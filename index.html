@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC-300 Exam Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="exam-container">
+        <section id="setup-screen" class="mode-screen">
+            <h1>SC-300 Exam Portal</h1>
+            <p>Choose how you want to study.</p><br><p><strong>Prepared By:Angkol</strong>
+
+            <div class="mode-grid">
+                <article class="mode-card">
+                    <h2>Practice Mode</h2>
+                    <p>Use the complete question bank with immediate grading and explanations after each submission.</p>
+                    <button id="practice-mode-btn" class="mode-btn practice-btn">Start Practice</button>
+                </article>
+
+                <article class="mode-card simulation-card">
+                    <div class="mode-badge">Exam conditions</div>
+                    <h2>Simulation Exam</h2>
+                    <ul>
+                        <li>60 questions</li>
+                        <li>120-minute limit</li>
+                        <li>Case studies appear first</li>
+                        <li>No feedback until completion</li>
+                        <li>Passing score: 70%</li>
+                    </ul>
+                    <button id="simulation-mode-btn" class="mode-btn simulation-btn">Start Simulation</button>
+                </article>
+            </div>
+        </section>
+
+        <section id="exam-screen" hidden>
+            <header class="exam-header">
+                <div>
+                    <h1>SC-300 Practice Exam</h1>
+                    <span id="mode-label" class="mode-label">Practice Mode</span>
+                </div>
+
+                <div class="exam-header-status">
+                    <strong id="exam-timer">Practice</strong>
+                    <span id="exam-status">Question 1</span>
+                </div>
+            </header>
+
+            <div class="top-jump-bar">
+                <span class="jump-label">Jump to Question:</span>
+                <select id="jump-select" class="jump-select"></select>
+                <button id="finish-exam-btn" class="finish-btn" hidden>Finish Exam</button>
+            </div>
+
+            <div id="portal-layout" class="portal-grid"></div>
+
+            <div class="submit-wrapper">
+                <button id="submit-btn" class="submit-btn">Submit Answer</button>
+            </div>
+
+            <div id="feedback-box" class="feedback-box" style="display: none;"></div>
+
+            <div class="footer-nav">
+                <button id="prev-btn" class="nav-btn">Previous</button>
+                <span id="question-counter" class="counter-text">Question 1</span>
+                <button id="next-btn" class="nav-btn">Next</button>
+            </div>
+        </section>
+
+        <section id="results-screen" class="results-screen" hidden>
+            <h1>Simulation Exam Results</h1>
+            <div id="result-status" class="result-status">PASS</div>
+            <p id="result-score" class="result-score"></p>
+            <p id="result-note" class="result-note"></p>
+            <button id="restart-exam-btn" class="mode-btn practice-btn">Return to Start</button>
+
+            <h2 class="review-heading">Answer Review</h2>
+            <div id="review-list" class="review-list"></div>
+        </section>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
