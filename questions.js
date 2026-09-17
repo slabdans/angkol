@@ -3,22 +3,41 @@
 // Fully converted for the case-study engine.
 const questions = [
   {
-    "id": 1,
-    "type": "radio",
-    "title": "Question 1",
-    "questionText": "\n      <p>You have an Azure Active Directory (Azure AD) tenant that contains the following objects:</p>\n      <ul>\n        <li>A device named <strong>Device1</strong></li>\n        <li>Users named <strong>User1, User2, User3, User4,</strong> and <strong>User5</strong></li>\n        <li>Groups named <strong>Group1, Group2, Group3, Group4,</strong> and <strong>Group5</strong></li>\n      </ul>\n      <p>The groups are configured as shown in the following table:</p>\n\n      <table class=\"hotspot-table\">\n        <thead>\n          <tr>\n            <th>Name</th>\n            <th>Type</th>\n            <th>Membership type</th>\n            <th>Members</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td><strong>Group1</strong></td>\n            <td>Security</td>\n            <td>Assigned</td>\n            <td>User1, User3, Group2, Group3</td>\n          </tr>\n          <tr>\n            <td><strong>Group2</strong></td>\n            <td>Security</td>\n            <td>Dynamic User</td>\n            <td>User2</td>\n          </tr>\n          <tr>\n            <td><strong>Group3</strong></td>\n            <td>Security</td>\n            <td>Dynamic Device</td>\n            <td>Device1</td>\n          </tr>\n          <tr>\n            <td><strong>Group4</strong></td>\n            <td>Microsoft 365</td>\n            <td>Assigned</td>\n            <td>User4</td>\n          </tr>\n          <tr>\n            <td><strong>Group5</strong></td>\n            <td>Microsoft 365</td>\n            <td>Dynamic User</td>\n            <td>User5</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>To which groups can you assign a Microsoft Office 365 Enterprise E5 license directly?</p>\n    ",
-    "prompt": "Select the correct option:",
-    "correctAnswer": 1,
-    "correctAnswerText": "\n      <p><strong>Correct Answer: B (Group1, Group2, Group3, Group4, and Group5)</strong></p>\n      <p>You can assign licences to any group created within the Azure AD portal. These can include security groups, Microsoft 365 groups, and either assigned or dynamic groups. You can even create a dynamic device security group and assign E5 licences to it, which doesn't make sense but is true (I've tested it).</p><br>\n      <p>However, the missing bit of information is whether the Microsoft 365 groups have the \"SecurityEnabled\" attribute set to True. Only M365 groups that have the \"SecurityEnabled\" attribute set to True can have licences assigned to them. If the group is created in the M365 Admin Centre, then the \"SecurityEnabled\" attribute is set to False and you can not assign licences to the group. But if the M365 group is created in the Azure AD portal, then the \"SecurityEnabled\" attribute is set to True and you can assign licences.</p><br>\n\t<p>For the answer, I would make an assumption that because this is an Identity-related exam testing us on Azure AD topics, that the M365 groups were created in the Azure AD portal and therefore have the \"SecurityEnabled\" attribute set to True. Which means the correct answer is B - all groups.</p>\n    ",
-    "isCaseStudy": false,
-    "options": [
-      "Group1 and Group4 only",
-      "Group1, Group2, Group3, Group4, and Group5",
-      "Group1 and Group2 only",
-      "Group1 only",
-      "Group1, Group2, Group4, and Group5 only"
-    ]
-  },
+    id: 1,
+    type: "radio",
+    title: "Question 1",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains the following objects:</p>
+        <ul>
+            <li>A device named Device1</li>
+            <li>Users named User1, User2, User3, User4, and User5</li>
+            <li>Groups named Group1, Group2, Group3, Group4, and Group5</li>
+        </ul>
+	<ul>The groups are configured as shown in the following table.
+	</ul>
+<div style="margin-bottom: 15px; text-align: center;">
+        <img src="images/q1_table1.jpg" alt="q1 table1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+        <p>To which groups can you assign a Microsoft Office 365 Enterprise E5 license directly?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Group1 and Group4 only",
+        "Group1, Group2, Group3, Group4, and Group5",
+        "Group1 and Group2 only",
+        "Group1 only",
+        "Group1, Group2, Group4, and Group5 only"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        Correct Answer: B
+
+        Explanation:
+        Office 365 Enterprise E5 user licenses can be assigned to security groups and M365 groups with security enabled managed via Microsoft Entra ID. Standard exam keys treat valid user/mixed group configurations in this scenario as supporting group-based licensing across the designated groups.
+
+        https://learn.microsoft.com/en-us/entra/identity/users/licensing-groups-assign
+    `
+},
   {
     "id": 2,
     "type": "radio",
