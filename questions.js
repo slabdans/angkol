@@ -7774,6 +7774,446 @@ https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions
         Assigning the role at the DB1 level (the specific database account) is more secure than assigning it at the Resource Group (RG1) or Subscription (Sub1) level, as it prevents the AKS cluster from potentially accessing other resources in those broader scopes.
     `
 },
+	{
+  "id": 308,
+  "type": "radio",
+  "title": "Question 308",
+  "questionText": `
+    <p>You have an Azure subscription that contains a storage account named <strong>storage1</strong> and a web app named <strong>WebApp1</strong>.</p>
+    <p>WebApp1 uses a system-assigned managed identity.</p>
+    <p>You need to ensure that WebApp1 can read and write files to storage1 by using the system-assigned managed identity.</p>
+    <br>
+    <p>What should you configure for storage1 in the Azure portal?</p>
+  `,
+  "prompt": "Select the correct option:",
+  "correctAnswer": 2,
+  "correctAnswerText": `
+    <p><strong>Correct Answer: C (the Access control (IAM) settings)</strong></p>
+
+    <p>To allow <strong>WebApp1</strong> to access <strong>storage1</strong> by using its system-assigned managed identity, you must assign an appropriate Azure RBAC role to the managed identity through the <strong>Access control (IAM)</strong> settings of the storage account.</p>
+
+    <p>For example, you can assign roles such as:</p>
+    <ul>
+      <li><strong>Storage Blob Data Reader</strong> - Read access to blobs.</li>
+      <li><strong>Storage Blob Data Contributor</strong> - Read, write, and delete access to blobs.</li>
+    </ul>
+
+    <p>This approach enables passwordless authentication and follows Microsoft Entra managed identity best practices.</p>
+
+    <p><strong>Why the other options are incorrect:</strong></p>
+    <ul>
+      <li><strong>A. Data protection</strong> - Configures retention, versioning, and recovery features, not authorization.</li>
+      <li><strong>B. A shared access signature (SAS)</strong> - Uses delegated tokens instead of managed identity authentication.</li>
+      <li><strong>D. File share settings</strong> - Configures Azure Files behavior and does not grant identity permissions.</li>
+      <li><strong>E. Access keys</strong> - Uses storage account keys instead of managed identities and requires credential management.</li>
+    </ul>
+  `,
+  "isCaseStudy": false,
+  "options": [
+    "data protection",
+    "a shared access signature (SAS)",
+    "the Access control (IAM) settings",
+    "the File share settings",
+    "access keys"
+  ]
+},
+{
+  "id": 309,
+  "type": "dropdown",
+  "title": "Question 309",
+  "questionText": `
+    <p>You have an Azure subscription named <strong>Sub1</strong> that contains a storage account named <strong>storage1</strong>.</p>
+
+    <p>You need to deploy two apps named <strong>App1</strong> and <strong>App2</strong> that will have the following configurations:</p>
+
+    <ul>
+      <li>App1 will be deployed as a registered app in Sub1.</li>
+      <li>App1 will access storage1 by using Microsoft Entra authentication.</li>
+      <li>App2 will access storage1 by using a single Microsoft Entra identity.</li>
+      <li>App2 will be hosted on two new virtual machines named VM1 and VM2.</li>
+    </ul>
+
+    <p>The solution must minimize administrative effort.</p>
+
+    <p>Which type of identity will each app use to access storage1?</p>
+
+    <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+    <div style="margin-top: 15px; background: #f9f9f9; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+      
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+        <label style="font-weight: 600; min-width: 100px;">App1:</label>
+        <select class="inline-select" data-key="app1Identity" style="padding: 6px; width: 420px;">
+          <option value="">-- Select Option --</option>
+          <option value="User-assigned managed identity">User-assigned managed identity</option>
+          <option value="Microsoft Entra group account">Microsoft Entra group account</option>
+          <option value="Microsoft Entra user account">Microsoft Entra user account</option>
+          <option value="Service principal">Service principal</option>
+          <option value="System-assigned managed identity">System-assigned managed identity</option>
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <label style="font-weight: 600; min-width: 100px;">App2:</label>
+        <select class="inline-select" data-key="app2Identity" style="padding: 6px; width: 420px;">
+          <option value="">-- Select Option --</option>
+          <option value="User-assigned managed identity">User-assigned managed identity</option>
+          <option value="Microsoft Entra group account">Microsoft Entra group account</option>
+          <option value="Microsoft Entra user account">Microsoft Entra user account</option>
+          <option value="Service principal">Service principal</option>
+          <option value="System-assigned managed identity">System-assigned managed identity</option>
+        </select>
+      </div>
+
+    </div>
+  `,
+  "prompt": "",
+  "correctAnswer": {
+    "app1Identity": "System-assigned managed identity",
+    "app2Identity": "User-assigned managed identity"
+  },
+  "correctAnswerText": `
+    <p><strong>Correct Answers:</strong></p>
+
+    <ul>
+      <li><strong>App1:</strong> System-assigned managed identity</li>
+      <li><strong>App2:</strong> User-assigned managed identity</li>
+    </ul>
+
+    <p><strong>App1 - System-assigned managed identity</strong></p>
+
+    <p>
+      App1 is deployed as a single registered application and requires access to
+      storage1 by using Microsoft Entra authentication. A system-assigned managed
+      identity is the preferred solution because the identity is tied directly to
+      the lifecycle of the Azure resource.
+    </p>
+
+    <p>
+      When the resource is deleted, the identity is automatically removed,
+      minimizing administrative overhead and eliminating the need to manage
+      credentials.
+    </p>
+
+    <p><strong>App2 - User-assigned managed identity</strong></p>
+
+    <p>
+      App2 will run on two virtual machines (VM1 and VM2) but must use a single
+      Microsoft Entra identity when accessing storage1.
+    </p>
+
+    <p>
+      A user-assigned managed identity can be created once and attached to
+      multiple Azure resources. Both VM1 and VM2 can use the same identity,
+      allowing centralized permission management and reducing administrative effort.
+    </p>
+
+    <p><strong>Why the other options are incorrect:</strong></p>
+
+    <ul>
+      <li><strong>Microsoft Entra user account:</strong> Requires credential management and is not recommended for application authentication.</li>
+      <li><strong>Microsoft Entra group account:</strong> Cannot be used as an application identity.</li>
+      <li><strong>Service principal:</strong> Works for application authentication but requires managing secrets or certificates, increasing administrative effort.</li>
+      <li><strong>System-assigned managed identity for App2:</strong> Each VM would receive a different identity and would not satisfy the requirement to use a single identity.</li>
+    </ul>
+  `,
+  "isCaseStudy": false
+},
+{
+  "id": 310,
+  "type": "dropdown",
+  "title": "Question 310",
+  "questionText": `
+    <p>You have a Microsoft 365 E5 subscription.</p>
+
+    <p>You need to configure app consent for the subscription. The solution must meet the following requirements:</p>
+
+    <ul>
+      <li>Disable user consent to apps.</li>
+      <li>Configure admin consent workflow for apps.</li>
+    </ul>
+
+    <p>Which portal should you use for each requirement?</p>
+
+    <p>To answer, select the appropriate options in the answer area.</p>
+
+    <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+    <div style="margin-top: 15px; background: #f9f9f9; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">
+        <label style="font-weight:600; min-width:240px;">
+          Disable user consent to apps:
+        </label>
+
+        <select class="inline-select" data-key="disableConsent" style="padding:6px; width:380px;">
+          <option value="">-- Select Option --</option>
+          <option value="Microsoft 365 admin center">Microsoft 365 admin center</option>
+          <option value="Microsoft 365 Apps admin center">Microsoft 365 Apps admin center</option>
+          <option value="Microsoft 365 Defender portal">Microsoft 365 Defender portal</option>
+          <option value="Microsoft Purview compliance portal">Microsoft Purview compliance portal</option>
+        </select>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+        <label style="font-weight:600; min-width:240px;">
+          Configure admin consent workflow for apps:
+        </label>
+
+        <select class="inline-select" data-key="adminConsentWorkflow" style="padding:6px; width:380px;">
+          <option value="">-- Select Option --</option>
+          <option value="Microsoft Entra admin center">Microsoft Entra admin center</option>
+          <option value="Microsoft 365 admin center">Microsoft 365 admin center</option>
+          <option value="Microsoft 365 Defender portal">Microsoft 365 Defender portal</option>
+          <option value="Microsoft Purview compliance portal">Microsoft Purview compliance portal</option>
+        </select>
+      </div>
+
+    </div>
+  `,
+  "prompt": "",
+  "correctAnswer": {
+    "disableConsent": "Microsoft 365 admin center",
+    "adminConsentWorkflow": "Microsoft Entra admin center"
+  },
+  "correctAnswerText": `
+    <p><strong>Correct Answers:</strong></p>
+
+    <ul>
+      <li><strong>Disable user consent to apps:</strong> Microsoft 365 admin center</li>
+      <li><strong>Configure admin consent workflow for apps:</strong> Microsoft Entra admin center</li>
+    </ul>
+
+    <p><strong>Disable user consent to apps - Microsoft 365 admin center</strong></p>
+
+    <p>
+      Microsoft provides an organization-wide control in the Microsoft 365 admin center
+      to manage whether users can consent to applications that request access to
+      organizational data.
+    </p>
+
+    <p>
+      In Microsoft certification exams, broad tenant-level consent controls are
+      commonly mapped to the Microsoft 365 admin center because they affect the
+      entire Microsoft 365 environment.
+    </p>
+
+    <p><strong>Configure admin consent workflow for apps - Microsoft Entra admin center</strong></p>
+
+    <p>
+      The Admin Consent Workflow is configured in the Microsoft Entra admin center.
+      This feature provides a structured approval process when users request access
+      to applications that require administrator approval.
+    </p>
+
+    <p>
+      Using the Microsoft Entra admin center, administrators can:
+    </p>
+
+    <ul>
+      <li>Enable or disable the admin consent workflow.</li>
+      <li>Designate reviewers and approvers.</li>
+      <li>Configure request expiration periods.</li>
+      <li>Configure email notifications and approval settings.</li>
+      <li>Manage pending consent requests.</li>
+    </ul>
+
+    <p><strong>Why the other portals are incorrect:</strong></p>
+
+    <ul>
+      <li><strong>Microsoft 365 Apps admin center</strong> focuses on Microsoft 365 Apps deployment and servicing.</li>
+      <li><strong>Microsoft 365 Defender portal</strong> is used for security operations, alerts, and threat management.</li>
+      <li><strong>Microsoft Purview compliance portal</strong> is used for compliance, governance, auditing, and information protection.</li>
+    </ul>
+
+    <p>
+      Therefore, use the Microsoft 365 admin center to disable user consent and
+      the Microsoft Entra admin center to configure the admin consent workflow.
+    </p>
+  `,
+  "isCaseStudy": false
+},
+{
+  "id": 311,
+  "type": "radio",
+  "title": "Question 311",
+  "questionText": `
+    <p>You have a Microsoft 365 subscription.</p>
+
+    <p>You plan to deploy an app named <strong>App1</strong> that will have the following configurations:</p>
+
+    <ul>
+      <li>Will be registered in Microsoft Entra.</li>
+      <li>Will access the signed-in user's Microsoft Outlook calendar by using the Microsoft Graph API.</li>
+    </ul>
+
+    <p>You need to ensure that App1 can access Microsoft Graph.</p>
+
+    <p>What should you use?</p>
+  `,
+  "prompt": "Select the correct option:",
+  "correctAnswer": 1,
+  "correctAnswerText": `
+    <p><strong>Correct Answer: B (delegated permissions)</strong></p>
+
+    <p><strong>Delegated permissions are correct.</strong></p>
+
+    <p>
+      Delegated permissions are used by applications that have a signed-in user
+      present. The application acts on behalf of the authenticated user and can
+      access resources only within the permissions granted to both the application
+      and the signed-in user.
+    </p>
+
+    <p>
+      In this scenario, App1 must access the signed-in user's Microsoft Outlook
+      calendar through Microsoft Graph. Because the application is accessing
+      data that belongs to the currently authenticated user, delegated permissions
+      such as <code>Calendars.Read</code> or
+      <code>Calendars.ReadWrite</code> are required.
+    </p>
+
+    <p><strong>Why the other options are incorrect:</strong></p>
+
+    <ul>
+      <li>
+        <strong>A. Application permissions</strong> are used when an application
+        runs without a signed-in user and needs tenant-wide access to data.
+      </li>
+      <li>
+        <strong>C. A custom role-based access control (RBAC) role</strong>
+        controls administrative permissions within Microsoft Entra or Azure
+        resources, not Microsoft Graph API access.
+      </li>
+      <li>
+        <strong>D. A built-in role-based access control (RBAC) role</strong>
+        grants administrative access to resources but does not provide delegated
+        Microsoft Graph permissions.
+      </li>
+    </ul>
+
+    <p>
+      Therefore, because App1 must access the calendar of the currently signed-in
+      user, the correct solution is to use <strong>delegated permissions</strong>.
+    </p>
+  `,
+  "isCaseStudy": false,
+  "options": [
+    "application permissions",
+    "delegated permissions",
+    "a custom role-based access control (RBAC) role",
+    "a built-in role-based access control (RBAC) role"
+  ]
+},
+{
+  "id": 312,
+  "type": "dropdown",
+  "title": "Question 312",
+  "questionText": `
+    <p>You have an Azure subscription that contains the resources shown in the following table.</p>
+<div style="margin-bottom: 15px; text-align: center;">
+        <img src="images/q312_table1.jpg" alt="q312 table1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      <p>Which identities can you add to <strong>VM1</strong> and <strong>App1</strong>?</p>
+
+    <p>To answer, select the appropriate options in the answer area.</p>
+
+    <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+    <div style="margin-top: 15px; background: #f9f9f9; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">
+        <label style="font-weight:600; min-width:100px;">VM1:</label>
+
+        <select class="inline-select" data-key="vm1Identity" style="padding:6px; width:420px;">
+          <option value="">-- Select Option --</option>
+          <option value="User1 only">User1 only</option>
+          <option value="Managed2 only">Managed2 only</option>
+          <option value="Managed1 and Managed2 only">Managed1 and Managed2 only</option>
+          <option value="Managed2 and User1 only">Managed2 and User1 only</option>
+          <option value="Managed1, Managed2, and User1">Managed1, Managed2, and User1</option>
+        </select>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+        <label style="font-weight:600; min-width:100px;">App1:</label>
+
+        <select class="inline-select" data-key="app1Identity" style="padding:6px; width:420px;">
+          <option value="">-- Select Option --</option>
+          <option value="User1 only">User1 only</option>
+          <option value="Managed2 only">Managed2 only</option>
+          <option value="Managed2 and User1 only">Managed2 and User1 only</option>
+          <option value="A system-assigned managed identity only">A system-assigned managed identity only</option>
+          <option value="A system-assigned managed identity and Managed2 only">A system-assigned managed identity and Managed2 only</option>
+          <option value="A system-assigned managed identity, Managed2, and User1">A system-assigned managed identity, Managed2, and User1</option>
+        </select>
+      </div>
+
+    </div>
+  `,
+  "prompt": "",
+  "correctAnswer": {
+    "vm1Identity": "Managed2 only",
+    "app1Identity": "A system-assigned managed identity and Managed2 only"
+  },
+  "correctAnswerText": `
+    <p><strong>Correct Answers:</strong></p>
+
+    <ul>
+      <li><strong>VM1:</strong> Managed2 only</li>
+      <li><strong>App1:</strong> A system-assigned managed identity and Managed2 only</li>
+    </ul>
+
+    <p><strong>VM1 - Managed2 only</strong></p>
+
+    <p>
+      VM1 can be assigned a user-assigned managed identity. In this scenario,
+      <strong>Managed2</strong> is a user-assigned managed identity that exists
+      as an independent Azure resource and can be attached to supported Azure
+      resources such as virtual machines.
+    </p>
+
+    <p>
+      A Microsoft Entra user account cannot be directly assigned as an identity
+      to a virtual machine. Only managed identities can be attached to Azure
+      resources.
+    </p>
+
+    <p><strong>App1 - A system-assigned managed identity and Managed2 only</strong></p>
+
+    <p>
+      Azure App Service supports both system-assigned and user-assigned managed
+      identities simultaneously.
+    </p>
+
+    <ul>
+      <li>
+        <strong>System-assigned managed identity:</strong> Automatically created
+        and tied to the lifecycle of App1.
+      </li>
+      <li>
+        <strong>Managed2:</strong> A user-assigned managed identity that can be
+        shared across multiple resources.
+      </li>
+    </ul>
+
+    <p>
+      This configuration enables App1 to use its own dedicated identity while
+      also leveraging a shared identity that may already have permissions assigned
+      elsewhere in the environment.
+    </p>
+
+    <p><strong>Why the other options are incorrect:</strong></p>
+
+    <ul>
+      <li><strong>User1</strong> is a Microsoft Entra user account and cannot be assigned as a managed identity to Azure resources.</li>
+      <li><strong>Managed1 and Managed2 only</strong> is incorrect because the App Service can also have its own system-assigned identity.</li>
+      <li><strong>A system-assigned managed identity only</strong> does not include the existing user-assigned identity.</li>
+      <li><strong>A system-assigned managed identity, Managed2, and User1</strong> is invalid because User1 cannot be attached as a resource identity.</li>
+    </ul>
+  `,
+  "isCaseStudy": false
+},
 {
     id: 376,
     isCaseStudy: true,
