@@ -8214,6 +8214,3602 @@ https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions
   `,
   "isCaseStudy": false
 },
+	{
+    id: 317,
+    type: "dropdown",
+    title: "Question 317: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription that contains the resources shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+            <img src="images/q317_table1.jpg" alt="q317 table1" style="width: 100%; max-width: 550px; height: p>
+
+        <p>Which identities can you add to VM1 and App1?</p>
+
+        <p>To answer, select the appropriate options in the answer area.</p>
+
+        <p><em>NOTE: Each correct answer is worth one point.</em></p>
+
+        <div style="margin-top: 15px; background: #f9f9f9; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+            <p style="margin-bottom: 8px;">
+                <strong>VM1:</strong>
+                <select class="inline-select" data-key="vm1">
+                    <option value="">-- Select Option --</option>
+                    <option value="User1 only">User1 only</option>
+                    <option value="Managed2 only">Managed2 only</option>
+                    <option value="Managed1 and Managed2 only">Managed1 and Managed2 only</option>
+                    <option value="Managed2 and User1 only">Managed2 and User1 only</option>
+                    <option value="Managed1, Managed2, and User1">Managed1, Managed2, and User1</option>
+                </select>
+            </p>
+
+            <p>
+                <strong>App1:</strong>
+                <select class="inline-select" data-key="app1">
+                    <option value="">-- Select Option --</option>
+                    <option value="User1 only">User1 only</option>
+                    <option value="Managed2 only">Managed2 only</option>
+                    <option value="Managed2 and User1 only">Managed2 and User1 only</option>
+                    <option value="A system-assigned managed identity only">A system-assigned managed identity only</option>
+                    <option value="A system-assigned managed identity and Managed2 only">A system-assigned managed identity and Managed2 only</option>
+                    <option value="A system-assigned managed identity, Managed2, and User1">A system-assigned managed identity, Managed2, and User1</option>
+                </select>
+            </p>
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        vm1: "Managed2 only",
+        app1: "A system-assigned managed identity and Managed2 only"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>VM1: Managed2 only</strong></p>
+
+        <p>
+            This implies that in the scenario's text, Managed2 is a User-Assigned Managed Identity.
+            Unlike system-assigned identities, user-assigned identities are standalone resources
+            that can be "attached" to multiple VMs or other services.
+            The selection indicates that Managed1 might be in a different region or subscription,
+            or simply wasn't assigned to this specific VM.
+        </p>
+
+        <p><strong>App1: A system-assigned managed identity and Managed2 only</strong></p>
+
+        <p>
+            This shows that App1 (likely a Logic App or App Service) is using both types of identities simultaneously:
+        </p>
+
+        <p>
+            System-assigned: A unique identity tied specifically to the lifecycle of App1.
+            If you delete App1, this identity is deleted automatically.
+        </p>
+    `
+},
+{
+    id: 318,
+    type: "radio",
+    title: "Question 318",
+    questionText: `
+        <p>You have an Azure subscription that contains the resources shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q318_table1.jpg" alt="q3 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You need to grant permissions to the resources by using attribute-based access control (ABAC).</p>
+
+        <p>To which resource can you grant permissions?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Vault1",
+        "VM1",
+        "App1",
+        "Storage1"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. Storage1 is correct.
+        </p>
+
+        <p>
+            In Azure, Attribute-Based Access Control (ABAC) is currently supported specifically for Azure Storage (Blobs and Queues) through the use of role assignment conditions.
+        </p>
+    `
+},
+{
+    id: 319,
+    type: "checkbox",
+    title: "Question 319",
+    questionText: `
+        <p>You have an Azure subscription that is linked to a Microsoft Entra tenant. The tenant contains a registered app named App1.</p>
+
+        <p>You have a partner organization that has a Microsoft Entra tenant. The tenant contains a registered app named App2.</p>
+
+        <p>You need to ensure that App1 can access App2.</p>
+
+        <p>Which two types of credentials can App1 use? Each correct answer presents a complete solution.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    prompt: "Select all correct options:",
+    options: [
+        "certificate",
+        "managed identity",
+        "secret",
+        "user account",
+        "one-time password"
+    ],
+    correctAnswer: [0, 2],
+    correctAnswerText: `
+        <p><strong>Answer: AC</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Correct options: A – certificate, C – secret</strong></p>
+
+        <p>
+            <strong>Certificate</strong> – A client-side X.509 certificate can be used for OAuth2.0 client-credential flow.
+            The certificate is stored in the app registration’s “Certificates & secrets” blade and can be referenced by App1
+            when it requests a token for App2.
+            This method is preferred for production workloads because certificates are long-lived, can be stored securely
+            (e.g., Azure Key Vault), and do not require secret-management overhead.
+        </p>
+
+        <p>
+            <strong>Secret</strong> – A client secret (a string) is also supported for the client-credential flow.
+            App1 can configure a secret in its registration and use it to obtain a token for App2.
+            Secrets are simple to set up and work well for testing or low-risk scenarios, but they must be rotated regularly to maintain security.
+        </p>
+
+        <p><strong>Why the other options are not valid for this scenario</strong></p>
+
+        <p>
+            <strong>Managed identity (B)</strong> – Managed identities are used by Azure resources
+            (e.g., VMs, App Services) to obtain tokens for Azure AD resources.
+            They cannot be assigned to a registered application (App1) that lives outside Azure compute;
+            they are tied to Azure resource identities, not to arbitrary app registrations.
+        </p>
+
+        <p>
+            <strong>User account (D)</strong> – A user account would imply a delegated authentication flow where a human signs in.
+            The requirement is for App1 (a service principal) to access App2 programmatically, not for a user to sign in interactively.
+        </p>
+
+        <p>
+            <strong>One-time password (E)</strong> – Azure AD does not issue “one-time passwords” as a credential type for
+            client-credential flows. Such a mechanism is not defined for service-to-service authentication between two app registrations.
+        </p>
+
+        <p>
+            Thus, the only two credential types that satisfy the requirement for App1 to authenticate to App2 are
+            certificate and secret.
+        </p>
+    `
+},
+{
+    id: 320,
+    type: "radio",
+    title: "Question 320",
+    questionText: `
+        <p>You have an Azure subscription that contains two virtual machines named VM1 and VM2 and an Azure SQL managed instance named SQL1.</p>
+
+        <p>You need to ensure that VM1 and VM2 can retrieve data from SQL1. The solution must minimize administrative effort.</p>
+
+        <p>What should you create first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "a certificate",
+        "a shared access signature (SAS) token",
+        "a managed identity",
+        "a Microsoft Entra user account"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>C. A managed identity</strong></p>
+
+        <p>
+            Explanation: To ensure that VM1 and VM2 can retrieve data from SQL1 (Azure SQL Managed Instance)
+            with minimal administrative effort, you should use Azure Managed Identity.
+            Managed identities allow Azure resources (like VMs) to authenticate and access other Azure
+            services (like SQL Managed Instance) securely without storing credentials.
+        </p>
+
+        <p><strong>Why not the others?</strong></p>
+
+        <p>
+            <strong>A. A certificate</strong> – While certificates can be used for authentication,
+            managing them requires more administrative overhead than a managed identity.
+        </p>
+
+        <p>
+            <strong>B. A shared access signature (SAS) token</strong> – SAS tokens are mainly used
+            for Azure Storage access, not for authenticating to SQL Managed Instances.
+        </p>
+
+        <p>
+            <strong>D. A Microsoft Entra user account</strong> – Entra ID users are meant for human
+            authentication, while VM-to-SQL authentication should use workload identity solutions
+            like managed identities.
+        </p>
+    `
+},
+{
+    id: 321,
+    type: "radio",
+    title: "Question 321",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>You plan to deploy a third-party software as a service (SaaS) app named App1.</p>
+
+        <p>You need to onboard App1 to Microsoft Defender for Cloud Apps. The solution must ensure that you can implement session control policies.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From the Microsoft Defender portal, configure Cloud discovery.",
+        "From the Microsoft Entra admin center, configure single sign-on (SSO) for App1.",
+        "From the Microsoft Defender portal, create an OAuth app policy.",
+        "From the Microsoft Entra admin center, configure a traffic forwarding profile."
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            B. From the Microsoft Entra admin center, configure single sign-on (SSO) for App1.
+        </p>
+
+        <p>
+            Why this is the first step:
+        </p>
+
+        <p>
+            To implement session control policies in Microsoft Defender for Cloud Apps, the application must be integrated with Conditional Access App Control.
+        </p>
+
+        <p>
+            This integration relies on the application being proxied through Microsoft Entra ID.
+        </p>
+
+        <p>
+            The Proxy Mechanism:
+            Session control works by redirecting a user's sign-on request through Defender for Cloud Apps instead of sending them directly to the SaaS app.
+            This redirection is only possible if the app uses Microsoft Entra ID as its Identity Provider (IdP).
+        </p>
+    `
+},
+{
+    id: 322,
+    type: "radio",
+    title: "Question 322",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a Microsoft SharePoint Online site named Site1.</p>
+
+        <p>You need to enable Microsoft Defender for Cloud Apps session control for Site1.</p>
+
+        <p>Which type of policy should you create first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "access",
+        "app governance",
+        "session",
+        "Conditional Access"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. Conditional Access
+        </p>
+
+        <p>
+            To enable Microsoft Defender for Cloud Apps session control for Site1 (SharePoint Online), you need to first configure a Conditional Access policy in Microsoft Entra ID (formerly Azure AD).
+        </p>
+
+        <p>
+            Step 1: Create a Conditional Access Policy
+        </p>
+
+        <p>
+            In Microsoft Entra ID, create a Conditional Access policy targeting SharePoint Online.
+            In the Session controls section, select Use Conditional Access App Control and set it to Monitor or Block downloads.
+        </p>
+
+        <p>
+            Step 2: Configure a Session Policy in Defender for Cloud Apps
+        </p>
+
+        <p>
+            After enabling session control via Conditional Access, go to Microsoft Defender for Cloud Apps and create a session policy to enforce rules such as blocking downloads, monitoring activities, or restricting access.
+        </p>
+    `
+},
+{
+    id: 323,
+    type: "radio",
+    title: "Question 323",
+    questionText: `
+        <p>You have a Microsoft Entra ID P2 tenant named contoso.com that contains a registered app named App1. On January 1, App1 was deleted.</p>
+
+        <p>You need to restore App1.</p>
+
+        <p>What is the last day on which you can restore App1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "January 14",
+        "January 30",
+        "March 30",
+        "June 30"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct option: B – January 30
+        </p>
+
+        <p>
+            When an app registration is deleted in Microsoft Entra ID, the object is placed in a soft-delete state for 30 calendar days.
+        </p>
+
+        <p>
+            During this window the registration can be restored to its original state (including client ID, secrets, redirect URIs, permissions, etc.).
+        </p>
+
+        <p>
+            After the 30-day period expires, the registration is permanently purged and cannot be recovered. Since the app was deleted on January 1, the final day on which restoration is still possible is January 30 (30 days later).
+        </p>
+
+        <p><strong>Why the other options are incorrect</strong></p>
+
+        <p>
+            A – January 14 – Only half of the soft-delete retention period; the app would still be recoverable, but the question asks for the last possible day.
+        </p>
+
+        <p>
+            C – March 30 – Represents a 90-day interval, which exceeds the documented 30-day soft-delete window for app registrations.
+        </p>
+
+        <p>
+            D – June 30 – Implies a six-month retention period, which does not align with any Entra ID soft-delete policy for app registrations.
+        </p>
+
+        <p>
+            Thus, the only answer that matches the official 30-day soft-delete retention period is January 30.
+        </p>
+    `
+},
+{
+    id: 324,
+    type: "dropdown",
+    title: "Question 324: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription named Sub1 that contains an Azure key vault named Vault1 and an Azure Automation account named Automation1.</p>
+
+        <p>You need to ensure that Automation1 can access Vault1. The solution must meet the following requirements:</p>
+
+        <ul>
+            <li>Ensure that if Automation1 is deleted, the permissions granted for Vault1 will be removed automatically.</li>
+            <li>Ensure that runbooks created in Automation1 can read secret values stored in Vault1.</li>
+            <li>Follow the principle of least privilege.</li>
+        </ul>
+
+        <p>What should you configure for Automation1, and which built-in role should Automation1 use to access Vault1?</p>
+
+        <p>To answer, select the appropriate options in the answer area.</p>
+
+        <p><em>NOTE: Each correct answer is worth one point.</em></p>
+
+        <div style="margin-top:15px;background:#f9f9f9;padding:12px;border:1px solid #ddd;border-radius:4px;">
+            <p style="margin-bottom:12px;">
+                <strong>For Automation1, configure:</strong>
+                <select class="inline-select" data-key="automationConfig" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="A service account">A service account</option>
+                    <option value="A system-assigned managed identity">A system-assigned managed identity</option>
+                    <option value="A user-assigned managed identity">A user-assigned managed identity</option>
+                    <option value="An app registration">An app registration</option>
+                    <option value="An enterprise application">An enterprise application</option>
+                </select>
+            </p>
+
+            <p>
+                <strong>Role:</strong>
+                <select class="inline-select" data-key="role" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="Key Vault Crypto Officer">Key Vault Crypto Officer</option>
+                    <option value="Key Vault Crypto User">Key Vault Crypto User</option>
+                    <option value="Key Vault Reader">Key Vault Reader</option>
+                    <option value="Key Vault Secrets Officer">Key Vault Secrets Officer</option>
+                    <option value="Key Vault Secrets User">Key Vault Secrets User</option>
+                </select>
+            </p>
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        automationConfig: "A system-assigned managed identity",
+        role: "Key Vault Secrets User"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>A system-assigned managed identity.</strong></p>
+
+        <p>
+            A system-assigned managed identity is tied directly to the lifecycle of the specific Azure resource (in this case, the Azure Automation account). Turning it on automatically registers the automation account as an identity in Microsoft Entra ID. This eliminates the operational overhead of manually creating app registrations, managing client secrets, or handling credential rotation, ensuring maximum security for background workloads.
+        </p>
+
+        <p><strong>Key Vault Secrets User.</strong></p>
+
+        <p>
+            The scenario dictates that the runbook needs to read database connection credentials (which are stored as Secrets in the Key Vault). Following the principle of least privilege:
+        </p>
+
+        <p>
+            Key Vault Secrets User grants the explicit permission required to read the secret values (Microsoft.KeyVault/vaults/secrets/getSecret/action).
+        </p>
+
+        <p>
+            Key Vault Reader is insufficient because it only allows viewing vault metadata, not the actual secret strings. Key Vault Secrets Officer provides unnecessary write/delete capabilities.
+        </p>
+    `
+},
+{
+    id: 325,
+    type: "radio",
+    title: "Question 325",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a Microsoft SharePoint Online site named Site1.</p>
+
+        <p>You need to be notified if a user downloads more than 50 files in one minute from Site1.</p>
+
+        <p>Which type of policy should you create in the Microsoft Defender for Cloud Apps?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "session policy",
+        "activity policy",
+        "file policy",
+        "app discovery policy"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct option: B – activity policy
+        </p>
+
+        <p>
+            What an activity policy does:
+            In Microsoft Defender for Cloud Apps an activity policy monitors specific user actions (e.g., file downloads, uploads, sharing) and can trigger alerts or block the action when a condition is met.
+        </p>
+
+        <p>
+            Fit for the requirement:
+            The requirement is to be alerted when a user downloads more than 50 files in one minute from a particular SharePoint site. This is a classic behavior-based monitoring scenario that activity policies are designed to evaluate in real-time.
+        </p>
+
+        <p>
+            Configuration steps:
+            Create an activity policy that targets the SharePoint site (or the SharePoint Online service), sets the condition “Number of file downloads > 50 within 1 minute,” and defines the response (e.g., generate an alert, send an email, or block the download).
+            The policy evaluates the activity logs of all users accessing that site, satisfying the exact use-case.
+        </p>
+
+        <p><strong>Why the other options are not appropriate</strong></p>
+
+        <p>
+            A. Session policy – Session policies control the entire user session (e.g., requiring MFA, restricting device compliance) and are not granular enough to count file-download events.
+            They cannot be scoped to a specific activity count within a time window.
+        </p>
+
+        <p>
+            C. File policy – File policies focus on protecting individual files (e.g., encryption, DLP, retention) or applying rules based on file properties (sensitivity, type).
+            They do not provide a counting mechanism for multiple file accesses across users.
+        </p>
+
+        <p>
+            D. App discovery policy – App discovery policies are used to discover and control the use of cloud applications, not to monitor usage patterns such as download frequency.
+            They lack the capability to evaluate per-user activity metrics over a time interval.
+        </p>
+
+        <p>
+            Conclusion:
+            To receive a notification when a user exceeds 50 downloads in a minute from Site1, you must configure an activity policy that monitors download activity and triggers an alert based on that count.
+            This aligns precisely with the functionality of activity policies in Defender for Cloud Apps, while the other policy types cannot fulfill the specific counting and alerting requirement.
+        </p>
+    `
+},
+{
+    id: 326,
+    type: "dropdown",
+    title: "Question 326: Hotspot",
+    questionText: `
+        <p>You have an on-premises server named Server1 that runs Windows Server.</p>
+
+        <p>You have a Microsoft Entra tenant that contains an app registration named App1. App1 has Microsoft Graph application permissions.</p>
+
+        <p>You need to configure the environment to support App1. The solution must meet the following requirements:</p>
+
+        <ul>
+            <li>App1 must be accessible only from the corporate network.</li>
+            <li>The credentials for App1 must NOT be stored as plain text.</li>
+            <li>Non-interactive scheduled tasks on Server1 must be able to authenticate to App1.</li>
+        </ul>
+
+        <p>What should you do?</p>
+
+        <p>To answer, select the appropriate options in the answer area.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+        <div style="margin-top:15px;background:#f9f9f9;padding:12px;border:1px solid #ddd;border-radius:4px;">
+            <p style="margin-bottom:12px;">
+                <strong>In the tenant configure:</strong>
+                <select class="inline-select" data-key="tenantConfig" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="An authentication method">An authentication method</option>
+                    <option value="A Conditional Access policy">A Conditional Access policy</option>
+                    <option value="A Microsoft Entra application proxy">A Microsoft Entra application proxy</option>
+                    <option value="A permission classification">A permission classification</option>
+                </select>
+            </p>
+
+            <p>
+                <strong>Configure scheduled tasks on Server1 to authenticate by using a:</strong>
+                <select class="inline-select" data-key="authenticationMethod" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="Certificate">Certificate</option>
+                    <option value="Client secret">Client secret</option>
+                    <option value="System-assigned managed identity">System-assigned managed identity</option>
+                    <option value="User-assigned managed identity">User-assigned managed identity</option>
+                </select>
+            </p>
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        tenantConfig: "A Conditional Access policy",
+        authenticationMethod: "User-assigned managed identity"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            <strong>A Conditional Access policy</strong>
+        </p>
+
+        <p>
+            Conditional Access is the "If/Then" engine of Microsoft Entra security.
+            You use it to define the specific conditions under which a user or service can access resources.
+            For example, you can create a policy that requires Multi-Factor Authentication (MFA) only when a user is signing in from an untrusted network or a high-risk location.
+        </p>
+
+        <p>
+            <strong>User-assigned managed identity.</strong>
+        </p>
+
+        <p>
+            When you have automated processes like scheduled tasks running on a server, you want to avoid using passwords or "service accounts" that require manual secret rotation.
+        </p>
+
+        <p>
+            Why User-assigned? Because you can create one identity (with specific permissions) and assign it to multiple servers or tasks.
+        </p>
+
+        <p>
+            The Benefit: The server authenticates automatically using the identity assigned to it by Azure.
+            There are no credentials to leak, and Microsoft handles all the backend "password" rotations for you.
+        </p>
+    `
+},
+{
+    id: 327,
+    type: "radio",
+    title: "Question 327",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains the identities shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q327_table1.jpg" alt="q327 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You register an app named App1 in the tenant.</p>
+
+        <p>To which identities can you assign the Owner role for App1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "User1 only",
+        "User1 and Group1 only",
+        "User1 and SP1 only",
+        "User1, Group1, and Group2 only",
+        "User1, Group1, and SP1 only",
+        "User1, Group1, Group2, and SP1"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            A. User1 only
+        </p>
+
+        <p>
+            In Microsoft Entra ID (formerly Azure Active Directory), the architectural design governing Application Registrations strictly limits who can be explicitly designated as an "Owner":
+        </p>
+
+        <p>
+            <strong>Users (User1):</strong> Microsoft Entra ID natively supports assigning individual User accounts as owners of an application registration.
+            Owners have the authority to manage all properties of that specific application (such as modifying names, managing certificates/secrets, and requesting API permissions).
+        </p>
+
+        <p>
+            <strong>Groups (Group1 & Group2):</strong> Microsoft Entra ID does not support assigning groups as owners of an application registration.
+        </p>
+
+        <p>
+            If a team needs to manage an app registration collectively, you must either add the team members individually as owners or assign them administrative directory roles (like Cloud Application Administrator or Application Developer).
+        </p>
+    `
+},
+{
+    id: 328,
+    type: "radio",
+    title: "Question 328",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Cloud Apps and Conditional Access policies.</p>
+
+        <p>You need to block access to cloud apps when a user is assessed as high risk.</p>
+
+        <p>Which type of policy should you create in the Microsoft Defender for Cloud Apps?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "app discovery policy",
+        "OAuth app policy",
+        "activity policy",
+        "access policy"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Technical Justification</strong></p>
+
+        <p>
+            Correct option – D. Access policy
+        </p>
+
+        <p>
+            An access policy in Microsoft Defender for Cloud Apps allows you to define granular controls that can block, allow, or restrict access to cloud applications based on specified conditions, including user risk level (e.g., “high risk”).
+        </p>
+
+        <p>
+            By configuring an access policy that triggers when a user’s risk score reaches “high,” you can automatically deny sign-in or terminate the session for that user across all protected apps, directly meeting the requirement to block access when the user is assessed as high risk.
+        </p>
+
+        <p><strong>Why the other options are unsuitable</strong></p>
+
+        <p>
+            A. App discovery policy – Used only to discover and catalog cloud apps; it does not enforce access decisions or evaluate user risk.
+        </p>
+
+        <p>
+            B. OAuth app policy – Controls OAuth-connected apps (e.g., third-party integrations) but does not provide a mechanism to block access based on user risk scores.
+        </p>
+
+        <p>
+            C. Activity policy – Monitors and alerts on specific activity patterns (e.g., suspicious file downloads) but cannot enforce a blanket block of an entire app when a user’s risk level is high.
+        </p>
+
+        <p><strong>Conclusion</strong></p>
+
+        <p>
+            To enforce a block on cloud-app access when a user is classified as high risk, you must create an access policy that leverages the user-risk condition.
+            This is the only policy type that directly ties risk assessment to access enforcement.
+        </p>
+
+        <p><strong>References</strong></p>
+
+        <p>
+            Microsoft Defender for Cloud Apps – Create and manage access policies:
+            https://learn.microsoft.com/en-us/cloud-app-security/create-access-policy
+        </p>
+
+        <p>
+            Microsoft Defender for Cloud Apps – User risk and sign-in policies:
+            https://learn.microsoft.com/en-us/cloud-app-security/user-risk-policy
+        </p>
+    `
+},
+{
+    id: 329,
+    type: "radio",
+    title: "Question 329",
+    questionText: `
+        <p>You have a Microsoft Entra tenant.</p>
+
+        <p>You discover that a large number of new apps were added to the tenant.</p>
+
+        <p>You need to implement an approval process for new enterprise applications.</p>
+
+        <p>What should you do?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From the Microsoft Defender portal, configure an app connector.",
+        "From the Microsoft Entra admin center, configure an access review.",
+        "From the Microsoft Defender portal, create an app detection policy.",
+        "From the Microsoft Entra admin center, configure the Admin consent settings."
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Technical Justification</strong></p>
+
+        <p>
+            Correct choice – D. Configure the Admin consent settings in the Microsoft Entra admin center
+        </p>
+
+        <p>
+            The Admin consent settings allow an administrator to enforce that any consent for a new enterprise application must be granted by an admin. By setting “User consent settings” to “Admins only” or by requiring admin consent for specific app types, you create an explicit approval workflow for every new app that attempts to register or be added to the tenant. This directly satisfies the requirement for an approval process for new enterprise applications.
+        </p>
+
+        <p><strong>Why the other options are unsuitable</strong></p>
+
+        <p>
+            A. Configure an app connector from the Microsoft Defender portal – App connectors are used to ingest logs from third-party SaaS apps into Microsoft Defender for Cloud Apps; they do not control app registration or consent approvals.
+        </p>
+
+        <p>
+            B. Configure an access review in the Microsoft Entra admin center – Access reviews are designed to periodically review user access to resources (e.g., groups, applications) and to recertify permissions. They do not prevent or approve the initial registration of new applications.
+        </p>
+
+        <p>
+            C. Create an app detection policy from the Microsoft Defender portal – App detection policies are part of Defender for Cloud Apps and focus on detecting risky or unsanctioned apps after they are already in use; they do not enforce an approval workflow for new app registrations.
+        </p>
+
+        <p><strong>Implementation steps (high-level)</strong></p>
+
+        <p>
+            1. Sign in to the Microsoft Entra admin center.
+        </p>
+
+        <p>
+            2. Navigate to Users &gt; Password reset &gt; Per user consent settings (or directly to Enterprise applications &gt; Consent and permissions).
+        </p>
+
+        <p>
+            3. Set “Users can consent to apps accessing company data” to “Admins only” or configure “Require admin consent for apps” for the desired app categories.
+        </p>
+
+        <p>
+            4. Save the policy; any attempt by a user to consent to a new enterprise app will now trigger an admin approval request, fulfilling the approval process requirement.
+        </p>
+
+        <p><strong>References</strong></p>
+
+        <p>
+            Configure admin consent settings in Microsoft Entra ID:
+            https://learn.microsoft.com/entra/id-admin/role-based-access-control#admin-consent-settings
+        </p>
+
+        <p>
+            Manage app consent and approvals in Microsoft Entra ID:
+            https://learn.microsoft.com/entra/identity-governance/access-reviews-consent-management#admin-consent-settings
+        </p>
+    `
+},
+{
+    id: 330,
+    type: "radio",
+    title: "Question 330",
+    questionText: `
+        <p>You have a Microsoft Entra tenant.</p>
+
+        <p>You need to ensure that users are prevented from consenting to high-privilege permission requests for enterprise applications. The solution must ensure that the users can consent to low-risk permission requests.</p>
+
+        <p>What should you modify first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Admin consent settings",
+        "Permission classifications",
+        "User consent settings",
+        "App registrations"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Justification: Correct choice – C. User consent settings</strong></p>
+
+        <p>
+            The User consent settings (via the “Users can consent to apps accessing company resources” policy) directly control whether end-users are allowed to grant consent for any permission, including high-privilege ones.
+        </p>
+
+        <p>
+            By restricting consent to low-risk categories only, you prevent users from approving high-privilege permission requests while still permitting consent for low-risk requests.
+        </p>
+
+        <p>
+            This setting is the first configuration point because it governs the consent flow at the user level before any application-specific or admin-level configurations are considered.
+        </p>
+
+        <p><strong>Why the other options are less suitable</strong></p>
+
+        <p>
+            A. Admin consent settings – This controls administrative consent actions, not the everyday user consent process. It does not stop regular users from consenting to high-privilege permissions themselves.
+        </p>
+
+        <p>
+            B. Permission classifications – Classifications are used to label permissions (e.g., “low”, “high”) but they do not enforce consent restrictions; they only provide a taxonomy for policy evaluation.
+        </p>
+
+        <p>
+            D. App registrations – Managing app registrations is about creating and configuring applications, not about governing user consent behavior.
+        </p>
+
+        <p><strong>Conclusion</strong></p>
+
+        <p>
+            To enforce that users can only consent to low-risk permissions, you must first adjust the User consent settings policy.
+        </p>
+
+        <p><strong>References:</strong></p>
+
+        <p>
+            Microsoft Entra ID – User consent settings:
+            https://learn.microsoft.com/entra/identity-platform/users-consent-settings
+        </p>
+
+        <p>
+            Microsoft Entra ID – Consent and permissions overview:
+            https://learn.microsoft.com/entra/identity-platform/consent-and-permissions
+        </p>
+    `
+},
+{
+    id: 331,
+    type: "radio",
+    title: "Question 331",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>Users authorize third-party cloud apps to access their data.</p>
+
+        <p>You need to configure an alert that will be triggered when an app requires high permissions and is authorized by more than 20 users.</p>
+
+        <p>Which type of policy should you create in Microsoft Defender for Cloud Apps?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "app discovery policy",
+        "access policy",
+        "OAuth app policy",
+        "activity policy"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Justification</strong></p>
+
+        <p>
+            OAuth app policy (Option C) is the only policy type in Microsoft Defender for Cloud Apps that evaluates the permissions requested by an OAuth-based third-party app and can trigger an alert when those permissions are considered high-risk. It also allows you to set a threshold for the number of users who have authorized the app, making it ideal for detecting widespread adoption of a high-privilege app.
+        </p>
+
+        <p>
+            App discovery policy (Option A) focuses on discovering and classifying apps that are being used within the tenant, but it does not evaluate permission levels or enforce thresholds based on user count.
+        </p>
+
+        <p>
+            Access policy (Option B) controls what users can access within sanctioned apps (e.g., Conditional Access), not the authorization status of external OAuth apps.
+        </p>
+
+        <p>
+            Activity policy (Option D) monitors user activities for suspicious behavior, but it does not specifically target the permission profile of third-party OAuth applications or enforce a user-count rule.
+        </p>
+
+        <p>
+            Therefore, the correct choice is C – OAuth app policy, because it directly addresses both the high-permission requirement and the authorization count condition.
+        </p>
+
+        <p><strong>References</strong></p>
+
+        <p>
+            Microsoft Defender for Cloud Apps – OAuth App Policies:
+            https://learn.microsoft.com/en-us/cloud-app-security/app-security-monitoring#oauth-app-policies
+        </p>
+
+        <p>
+            Microsoft Defender for Cloud Apps – Create and manage policies:
+            https://learn.microsoft.com/en-us/cloud-app-security/create-policies
+        </p>
+    `
+},
+{
+    id: 332,
+    type: "radio",
+    title: "Question 332",
+    questionText: `
+        <p>Your network contains an on-premises Active Directory Domains Services (AD DS) domain named contoso.com and a web app named WebApp1. WebApp1 uses Integrated Windows authentication.</p>
+
+        <p>Remote users access WebApp1 by establishing a VPN connection to the on-premises network and using a URL of https://webapp1.contoso.com.</p>
+
+        <p>You have a Microsoft Entra tenant that syncs with contoso.com. You perform the following actions:</p>
+
+        <ul>
+            <li>Deploy Microsoft Entra Private Access.</li>
+            <li>Configure a connector group that contains a connector named Connector1.</li>
+        </ul>
+
+        <p>You need to ensure that the remote users can access WebApp1 by using Microsoft Entra Private Access. What should you do?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Enroll the remote users’ devices in Microsoft Defender for Endpoint.",
+        "Deploy Microsoft Entra Internet Access.",
+        "Create a Conditional Access policy.",
+        "Create an application segment."
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Microsoft Entra Private Access requires an application segment to define the private application resource that users will access.
+        </p>
+
+        <p>
+            An application segment contains the internal application details such as:
+        </p>
+
+        <ul>
+            <li>Fully qualified domain name (FQDN)</li>
+            <li>IP address or IP range</li>
+            <li>Port information</li>
+            <li>Associated connector group</li>
+        </ul>
+
+        <p>
+            Because WebApp1 is an on-premises application that remote users must access through Microsoft Entra Private Access, you must create an application segment that includes the URL https://webapp1.contoso.com and associate it with Connector1.
+        </p>
+
+        <p><strong>Why the other options are incorrect:</strong></p>
+
+        <p>
+            A. Enroll the remote users’ devices in Microsoft Defender for Endpoint. This is not required to publish or access a private application through Microsoft Entra Private Access.
+        </p>
+
+        <p>
+            B. Deploy Microsoft Entra Internet Access. Internet Access is used to secure access to internet and SaaS applications, not private on-premises applications.
+        </p>
+
+        <p>
+            C. Create a Conditional Access policy. Conditional Access can control access after the application is published but does not make the private application reachable through Microsoft Entra Private Access.
+        </p>
+
+        <p>
+            Therefore, the correct answer is D. Create an application segment.
+        </p>
+    `
+},
+{
+    id: 333,
+    type: "radio",
+    title: "Question 333",
+    questionText: `
+        <p>You have a Microsoft 365 subscription.</p>
+
+        <p>You deploy a third-party web gateway named Gateway1.</p>
+
+        <p>You need to integrate Gateway1 with Microsoft Defender for Cloud Apps.</p>
+
+        <p>The solution must meet the following requirements:</p>
+
+        <ul>
+            <li>Ensure that data flows automatically to Defender for Cloud Apps.</li>
+            <li>Minimize administrative effort.</li>
+        </ul>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Add a data source.",
+        "Create a snapshot report.",
+        "Create an app registration.",
+        "Add a log collector."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            To integrate a third-party web gateway with Microsoft Defender for Cloud Apps and ensure that data flows automatically, the first step is to add the gateway as a data source.
+        </p>
+
+        <p>
+            Adding a data source establishes the connection between Gateway1 and Microsoft Defender for Cloud Apps and enables continuous ingestion of traffic logs.
+        </p>
+
+        <p>
+            This approach minimizes administrative effort because log uploads and processing occur automatically after the connection is configured.
+        </p>
+
+        <p><strong>Why the other options are incorrect:</strong></p>
+
+        <p>
+            B. Create a snapshot report. Snapshot reports are used for one-time log analysis and do not provide continuous automatic data ingestion.
+        </p>
+
+        <p>
+            C. Create an app registration. App registrations are used for application authentication and API access, not for onboarding log sources from web gateways.
+        </p>
+
+        <p>
+            D. Add a log collector. Log collectors are used in specific manual or agent-based collection scenarios. The recommended first step for integrating a supported third-party gateway is to add it as a data source.
+        </p>
+    `
+},
+{
+    id: 336,
+    type: "radio",
+    title: "Question 336",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Cloud Apps.</p>
+
+        <p>You discover that users connect to unsanctioned third-party apps.</p>
+
+        <p>You need to automatically identify and block the use of unsanctioned apps that have a risk score of 5 or higher and generate more than 200 GB of daily traffic.</p>
+
+        <p>The solution must minimize administrative effort.</p>
+
+        <p>What should you do?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From the Microsoft Defender portal, create an app governance policy.",
+        "Create an app discovery policy by using the New popular app template.",
+        "From the Microsoft Entra admin center, create a Conditional Access policy.",
+        "Create an app discovery policy by using the New risky app template."
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The New risky app template in Microsoft Defender for Cloud Apps is specifically designed to identify unsanctioned applications based on risk scores and usage metrics.
+        </p>
+
+        <p>
+            By creating an app discovery policy using the New risky app template, you can automatically detect applications that meet specific criteria such as:
+        </p>
+
+        <ul>
+            <li>Risk score thresholds</li>
+            <li>Traffic volumes</li>
+            <li>Sanctioned or unsanctioned status</li>
+            <li>User activity patterns</li>
+        </ul>
+
+        <p>
+            In this scenario, the policy can be configured to identify apps that:
+        </p>
+
+        <ul>
+            <li>Have a risk score of 5 or higher</li>
+            <li>Generate more than 200 GB of daily traffic</li>
+            <li>Are classified as unsanctioned applications</li>
+        </ul>
+
+        <p>
+            Once identified, the apps can be automatically marked as unsanctioned and integrated controls can be used to block access with minimal administrative effort.
+        </p>
+
+        <p><strong>Why the other options are incorrect:</strong></p>
+
+        <p>
+            A. App governance policies focus on monitoring and governing connected SaaS applications and their behaviors, not on discovering and blocking risky unsanctioned apps based on Cloud Discovery metrics.
+        </p>
+
+        <p>
+            B. The New popular app template identifies widely used applications but does not specifically target risky applications based on risk scores.
+        </p>
+
+        <p>
+            C. Conditional Access policies can control access to applications but do not automatically discover and classify risky unsanctioned applications based on traffic and risk ratings.
+        </p>
+
+        <p>
+            Therefore, the correct solution is to create an app discovery policy by using the New risky app template.
+        </p>
+    `
+},
+{
+    id: 337,
+    type: "radio",
+    title: "Question 337",
+    questionText: `
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>In Azure Active Directory (Azure AD), you configure the terms of use.</p>
+
+        <p>You need to ensure that only users who accept the terms of use can access the resources in the tenant. Other users must be denied access.</p>
+
+        <p>What should you configure?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "an access policy in Microsoft Cloud App Security.",
+        "Terms and conditions in Microsoft Endpoint Manager.",
+        "a conditional access policy in Azure AD",
+        "a compliance policy in Microsoft Endpoint Manager"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Conditional access is correct.
+        </p>
+
+        <p>
+            See the link "How to deploy terms of use policy in AZAD" referenced in the MS article;
+            https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/terms-of-use
+        </p>
+    `
+},
+{
+    id: 338,
+    type: "radio",
+    title: "Question 338",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains the groups shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q338_table1.jpg" alt="q338 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For which groups can you create an access review?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Group1 only",
+        "Group1 and Group4 only",
+        "Group1 and Group2 only",
+        "Group1, Group2, Group4, and Group5 only",
+        "Group1, Group2, Group3, Group4 and Group5"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            You cannot create access reviews for device groups.
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+    `
+},
+{
+    id: 339,
+    type: "radio",
+    title: "Question 339",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q339_table1.jpg" alt="q339 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>User1 is the owner of Group1.</p>
+
+        <p>You create an access review that has the following settings:</p>
+
+        <p>
+            ✑ Users to review: Members of a group<br>
+            ✑ Scope: Everyone<br>
+            ✑ Group: Group1<br>
+            ✑ Reviewers: Members (self)
+        </p>
+
+        <p>Which users can perform access reviews for User3?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "User1, User2, and User3",
+        "User3 only",
+        "User1 only",
+        "User1 and User2 only"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            When Reviewers is set to Members (Self), then only each individual member can review their own access, and if they do not then it is reported as no response
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review
+        </p>
+    `
+},
+{
+    id: 340,
+    type: "dropdown",
+    title: "Question 340: Hotspot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains Azure AD Privileged Identity Management (PIM) role settings for the User administrator role as shown in the following exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+            <img src="images/q340_exhibit1.jpg" alt="Question 340 Exhibit" style="width to select the answer choice that completes each statement based on the information presented in the graphic.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+        <div style="margin-top:15px;background:#f9f9f9;padding:12px;border:1px solid #ddd;border-radius:4px;">
+            <p style="margin-bottom:12px;">
+                <strong>A user who requires access to the User administrator role must perform multi-factor authentication (MFA) every:</strong>
+
+                <select class="inline-select" data-key="mfaFrequency" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="8 hours">8 hours</option>
+                    <option value="15 days">15 days</option>
+                    <option value="1 month">1 month</option>
+                </select>
+            </p>
+
+            <p>
+                <strong>Before an eligible user can perform a task that requires the User administrator role, the activation must be approved by a:</strong>
+
+                <select class="inline-select" data-key="approvalRole" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="global administrator only">global administrator only</option>
+                    <option value="global administrator or privileged role administrator">global administrator or privileged role administrator</option>
+                    <option value="permanently assigned user administrator">permanently assigned user administrator</option>
+                    <option value="privileged role administrator only">privileged role administrator only</option>
+                </select>
+            </p>
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        mfaFrequency: "8 hours",
+        approvalRole: "global administrator or privileged role administrator"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>MFA Requirement for User Administration Role:</strong></p>
+
+        <p><strong>Correct Answer: 8 hours.</strong></p>
+
+        <p>
+            In Azure AD, Privileged Identity Management (PIM) enforces Multi-Factor Authentication (MFA) for elevated access. The default policy requires MFA every 8 hours for users accessing privileged roles, including the User Administrator role. This ensures ongoing security for high-privilege tasks.
+        </p>
+
+        <p><strong>Approval for Role Activation:</strong></p>
+
+        <p><strong>Correct Answer: global administrator or privileged role administrator.</strong></p>
+
+        <p>
+            Explanation: When an eligible user attempts to activate a role requiring elevated privileges, such as the User Administrator role, PIM typically mandates approval by either a Global Administrator or a Privileged Role Administrator. This dual-approval mechanism ensures that critical operations are controlled and supervised.
+        </p>
+    `
+},
+{
+    id: 341,
+    type: "matrix",
+    title: "Question 341: Hot Spot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant named contoso.com that contains a user named User1. User1 has the devices shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+            <img src="images/q341_table1.jpg" alt="q341 table1" style="width: 100%; max-width: 550px; height: auto; bordercontoso.com that has the following settings:</p>
+
+        <p>
+            ✑ Name: Terms1<br>
+            ✑ Display name: Contoso terms of use<br>
+            ✑ Require users to expand the terms of use: On<br>
+            ✑ Require users to consent on every device: On<br>
+            ✑ Expire consents: On<br>
+            ✑ Expire starting on: December 10, 2020<br>
+            ✑ Frequency: Monthly
+        </p>
+
+        <p>On November 15, 2020, User1 accepts Terms1 on Device3.</p>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+            images/q341_answerarea.jpg
+        </div>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "On November 20, 2020, User1 can accept Terms1 on Device1."
+        },
+        {
+            id: "stmt2",
+            label: "On December 11, 2020, User1 can accept Terms1 on Device2."
+        },
+        {
+            id: "stmt3",
+            label: "On December 7, 2020, User1 can accept Terms1 on Device3."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 0,
+        stmt2: 1,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            <strong>Box 1: Yes</strong> because User1 has not yet accepted the terms on Device1.
+        </p>
+
+        <p>
+            <strong>Box 2: No</strong>, Answer date is December 11, 2020 expire starting on: December 10, 2020 answer date is December 11, 2020
+        </p>
+
+        <p>
+            <strong>Box 3: No</strong> because User1 has already accepted the terms on Device3. The terms do not expire until December 10 and then monthly after that.
+        </p>
+    `
+},
+{
+    id: 342,
+    type: "radio",
+    title: "Question 342",
+    questionText: `
+        <p>Your company recently implemented Azure Active Directory (Azure AD) Privileged Identity Management (PIM).</p>
+
+        <p>While you review the roles in PIM, you discover that all 15 users in the IT department at the company have permanent security administrator rights.</p>
+
+        <p>You need to ensure that the IT department users only have access to the Security administrator role when required.</p>
+
+        <p>What should you configure for the Security administrator role assignment?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Expire eligible assignments after from the Role settings details",
+        "Expire active assignments after from the Role settings details",
+        "Assignment type to Active",
+        "Assignment type to Eligible"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            I think the best way to read this question is "What should you configure FIRST for the Security administrator role assignment?"
+        </p>
+
+        <p>
+            You would setup "D. Assignment type to Eligible" so the admins can request the role in future, for a limited time based on the Role Setting of "Activation maximum duration (hours): 8 (by default)"
+        </p>
+
+        <p>
+            Only then would you set "B. Expire active assignments after from the Role settings details"
+        </p>
+
+        <p>
+            So D is the correct answer.
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-configure
+        </p>
+    `
+},
+{
+    id: 343,
+    type: "radio",
+    title: "Question 343",
+    questionText: `
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>The Sign-ins activity report shows that an external contractor signed in to the Exchange admin center.</p>
+
+        <p>You need to review access to the Exchange admin center at the end of each month and block sign-ins if required.</p>
+
+        <p>What should you create?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "an access package that targets users outside your directory",
+        "an access package that targets users in your directory",
+        "a group-based access review that targets guest users",
+        "an application-based access review that targets guest users"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            You can target a group with a conditional policy to detect and remediate the login at the end of each month.
+        </p>
+
+        <p>
+            Not valid, A, B, D
+        </p>
+
+        <p>
+            D admin is not using an app is using a privileged role to use Exchange admin center
+        </p>
+
+        <p>
+            A and B No
+        </p>
+
+        <p>
+            An access package.
+        </p>
+
+        <p>
+            A bundle of resources that a team or project needs and is governed with policies. Access packages are defined in containers called catalogs.
+        </p>
+
+        <p>
+            To reduce the risk of stale access, you should enable periodic reviews of users who have active assignments to an access package in Azure AD entitlement management
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
+        </p>
+    `
+},
+{
+    id: 344,
+    type: "radio",
+    title: "Question 344",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>You have 100 IT administrators who are organized into 10 departments. You create the access review shown in the exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q344_exhibit1.jpg" alt="q344 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You discover that all access review requests are received by Megan Bowen.</p>
+
+        <p>You need to ensure that the manager of each department receives the access reviews of their respective department.</p>
+
+        <p><strong>Solution:</strong> You create a separate access review for each role.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            No - each access review would still send review approval to Megan as no manager has been set for the user accounts under review.
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+    `
+},
+{
+    id: 345,
+    type: "radio",
+    title: "Question 345",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>You have 100 IT administrators who are organized into 10 departments. You create the access review shown in the exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q345_exhibit1.jpg" alt="q345 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You discover that all access review requests are received by Megan Bowen.</p>
+
+        <p>You need to ensure that the manager of each department receives the access reviews of their respective department.</p>
+
+        <p><strong>Solution:</strong> You modify the properties of the IT administrator user accounts.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Yes. Megan Bowen is receiving the access reviews because no Managers are set for those users under Job Info, she is the fallback reviewer.
+        </p>
+
+        <p>
+            If you set the Manager value to a user, this user will receive the review instead of Megan Bowen.
+        </p>
+    `
+},
+{
+    id: 346,
+    type: "radio",
+    title: "Question 346",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>You have 100 IT administrators who are organized into 10 departments. You create the access review shown in the exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q346_exhibit1.jpg" alt="q346 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You discover that all access review requests are received by Megan Bowen.</p>
+
+        <p>You need to ensure that the manager of each department receives the access reviews of their respective department.</p>
+
+        <p><strong>Solution:</strong> You set Reviewers to Member (self).</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Fallback reviewers are asked to do a review when the user has no manager specified in the directory or the group does not have an owner.
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+    `
+},
+{
+    id: 347,
+    type: "radio",
+    title: "Question 347",
+    questionText: `
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>The Azure Active Directory (Azure AD) tenant syncs to an on-premises Active Directory domain.</p>
+
+        <p>You plan to create an emergency-access administrative account named Emergency1. Emergency1 will be assigned the Global administrator role in Azure AD.</p>
+
+        <p>Emergency1 will be used in the event of Azure AD functionality failures and on-premises infrastructure failures. You need to reduce the likelihood that Emergency1 will be prevented from signing in during an emergency.</p>
+
+        <p>What should you do?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Configure Azure Monitor to generate an alert if Emergency1 is modified or signs in.",
+        "Require Azure AD Privileged Identity Management (PIM) activation of the Global administrator role for Emergency1.",
+        "Configure a conditional access policy to restrict sign-in locations for Emergency1 to only the corporate network.",
+        "Configure a conditional access policy to require multi-factor authentication (MFA) for Emergency1."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            This is an account used in 'break the glass' scenarios.
+        </p>
+
+        <p>
+            It only has a very long password, that is kept under lock and key.
+        </p>
+
+        <p>
+            User id and password are not connected to any user or device for authentication.
+        </p>
+
+        <p>
+            No MFA can block its access.
+        </p>
+
+        <p>
+            Even with Cell or network/email/phone down situations you can login with this account.
+        </p>
+
+        <p>
+            You can login from anywhere.
+        </p>
+
+        <p>
+            So it needs to be monitored to prevent tampering and account usage.
+        </p>
+    `
+},
+{
+    id: 348,
+    type: "radio",
+    title: "Question 348",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant named contoso.com.</p>
+
+        <p>You implement entitlement management to provide resource access to users at a company named Fabrikam, Inc. Fabrikam uses a domain named fabrikam.com.</p>
+
+        <p>Fabrikam users must be removed automatically from the tenant when access is no longer required.</p>
+
+        <p>You need to configure the following settings:</p>
+
+        <p>
+            ✑ Block external user from signing in to this directory: No<br>
+            ✑ Remove external user: Yes<br>
+            ✑ Number of days before removing external user from this directory: 90
+        </p>
+
+        <p>What should you configure on the Identity Governance blade?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Access packages",
+        "Entitlement management settings",
+        "Terms of use",
+        "Access reviews settings"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            B. Entitlement management settings.
+        </p>
+
+        <p>
+            Why Entitlement Management Settings?
+        </p>
+
+        <p>
+            While Access Packages and Access Reviews are tools used to manage access, the global behavior for what happens to an external user (like a Fabrikam user) once they no longer have any active access assignments is defined in the Entitlement management settings.
+        </p>
+
+        <p>
+            Within these settings, you can configure the Lifecycle management options for external users, including:
+        </p>
+
+        <ul>
+            <li>Block external user from signing in to this directory</li>
+            <li>Remove external user</li>
+            <li>Number of days before removing external user from this directory</li>
+        </ul>
+
+        <p>
+            These settings ensure that guest users are automatically removed from the tenant after access is no longer required.
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-external-users
+        </p>
+    `
+},
+{
+    id: 349,
+    type: "radio",
+    title: "Question 349",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) P1 tenant.</p>
+
+        <p>You need to review the Azure AD sign-in logs to investigate sign-ins that occurred in the past.</p>
+
+        <p>For how long does Azure AD store events in the sign-in logs?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "14 days",
+        "30 days",
+        "90 days",
+        "365 days"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            To be selected in the exam, to add, free, No, because no 7 days, but to choose 30 or 90 they need to add P1 or P2, but assume P2 is more expensive so thought only just P1, so 30 is correct
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/reference-reports-data-retention#how-long-does-azure-ad-store-the-data
+        </p>
+    `
+},
+{
+    id: 350,
+    type: "radio",
+    title: "Question 350",
+    questionText: `
+        <p>You have an Azure subscription that contains the resources shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q350_table1.jpg" alt="q350 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For which resources can you create an access review?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Group1, Role1, and Contributor only",
+        "Group1 only",
+        "Group1, App1, Contributor, and Role1",
+        "Role1 and Contributor only"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Yeah, it is possible to create access reviews for both Azure AND Azure AD roles. Tested in Azure portal.
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-create-azure-ad-roles-and-resource-roles-review
+        </p>
+
+        <p>
+            Access reviews require an Azure AD Premium P2 license.
+        </p>
+
+        <p>
+            Access reviews for Group1 and App1 can be configured in Azure AD Access Reviews.
+        </p>
+
+        <p>
+            Access reviews for the Contributor role and Role1 would need to be configured in Privileged Identity Management (PIM). PIM is included in Azure AD Premium P2.
+        </p>
+
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review?toc=/azure/active-directory/governance/toc.json
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
+        </p>
+    `
+},
+{
+    id: 351,
+    type: "radio",
+    title: "Question 351",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that uses conditional access policies.</p>
+
+        <p>You plan to use third-party security information and event management (SIEM) to analyze conditional access usage.</p>
+
+        <p>You need to download the Azure AD log by using the administrative portal. The log file must contain changes to conditional access policies.</p>
+
+        <p>What should you export from Azure AD?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "audit logs in CSV format",
+        "sign-ins in CSV format",
+        "audit logs in JSON format",
+        "sign-ins in JSON format"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            To be selected in the exam, to add, free, No, because no 7 days, but to choose 30 or 90 they need to add P1 or P2, but assume P2 is more expensive so thought only just P1, so 30 is correct
+        </p>
+
+        <p>
+            You can also choose to download the filtered data, up to 250,000 records, by selecting the Download button. You can download the logs in either CSV or JSON format.
+        </p>
+
+        <p>
+            So this question, can be one of those that you will got Correct if you choose any of both csv or JSON,
+        </p>
+
+        <p>
+            You can use the JSON transform feature in the Power Query Editor in Excel to split each property in the JSON object in the Audit Data column into multiple columns so that each property has its own column.
+        </p>
+
+        <p>
+            So answer = C, JSON
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/microsoft-365/compliance/export-view-audit-log-records?view=o365-worldwide
+        </p>
+
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/concept-audit-logs
+        </p>
+    `
+},
+{
+    id: 352,
+    type: "radio",
+    title: "Question 352",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>You have 100 IT administrators who are organized into 10 departments. You create the access review shown in the exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q352_exhibit1.jpg" alt="q352 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You discover that all access review requests are received by Megan Bowen.</p>
+
+        <p>You need to ensure that the manager of each department receives the access reviews of their respective department.</p>
+
+        <p><strong>Solution:</strong> You add each manager as a fallback reviewer.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The option of Fallback reviewer is when you set as reviewer to the manager or group owner and somehow that user is not having a manager in the directory. In those case, the fallback reviewer, which could be a department head would be the reviewer.
+        </p>
+
+        <p>
+            "Fallback reviewers are asked to do a review when the user has no manager specified in the directory or the group does not have an owner."
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+    `
+},
+{
+    id: 353,
+    type: "radio",
+    title: "Question 353",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains the objects shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q353_table1.jpg" alt="q353 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Which objects can you add as eligible in Azure AD Privileged Identity Management (PIM) for an Azure AD role?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "User1, Guest1, and Identity1",
+        "User1 and Guest1 only",
+        "User1 only",
+        "User1 and Identity1 only"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            You cannot assign service principals as eligible to Azure AD roles, Azure roles, and Privileged Access groups but you can grant a time limited active assignment to all three.
+        </p>
+
+        <p>
+            Reference:
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-deployment-plan
+        </p>
+    `
+},
+{
+    id: 354,
+    type: "matrix",
+    title: "Question 354: Hot Spot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains the following group:</p>
+
+        <p>
+            ✑ Name: Group1<br>
+            ✑ Members: User1, User2<br>
+            ✑ Owner: User3
+        </p>
+
+        <p>On January 15, 2021, you create an access review as shown in the exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q354_exhibit1.jpg" alt="q354 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+	<p>Users answer the Review1 question as shown in the following table.</p>
+<div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q354_table1.jpg" alt="q354 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "On February 5, 2021, User1 can answer the Review1 question again."
+        },
+        {
+            id: "stmt2",
+            label: "On January 25, 2021, User2 can answer the Review1 question again."
+        },
+        {
+            id: "stmt3",
+            label: "On January 22, 2021, User3 can answer the Review1 question."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 0,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            - On February 5, User1 can answer the Review1 question again: No
+        </p>
+
+        <p>
+            - Review1 is closed for new answers, and the monthly frequency means it has not been enough time to launch a new one yet
+        </p>
+
+        <p>
+            - On January 25, User2 can answer the Review1 question again: Yes
+        </p>
+
+        <p>
+            - IF by again they mean change their answer, then YES, BUT if by again they mean a new one, then NO
+        </p>
+
+        <p>
+            - Stupid question design
+        </p>
+
+        <p>
+            - On January 22, User3 can answer the Review1 question: No
+        </p>
+
+        <p>
+            - Not subject of review, not a member of the group.
+        </p>
+    `
+},
+{
+    id: 355,
+    type: "dropdown",
+    title: "Question 355: Hotspot",
+    questionText: `
+        <p>Your company has an Azure Active Directory (Azure AD) tenant named contoso.com. The company has a business partner named Fabrikam, Inc.</p>
+
+        <p>Fabrikam uses Azure AD and has two verified domain names of fabrikam.com and litwareinc.com. Both domain names are used for Fabrikam email addresses.</p>
+
+        <p>You plan to create an access package named package1 that will be accessible only to the users at Fabrikam.</p>
+
+        <p>You create a connected organization for Fabrikam. You need to ensure that the package1 will be accessible only to users who have fabrikam.com email addresses.</p>
+
+        <p>What should you do? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <div style="margin-top:15px;background:#f9f9f9;padding:12px;border:1px solid #ddd;border-radius:4px;">
+
+            <p style="margin-bottom:12px;">
+                <strong>To allow access for users who have fabrikam.com email addresses, configure:</strong>
+
+                <select class="inline-select" data-key="allowAccess" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="An access package assignment in Identity Governance">An access package assignment in Identity Governance</option>
+                    <option value="An access package policy in Identity Governance">An access package policy in Identity Governance</option>
+                    <option value="A conditional access policy in Azure AD">A conditional access policy in Azure AD</option>
+                    <option value="The External collaboration settings in Azure AD">The External collaboration settings in Azure AD</option>
+                </select>
+            </p>
+
+            <p>
+                <strong>To block access for users who have litwareinc.com email addresses, configure:</strong>
+
+                <select class="inline-select" data-key="blockAccess" style="padding:6px;margin-left:10px;">
+                    <option value="">-- Select Option --</option>
+                    <option value="An access package assignment in Identity Governance">An access package assignment in Identity Governance</option>
+                    <option value="An access package policy in Identity Governance">An access package policy in Identity Governance</option>
+                    <option value="A conditional access policy in Azure AD">A conditional access policy in Azure AD</option>
+                    <option value="The External collaboration settings in Azure AD">The External collaboration settings in Azure AD</option>
+                </select>
+            </p>
+
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        allowAccess: "An access package policy in Identity Governance",
+        blockAccess: "The External collaboration settings in Azure AD"
+    },
+    correctAnswerText: `
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-access-package-request-policy
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-access-package-create
+        </p>
+    `
+},
+{
+    id: 356,
+    type: "radio",
+    title: "Question 356",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant named contoso.com that has Azure AD Identity Protection policies enforced.</p>
+
+        <p>You create an Azure Sentinel instance and configure the Azure Active Directory connector.</p>
+
+        <p>You need to ensure that Azure Sentinel can generate incidents based on the risk alerts raised by Azure AD Identity Protection.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Add a Microsoft Sentinel data connector.",
+        "Configure the Notify settings in Azure AD Identity Protection.",
+        "Create a Microsoft Sentinel playbook.",
+        "Modify the Diagnostics settings in Azure AD."
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Add a Microsoft Sentinel Data connector is the wrong answer. Meant to mislead.
+        </p>
+
+        <p>
+            Because question itself mentions that AAD connector was added. Which seem to cover all AAD functionality including Identity Protection feature.
+        </p>
+
+        <p>
+            What you are asked to do is generate incidents based on the risk alerts.
+        </p>
+
+        <p>
+            For that you use playbooks in Sentinel. Which automates tasks that SOC engineers need to such as generte risk alerts. So answer is C.
+        </p>
+    `
+},
+{
+    id: 357,
+    type: "radio",
+    title: "Question 357",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You use Azure Monitor to analyze Azure Active Directory (Azure AD) activity logs.</p>
+
+        <p>You receive more than 100 email alerts each day for failed Azure AD user sign-in attempts. You need to ensure that a new security administrator receives the alerts instead of you.</p>
+
+        <p><strong>Solution:</strong> From Azure AD, you create an assignment for the Insights administrator role.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Permissions should be given to a Security Administrator or appropriate monitoring role, not the Insights Administrator role.
+        </p>
+
+        <p>
+            Insights Administrator is an administrator of the Office 365 Viva app (Employee Experience Platform).
+        </p>
+
+        <p>
+            Reference:
+            https://learn.microsoft.com/en-us/azure/active-directory/roles/permissions-reference#security-administrator
+        </p>
+    `
+},
+{
+    id: 358,
+    type: "radio",
+    title: "Question 358",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You use Azure Monitor to analyze Azure Active Directory (Azure AD) activity logs.</p>
+
+        <p>You receive more than 100 email alerts each day for failed Azure AD user sign-in attempts. You need to ensure that a new security administrator receives the alerts instead of you.</p>
+
+        <p><strong>Solution:</strong> From Azure AD, you modify the Diagnostics settings.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Diagnostic settings are in Azure Monitor. Not in AAD.
+        </p>
+
+        <p>
+            Nothing here that say's about using Defender for Cloud. Defender for cloud is a separate service.
+        </p>
+
+        <p>
+            And monitoring logs would be premium paid feature.
+        </p>
+
+        <p>
+            Nothing here mentions Defender for Cloud.
+        </p>
+    `
+},
+{
+    id: 359,
+    type: "radio",
+    title: "Question 359",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You use Azure Monitor to analyze Azure Active Directory (Azure AD) activity logs.</p>
+
+        <p>You receive more than 100 email alerts each day for failed Azure AD user sign-in attempts. You need to ensure that a new security administrator receives the alerts instead of you.</p>
+
+        <p><strong>Solution:</strong> From Azure Monitor, you create a data collection rule.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Data Collection Rules is not the way to go here.
+        </p>
+
+        <p>
+            Data Collection Rules (DCRs) define the data collection process in Azure Monitor. DCRs specify what data should be collected, how to transform that data, and where to send that data.
+        </p>
+
+        <p>
+            Some DCRs will be created and managed by Azure Monitor to collect a specific set of data to enable insights and visualizations.
+        </p>
+
+        <p>
+            From https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview
+        </p>
+    `
+},
+{
+    id: 360,
+    type: "radio",
+    title: "Question 360",
+    questionText: `
+        <p>You have an Azure Active Directory Premium P2 tenant.</p>
+
+        <p>You create a Log Analytics workspace.</p>
+
+        <p>You need to ensure that you can view Azure Active Directory (Azure AD) audit log information by using Azure Monitor.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Run the Set-AzureADTenantDetail cmdlet.",
+        "Create an Azure AD workbook.",
+        "Modify the Diagnostics settings for Azure AD.",
+        "Run the Get-AzureADAuditDirectoryLogs cmdlet."
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Send logs to Azure Monitor.
+        </p>
+
+        <p>
+            Sign in to the Azure portal.
+        </p>
+
+        <p>
+            Select Azure Active Directory > Diagnostic settings -> Add diagnostic setting.
+        </p>
+
+        <p>
+            You can also select Export Settings from the Audit Logs or Sign-ins page to get to the diagnostic settings configuration page.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics
+        </p>
+    `
+},
+{
+    id: 361,
+    type: "matrix",
+    title: "Question 361: Hot Spot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q361_table1.jpg" alt="q361 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>In Azure AD Privileged Identity Management (PIM), you configure the Global administrator role as shown in the following exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q361_exhibit1.jpg" alt="q361 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>User1 is eligible for the Global administrator role.</p>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 requires Azure Multi-Factor Authentication (MFA) to activate the Global administrator role."
+        },
+        {
+            id: "stmt2",
+            label: "User2 must approve all activation requests for the Global administrator role."
+        },
+        {
+            id: "stmt3",
+            label: "User2 and User3 can edit the Global administrator role assignment."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 0,
+        stmt2: 1,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            <strong>Box 1: Yes</strong> -
+        </p>
+
+        <p>
+            MFA is required on activation.
+        </p>
+
+        <p>
+            <strong>Box 2: No</strong> -
+        </p>
+
+        <p>
+            The Privileged Authentication Administrator can set or reset any authentication method for any user, including Global Administrators.
+        </p>
+
+        <p>
+            The Privileged Role Administrator can manage role assignments, including the Global Administrator role, in Azure Active Directory, as well as within Azure AD Privileged Identity Management. In addition, this role allows management of all aspects of Privileged Identity Management and administrative units.
+        </p>
+
+        <p>
+            <strong>Box 3: No</strong> -
+        </p>
+
+        <p>
+            The Privileged Authentication Administrator can set or reset any authentication method for any user, including Global Administrators.
+        </p>
+
+        <p>
+            The Privileged Role Administrator can manage role assignments, including the Global Administrator role, in Azure Active Directory, as well as within Azure AD Privileged Identity Management. In addition, this role allows management of all aspects of Privileged Identity Management and administrative units.
+        </p>
+    `
+},
+{
+    id: 362,
+    type: "radio",
+    title: "Question 362",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a Microsoft SharePoint Online site named Site1 and a Microsoft Teams team named Team1.</p>
+
+        <p>You need to create an entitlement management workflow to manage Site1 and Team1.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Configure an app registration.",
+        "Create an Administrative unit.",
+        "Create an access package.",
+        "Create a catalog."
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The correct answer is D - Create a catalog
+        </p>
+
+        <p>
+            Access packages for governed applications should be in a designated catalog. If you don't already have a catalog for your application governance scenario, create a catalog in Microsoft Entra entitlement management.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/identity-governance-applications-deploy#deploy-entitlement-management-policies-for-automating-access-assignment
+        </p>
+    `
+},
+{
+    id: 363,
+    type: "radio",
+    title: "Question 363",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You use Azure Monitor to analyze Azure Active Directory (Azure AD) activity logs.</p>
+
+        <p>You receive more than 100 email alerts each day for failed Azure AD user sign-in attempts. You need to ensure that a new security administrator receives the alerts instead of you.</p>
+
+        <p><strong>Solution:</strong> From Azure Monitor, you modify the action group.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The correct answer is A - Yes, you modify the action group from Azure Monitor.
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups#configure-notifications
+        </p>
+    `
+},
+{
+    id: 364,
+    type: "matrix",
+    title: "Question 364: Hot Spot",
+    questionText: `
+        <p>Your network contains an on-premises Active Directory domain that syncs to an Azure Active Directory (Azure AD) tenant.</p>
+
+        <p>The tenant contains the groups shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q364_table1.jpg" alt="q364 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The tenant contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q364_table2.jpg" alt="q364 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You create an access review as shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q364_table3.jpg" alt="q364 table 4" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 will be removed automatically from Group1 if the user does not respond to the review request."
+        },
+        {
+            id: "stmt2",
+            label: "User2 will be removed automatically from Group3 if the user does not respond to the review request."
+        },
+        {
+            id: "stmt3",
+            label: "User3 will be removed automatically from Group2 if the user does not respond to the review request."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 1,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            <strong>Box 1: No -</strong>
+        </p>
+
+        <p>
+            User1 is member of Group1. Group1 is in the cloud. Group1 is member of Group3. Group3 is in the cloud.
+        </p>
+
+        <p>
+            The access review applies to Group3, but not to Group1. The access review is setup to remove access if reviewers don't respond.
+        </p>
+
+        <p>
+            <strong>Box 2: No.</strong>
+        </p>
+
+        <p>
+            <strong>Box 3: No -</strong>
+        </p>
+
+        <p>
+            User3 is member of Group3, not of Group2.
+        </p>
+    `
+},
+{
+    id: 365,
+    type: "radio",
+    title: "Question 365",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a web app named App1. Guest users are regularly granted access to App1.</p>
+
+        <p>You need to ensure that the guest users that have NOT accessed App1 during the past 30 days have their access removed. The solution must minimize administrative effort.</p>
+
+        <p>What should you configure?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "a Conditional Access policy",
+        "a compliance policy",
+        "a guest access review",
+        "an access review for application access"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Access to groups and applications for employees and guests changes over time.
+        </p>
+
+        <p>
+            To reduce the risk associated with stale access assignments, administrators can use Azure Active Directory (Azure AD) to create access reviews for group members or application access.
+        </p>
+
+        <p>
+            An access review for application access enables administrators to periodically review guest user access to App1 and automatically remove access when users no longer require it or fail review criteria, such as inactivity during the review period.
+        </p>
+
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/create-access-review
+        </p>
+    `
+},
+{
+    id: 366,
+    type: "dropdown",
+    title: "Question 366: Hotspot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) ten-ant: that contains the groups shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q366_table1.jpg" alt="q366 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You create an access review for Group1 as shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q366_table2.jpg" alt="q366 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You create an access review for Group2 as shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q366_table3.jpg" alt="q366 table 3" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>What is the minimum member of Azure Active Directory Premium P2 licenses required for each group? To answer, select the appropriate, options in the answer area.</p>
+
+        <div style="margin-top:15px;background:#f9f9f9;padding:12px;border:1px solid #ddd;border-radius:4px;">
+            <p style="margin-bottom:12px;">
+                <strong>Group1:</strong>
+                <select class="inline-select" data-key="group1">
+                    <option value="">-- Select Option --</option>
+                    <option value="1">1</option>
+                    <option value="500">500</option>
+                    <option value="525">525</option>
+                </select>
+            </p>
+
+            <p>
+                <strong>Group2:</strong>
+                <select class="inline-select" data-key="group2">
+                    <option value="">-- Select Option --</option>
+                    <option value="1">1</option>
+                    <option value="100">100</option>
+                    <option value="295">295</option>
+                    <option value="395">395</option>
+                </select>
+            </p>
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        group1: "500",
+        group2: "1"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Group1 Selection:</strong></p>
+
+        <p>
+            Chosen Value: 500
+        </p>
+
+        <p>
+            The value "500" might represent a threshold, quota, or limit related to Group1's functionality or resource allocation. This value could be optimal for the scenario being discussed, balancing performance and capacity.
+        </p>
+
+        <p><strong>Group2 Selection:</strong></p>
+
+        <p>
+            Chosen Value: 1
+        </p>
+
+        <p>
+            The value "1" for Group2 might indicate a minimal setting or the initiation of a specific condition, rule, or configuration. This selection could be made to enable specific testing, a controlled environment, or strict limitations for this group's operation.
+        </p>
+    `
+},
+{
+    id: 367,
+    type: "matrix",
+    title: "Question 367: Hot Spot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant named contoso.com that contains a group named All Company and has the following Identity Governance settings:</p>
+
+        <p>
+            ✑ Block external users from signing in to this directory: Yes<br>
+            ✑ Remove external user: Yes<br>
+            ✑ Number of days before removing external user from this directory: 30
+        </p>
+
+        <p>On March 11, 2022, you create an access package named Package1 that has the following settings:</p>
+
+        <p>
+            ✑ Resource roles<br>
+            1. Name: All Company<br>
+            2. Type: Group and Team<br>
+            3. Role: Member
+        </p>
+
+        <p>
+            ✑ Lifecycle<br>
+            1. Access package assignment expire: On date<br>
+            2. Assignment expiration date: April 1, 2022
+        </p>
+
+        <p>On March 1, 2022, you assign Package1 to the guest users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q367_table1.jpg" alt="q367 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>On March 2, 2022, you assign the Reports reader role to Guest1.</p>
+
+        <p>On April 1, 2022, you invite a guest user named Guest3 to contoso.com.</p>
+
+        <p>On April 4, 2022, you add Guest3 to the All Company group.</p>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "On May 5, 2022, the Guest1 account is in contoso.com."
+        },
+        {
+            id: "stmt2",
+            label: "On May 5, 2022, the Guest2 account is in contoso.com."
+        },
+        {
+            id: "stmt3",
+            label: "On May 5, 2022, the Guest3 account is in contoso.com."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 1,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Box 1: No -</strong></p>
+
+        <p>
+            On March 2, 2022, you assign the Reports reader role to Guest1.
+        </p>
+
+        <p>
+            On April 1 the access package assignment expires. After another 30 days, well before May 5, the guest user account is removed.
+        </p>
+
+        <p><strong>Box 2: No -</strong></p>
+
+        <p>
+            On April 1 the access package assignment expires. After another 30 days, well before May 5, the guest user account is removed.
+        </p>
+
+        <p><strong>Box 3: Yes -</strong></p>
+
+        <p>
+            Note: Lifecycle -
+        </p>
+
+        <p>
+            On the Lifecycle tab, you specify when a user's assignment to the access package expires. You can also specify whether users can extend their assignments.
+        </p>
+
+        <p>
+            In the Expiration section, set Access package assignments expires to On date, Number of days, Number of hours, or Never.
+        </p>
+
+        <p>
+            For On date, select an expiration date in the future.
+        </p>
+
+        <p>
+            For Number of days, specify a number between 0 and 3660 days. For Number of hours, specify a number of hours.
+        </p>
+
+        <p>
+            Based on your selection, a user's assignment to the access package expires on a certain date, a certain number of days after they are approved, or never.
+        </p>
+
+        <p>
+            Note 2: By default, when an external user no longer has any access package assignments, they are blocked from signing in to your directory. After 30 days, their guest user account is removed from your directory.
+        </p>
+
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-access-package-lifecycle-policy
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-external-users
+        </p>
+    `
+},
+{
+    id: 368,
+    type: "radio",
+    title: "Question 368",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant named Contoso that contains a terms of use (ToU) named Terms1 and an access package. Contoso users collaborate with an external organization named Fabrikam.</p>
+
+        <p>Fabrikam users must accept Terms1 before being allowed to use the access package. You need to identify which users accepted or declined Terms1.</p>
+
+        <p>What should you use?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "sign-in logs",
+        "the Usage and Insights report",
+        "provisioning logs",
+        "audit logs"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>View Azure AD audit logs -</strong></p>
+
+        <p>
+            If you want to view more activity, Azure AD terms of use policies include audit logs.
+            Each user consent triggers an event in the audit logs that is stored for 30 days.
+        </p>
+
+        <p>
+            You can view these logs in the portal or download as a .csv file.
+        </p>
+
+        <p>
+            To get started with Azure AD audit logs, use the following procedure:
+        </p>
+
+        <p>
+            1. Sign in to the Azure portal as a global administrator, security administrator, or Conditional Access administrator.
+        </p>
+
+        <p>
+            2. Browse to Azure Active Directory &gt; Security &gt; Conditional Access &gt; Terms of use.
+        </p>
+
+        <p>
+            3. Select a terms of use policy.
+        </p>
+
+        <p>
+            4. Select View audit logs.
+        </p>
+
+        <p>
+            5. On the Azure AD audit logs screen, you can filter the information using the provided lists to target specific audit log information.
+        </p>
+
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/terms-of-use
+        </p>
+    `
+},
+{
+    id: 369,
+    type: "radio",
+    title: "Question 369",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q369_table1.jpg" alt="q369 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>User1 is the owner of Group1.</p>
+
+        <p>You create an access review that has the following settings:</p>
+
+        <p>
+            ✑ What to review: Teams + Groups<br>
+            ✑ Scope: All users<br>
+            ✑ Group: Group1<br>
+            ✑ Reviewers: Users review their own access
+        </p>
+
+        <p>Which users can perform access reviews for User3?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "User1 only",
+        "User3 only",
+        "User1 and User2 only",
+        "User1, User2, and User3"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct answer is B: User3
+        </p>
+
+        <p>
+            You can ask the guests themselves or a decision maker to participate in an access review and recertify (or attest) to the guests' access.
+        </p>
+
+        <p>
+            Refer to the below article:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/manage-guest-access-with-access-reviews
+        </p>
+    `
+},
+{
+    id: 370,
+    type: "matrix",
+    title: "Question 370: Hot Spot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains three users named User1, User2, and User3. You create a group named Group1. You add User2 and User3 to Group1.</p>
+
+        <p>You configure a role in Azure AD Privileged Identity Management (PIM) as shown in the Application Administrator exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q370_exhibit1.jpg" alt="q370 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Group1 is configured as the approver for the Application administrator role. You configure User2 to be eligible for the Application administrator role.</p>
+
+        <p>For User1 you add an assignment to the Application administrator role as shown in the Assignment exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q370_exhibit2.jpg" alt="q370 exhibit 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 is assigned the Application administrator role automatically."
+        },
+        {
+            id: "stmt2",
+            label: "When User2 requests to be assigned the Application administrator role, only User3 can approve the request."
+        },
+        {
+            id: "stmt3",
+            label: "If a request by User1 to be assigned the Application administrator role is approved on January 31, 2021, at 23:00, User1 can use the role until February 1, 2021, at 04:00."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 0,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            <strong>Box 1: No -</strong>
+        </p>
+
+        <p>
+            User1 is eligible from 1/1/2021 to 1/31/2021.
+        </p>
+
+        <p>
+            However, here the Application Administrator role requires approval.
+        </p>
+
+        <p>
+            <strong>Box 2: Yes</strong>
+        </p>
+
+        <p>
+            <strong>Box 3: Yes -</strong>
+        </p>
+
+        <p>
+            User1 is eligible from 1/1/2021 to 1/31/2021.
+        </p>
+
+        <p>
+            Activation maximum duration (hours) is set to 5 hours.
+        </p>
+
+        <p>
+            The role can therefore be used until February 1, 2021, at 04:00.
+        </p>
+    `
+},
+{
+    id: 371,
+    type: "dropdown",
+    title: "Question 371: Hotspot",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>You create an access review for Azure Active Directory (Azure AD) roles.</p>
+
+        <p>You need to ensure that users who do not respond to review requests are removed automatically from the roles. The solution must minimize administrative effort.</p>
+
+        <p>Which two settings should you modify? To answer, select the settings in the answer area.</p>
+
+        <div style="margin-top:15px;border:1px solid #d1d5db;background:#ffffff;padding:16px;border-radius:4px;">
+
+            <div style="margin-bottom:16px;">
+                <div style="font-size:14px;color:#374151;margin-bottom:4px;">Reviewers</div>
+
+                <table style="width:100%;border-collapse:collapse;">
+                    <tr>
+                        <td style="width:140px;padding:8px 4px;font-size:13px;color:#374151;">
+                            Reviewers
+                        </td>
+                        <td style="padding:4px;">
+                            <select data-key="reviewers"
+                                style="width:100%;padding:6px;border:1px solid #7fb27f;background:#dff0d8;">
+                                <option value="">-- Select --</option>
+                                <option value="Members (self)">Members (self)</option>
+                                <option value="Group owners">Group owners</option>
+                                <option value="Managers">Managers</option>
+                                <option value="Selected users">Selected users</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <hr style="border:none;border-top:1px solid #ddd;margin:16px 0;">
+
+            <div style="margin-bottom:16px;">
+                <div style="font-size:14px;font-weight:bold;color:#374151;margin-bottom:10px;">
+                    Upon completion settings
+                </div>
+
+                <table style="width:100%;border-collapse:collapse;">
+
+                    <tr>
+                        <td style="width:260px;padding:8px 4px;border:1px solid #cfcfcf;">
+                            Auto apply results to resource
+                        </td>
+
+                        <td style="padding:4px;border:1px solid #cfcfcf;">
+                            <span style="display:inline-block;background:#0078d4;color:white;padding:4px 12px;border-radius:16px;">Enable</span>
+                            <span style="margin-left:10px;">Disable</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            If reviewers don't respond
+                        </td>
+
+                        <td style="padding:4px;border:1px solid #cfcfcf;">
+                            <select data-key="noResponse"
+                                style="width:100%;padding:6px;border:1px solid #7fb27f;background:#dff0d8;">
+                                <option value="">-- Select --</option>
+                                <option value="No change">No change</option>
+                                <option value="Remove access">Remove access</option>
+                                <option value="Approve access">Approve access</option>
+                                <option value="Take recommendations">Take recommendations</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            Action to apply on denied guest users
+                        </td>
+
+                        <td style="padding:8px;border:1px solid #cfcfcf;background:#f3f4f6;color:#6b7280;">
+                            Remove user's membership from the resource
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            (Preview) At end of review, send notification to
+                        </td>
+
+                        <td style="padding:8px;border:1px solid #cfcfcf;color:#2563eb;">
+                            + Select User(s) or Group(s)
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div>
+                <div style="font-size:14px;font-weight:bold;color:#374151;margin-bottom:10px;">
+                    Advanced settings
+                </div>
+
+                <table style="width:100%;border-collapse:collapse;">
+
+                    <tr>
+                        <td style="width:260px;padding:8px 4px;border:1px solid #cfcfcf;">
+                            Show recommendations
+                        </td>
+
+                        <td style="padding:8px;border:1px solid #cfcfcf;">
+                            <span style="display:inline-block;background:#0078d4;color:white;padding:4px 12px;border-radius:16px;">Enable</span>
+                            <span style="margin-left:10px;">Disable</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            Require reason on approval
+                        </td>
+
+                        <td style="padding:8px;border:1px solid #cfcfcf;">
+                            <span style="display:inline-block;background:#0078d4;color:white;padding:4px 12px;border-radius:16px;">Enable</span>
+                            <span style="margin-left:10px;">Disable</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            Mail notifications
+                        </td>
+
+                        <td style="padding:8px;border:1px solid #cfcfcf;">
+                            <span style="display:inline-block;background:#0078d4;color:white;padding:4px 12px;border-radius:16px;">Enable</span>
+                            <span style="margin-left:10px;">Disable</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            Reminders
+                        </td>
+
+                        <td style="padding:8px;border:1px solid #cfcfcf;">
+                            <span style="display:inline-block;background:#0078d4;color:white;padding:4px 12px;border-radius:16px;">Enable</span>
+                            <span style="margin-left:10px;">Disable</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:8px 4px;border:1px solid #cfcfcf;">
+                            Additional content for reviewer email
+                        </td>
+
+                        <td style="height:70px;border:1px solid #cfcfcf;background:#fafafa;">
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        reviewers: "Members (self)",
+        noResponse: "No change"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>Box 1: Reviewers, Members (self)</p>
+
+        <p>
+            Reviewers for guest users can be:
+        </p>
+
+        <p>
+            Specified reviewers: Certain users within your organization
+        </p>
+
+        <p>
+            Group owners: Office 365 Group owners that also includes Teams
+        </p>
+
+        <p>
+            Self-review: Guest users can review access on their own
+        </p>
+
+        <p>Box 2: If reviewers don't respond, No Change</p>
+
+        <p>
+            If reviewers don't respond (within the configured review period):
+        </p>
+
+        <p>
+            No change: Leave user's access unchanged
+        </p>
+
+        <p>
+            Remove access: Remove user's access
+        </p>
+
+        <p>
+            Approve access: Approve user's access
+        </p>
+
+        <p>
+            Take recommendations: Take the system's recommendation on denying or approving the user's continued access
+        </p>
+
+        <p><strong>Reference:</strong></p>
+
+        <p>
+            https://blog.quadrotech-it.com/blog/how-to-manage-guest-access-in-azure-active-directory-pt-1/
+        </p>
+    `
+},
+{
+    id: 372,
+    type: "dropdown",
+    title: "Question 372: Hotspot",
+    questionText: `
+        <p>You have an Azure Active Directory (Azure AD) tenant that contains a user named User1. An administrator deletes User1.</p>
+
+        <p>You need to identify the following:</p>
+
+        <ul>
+            <li>How many days after the account of User1 is deleted can you restore the account?</li>
+            <li>Which is the least privileged role that can be used to restore User1?</li>
+        </ul>
+
+        <p>What should you identify? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:250px;text-align:right;font-size:15px;">
+                        Number of days:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="days"
+                            style="min-width:180px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="90">90</option>
+                            <option value="180">180</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        Role:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="role"
+                            style="min-width:320px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="User administrator">User administrator</option>
+                            <option value="Network administrator">Network administrator</option>
+                            <option value="Helpdesk administrator">Helpdesk administrator</option>
+                            <option value="Domain name administrator">Domain name administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        days: "30",
+        role: "User administrator"
+    },
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Number of days: 30
+        </p>
+
+        <p>
+            Role: User administrator
+        </p>
+    `
+},
+{
+    id: 373,
+    type: "dropdown",
+    title: "Question 373: Hotspot",
+    questionText: `
+        <p>You have an Azure AD tenant that contains the groups shown in the following exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q373_graphic1.jpg" alt="q373 graphic 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Use the drop-down menus to select the answer choice that completes each statement based on the information presented in the graphic.</p>
+
+                <div style="border:1px solid #d1d5db;background:#ffffff;padding:24px;border-radius:4px;">
+
+            <table style="width:100%;border-collapse:collapse;">
+
+                <tr>
+                    <td style="padding:16px 8px;font-size:15px;vertical-align:middle;">
+                        You can add a managed identity to
+                        &lt;answer choice&gt;.
+                    </td>
+
+                    <td style="padding:16px 8px;width:420px;">
+                        <select data-key="managedIdentity"
+                            style="width:100%;padding:8px;border:1px solid #bdbdbd;background:#fff;">
+                            <option value="">-- Select --</option>
+                            <option value="Group2 only">Group2 only</option>
+                            <option value="All company and Group1 only">All company and Group1 only</option>
+                            <option value="Group2, Group3, and Group4 only">Group2, Group3, and Group4 only</option>
+                            <option value="All company, Group1, and Group2 only">All company, Group1, and Group2 only</option>
+                            <option value="All company, Group1, Group2, Group3, and Group4">All company, Group1, Group2, Group3, and Group4</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:16px 8px;font-size:15px;vertical-align:middle;">
+                        You can add an Azure AD cloud user to
+                        &lt;answer choice&gt;.
+                    </td>
+
+                    <td style="padding:16px 8px;width:420px;">
+                        <select data-key="cloudUser"
+                            style="width:100%;padding:8px;border:1px solid #bdbdbd;background:#fff;">
+                            <option value="">-- Select --</option>
+                            <option value="Group2 only">Group2 only</option>
+                            <option value="All company and Group1 only">All company and Group1 only</option>
+                            <option value="Group2, Group3, and Group4 only">Group2, Group3, and Group4 only</option>
+                            <option value="All company, Group1, and Group2 only">All company, Group1, and Group2 only</option>
+                            <option value="All company, Group1, Group2, Group3, and Group4">All company, Group1, Group2, Group3, and Group4</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        managedIdentity: "Group2 only",
+        cloudUser: "All company, Group1, and Group2 only"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            - Managed identity to Security group only.
+        </p>
+
+        <p>
+            The security group can't be Dynamic or sync from OnPremise
+        </p>
+
+        <p>
+            - AD User Cloud can be added to Security and M365 groups
+        </p>
+
+        <p>
+            ○ Not the dynamic (Group3) as it's using a query to get members
+            Not Group4 as it's synch from OnPrem
+        </p>
+    `
+},
+{
+    id: 374,
+    type: "checkbox",
+    title: "Question 374",
+    questionText: `
+        <p>You have an Azure AD tenant that contains two users named User1 and User2.</p>
+
+        <p>You plan to perform the following actions:</p>
+
+        <ul>
+            <li>Create a group named Group1.</li>
+            <li>Add User1 and User2 to Group1.</li>
+            <li>Assign Azure AD roles to Group1.</li>
+        </ul>
+
+        <p>You need to create Group1.</p>
+
+        <p>Which two settings can you use? Each correct answer presents a complete solution.</p>
+    `,
+    prompt: "Select all correct options:",
+    options: [
+        "Group type: Microsoft 365 - Membership type: Assigned",
+        "Group type: Security - Membership type: Assigned",
+        "Group type: Security - Membership type: Dynamic User",
+        "Group type: Microsoft 365 - Membership type: Dynamic User",
+        "Group type: Security - Membership type: Dynamic Device"
+    ],
+    correctAnswer: [0, 1],
+    correctAnswerText: `
+        <p><strong>Answer: A, B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            when you create a group you MUST enable "azure ad roles can be assigned to the group" (cannot be done afterwards).
+        </p>
+
+        <p>
+            If you enable this feature when creating a group, dynamic groups are getting greyed out / disabled.
+        </p>
+    `
+},
+{
+    id: 375,
+    type: "dragdrop",
+    title: "Question 375",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>You need to perform the following tasks:</p>
+
+        <ul>
+            <li>Identify the locations and IP addresses used by Azure AD users to sign in.</li>
+            <li>Review the Azure AD security settings and identify improvement recommendations.</li>
+            <li>Identify changes to Azure AD users or service principals.</li>
+        </ul>
+
+        <p>What should you use for each task?</p>
+
+        <p>To answer, drag the appropriate resources to the correct requirements. Each resource may be used once, more than once, or not at all.</p>
+    `,
+    prompt: "Select an item, then select the matching answer area:",
+    availableItems: [
+        "Audit logs",
+        "Identity secure score",
+        "Sign-in logs"
+    ],
+    dropTargets: [
+        {
+            id: "task1",
+            label: "Identify the locations and IP addresses used by Azure AD users to sign in:",
+            correctAnswer: "Sign-in logs"
+        },
+        {
+            id: "task2",
+            label: "Identify changes to Azure AD users or service principals:",
+            correctAnswer: "Audit logs"
+        },
+        {
+            id: "task3",
+            label: "Review the Azure AD security settings and identify improvement recommendations:",
+            correctAnswer: "Identity secure score"
+        }
+    ],
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            1. Sign-in logs
+        </p>
+
+        <p>
+            2. Audit logs
+        </p>
+
+        <p>
+            3. Identity secure score
+        </p>
+    `
+},
 {
     id: 376,
     isCaseStudy: true,
