@@ -15791,4 +15791,5609 @@ You create the Azure resources shown in the following table.
         </p>
     `
 },
+	{
+    id: 444,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q444_table1.jpg" alt="q444 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 444",
+
+    questionText: `
+        <p>
+            You need to meet the technical requirements for license management by the helpdesk administrators.
+        </p>
+
+        <p>
+            What should you create first, and which tool should you use?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:260px;">
+                        Object to create for each branch office:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="objectToCreate" style="min-width:260px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="An administrative unit">An administrative unit</option>
+                            <option value="A custom role">A custom role</option>
+                            <option value="A Dynamic User security group">A Dynamic User security group</option>
+                            <option value="An OU">An OU</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        Tool to use:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="toolToUse" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Azure Active Directory admin center">Azure Active Directory admin center</option>
+                            <option value="Active Directory Administrative Center">Active Directory Administrative Center</option>
+                            <option value="Active Directory module for Windows PowerShell">Active Directory module for Windows PowerShell</option>
+                            <option value="Microsoft 365 admin center">Microsoft 365 admin center</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        objectToCreate: "An administrative unit",
+        toolToUse: "Azure Active Directory admin center"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Object to create for each branch office: <strong>An administrative unit</strong>
+        </p>
+
+        <p>
+            Tool to use: <strong>Azure Active Directory admin center</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Administrative units allow administrative permissions to be delegated to a subset of users, groups, and devices within Microsoft Entra ID.
+        </p>
+
+        <p>
+            This meets the requirement that helpdesk administrators must be able to manage licenses only for users in their respective office.
+        </p>
+
+        <p>
+            After creating administrative units for each branch office, role assignments can be scoped to those administrative units.
+        </p>
+
+        <p>
+            Administrative units are managed by using the Azure Active Directory admin center rather than the on-premises Active Directory Administrative Center.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/roles/administrative-units
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/roles/admin-units-manage
+        </p>
+    `
+},{
+    id: 445,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q445_table1.jpg" alt="q405 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 445",
+
+    questionText: `
+        <p>
+            You need to resolve the issue of the sales department users.
+        </p>
+
+        <p>
+            What should you configure for the Azure AD tenant?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "the Device settings",
+        "the Access reviews settings",
+        "the User settings",
+        "Security defaults"
+    ],
+
+    correctAnswer: 2,
+
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The issue relates to license assignment and management for users.
+        </p>
+
+        <p>
+            The sales department users have different licensing requirements based on location:
+        </p>
+
+        <ul>
+            <li>
+                Users in the London office have the Microsoft 365 Phone System license unassigned.
+            </li>
+
+            <li>
+                Users in the Seattle office have the Yammer Enterprise license unassigned.
+            </li>
+        </ul>
+
+        <p>
+            User settings in Azure AD are used to manage user-related configuration and licensing behavior.
+        </p>
+
+        <p>
+            Device settings relate to device management, Access reviews settings relate to identity governance reviews, and Security defaults relate to baseline security controls.
+        </p>
+
+        <p>
+            Therefore, the correct answer is <strong>the User settings</strong>.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/microsoft-365/admin/manage/remove-licenses-from-users
+        </p>
+    `
+},
+{
+    id: 446,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q446_table1.jpg" alt="q446 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+
+                <li>Use custom programs for Identity Governance.</li>
+
+                <li>Ensure that User1 can create enterprise applications in Azure AD by using the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+
+                <li>Implement a banned password list for the litware.com forest.</li>
+
+                <li>Enforce MFA when accessing on-premises applications.</li>
+
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 446",
+
+    questionText: `
+        <p>
+            You need to configure the assignment of Azure AD licenses to the Litware users.
+        </p>
+
+        <p>
+            The solution must meet the licensing requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:260px;">
+                        Azure AD Connect settings to modify:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="aadConnectSetting" style="min-width:260px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Directory Extensions">Directory Extensions</option>
+                            <option value="Domain Filtering">Domain Filtering</option>
+                            <option value="Optional Features">Optional Features</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        Assign Azure AD licenses to:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="licenseTarget" style="min-width:450px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="An Azure Active Directory group that has only nested groups">
+                                An Azure Active Directory group that has only nested groups
+                            </option>
+                            <option value="An Azure Active Directory group that has the Assigned membership type">
+                                An Azure Active Directory group that has the Assigned membership type
+                            </option>
+                            <option value="An Azure Active Directory group that has the Dynamic User membership type">
+                                An Azure Active Directory group that has the Dynamic User membership type
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        aadConnectSetting: "Directory Extensions",
+        licenseTarget: "An Azure Active Directory group that has the Dynamic User membership type"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Azure AD Connect settings to modify:
+            <strong>Directory Extensions</strong>
+        </p>
+
+        <p>
+            Assign Azure AD licenses to:
+            <strong>An Azure Active Directory group that has the Dynamic User membership type</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The custom Active Directory attribute LWLicenses must be synchronized to Azure AD so that it can be used in dynamic membership rules.
+        </p>
+
+        <p>
+            Azure AD Connect Directory Extensions are used to synchronize custom attributes from Active Directory to Azure AD.
+        </p>
+
+        <p>
+            Once the LWLicenses attribute is available in Azure AD, a Dynamic User membership rule can automatically add users to Microsoft 365 groups based on the value of the attribute.
+        </p>
+
+        <p>
+            Group-based licensing can then assign the appropriate licenses automatically to members of the dynamic group.
+        </p>
+    `
+},
+{
+    id: 447,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q447_table1.jpg" alt="q447 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+
+                <li>Use custom programs for Identity Governance.</li>
+
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+
+                <li>Implement a banned password list for the litware.com forest.</li>
+
+                <li>Enforce MFA when accessing on-premises applications.</li>
+
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 447",
+
+    questionText: `
+        <p>
+            You need to meet the authentication requirements for leaked credentials.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "Enable password hash synchronization in Azure AD Connect.",
+        "Configure Azure AD Password Protection.",
+        "Configure an authentication method policy in Azure AD.",
+        "Enable federation with PingFederate in Azure AD Connect."
+    ],
+
+    correctAnswer: 0,
+
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Detecting leaked credentials by using Azure AD Identity Protection requires password hashes to be present in Azure AD.
+        </p>
+
+        <p>
+            The current environment uses pass-through authentication and has password hash synchronization disabled.
+        </p>
+
+        <p>
+            To automatically detect and remediate externally leaked credentials, password hash synchronization must be enabled in Azure AD Connect.
+        </p>
+
+        <p>
+            Azure AD Password Protection helps prevent weak passwords but does not detect leaked credentials.
+        </p>
+
+        <p>
+            Authentication method policies manage authentication methods but do not provide leaked credential detection.
+        </p>
+
+        <p>
+            Federation with PingFederate does not satisfy the requirement for Azure AD Identity Protection leaked credential detection.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/identity-protection/concept-identity-protection-risks#password-hash-synchronization
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/security/fundamentals/steps-secure-identity
+        </p>
+    `
+},
+{
+    id: 448,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q448_table1.jpg" alt="q448 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <p>
+                Litware identifies the following delegation requirements:
+            </p>
+
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+                <li>Use custom programs for Identity Governance.</li>
+                <li>Ensure that User1 can create enterprise applications in Azure AD by using the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+                <li>Implement a banned password list for the litware.com forest.</li>
+                <li>Enforce MFA when accessing on-premises applications.</li>
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 448",
+
+    questionText: `
+        <p>
+            You need to identify which roles to use for managing role assignments.
+        </p>
+
+        <p>
+            The solution must meet the delegation requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:340px;">
+                        To manage Azure AD built-in role assignments, use:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="aadRoleAssignments" style="min-width:260px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Global administrator">Global administrator</option>
+                            <option value="Privileged role administrator">Privileged role administrator</option>
+                            <option value="Security administrator">Security administrator</option>
+                            <option value="User access administrator">User access administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        To manage Azure resource role assignments, use:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="azureResourceAssignments" style="min-width:260px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Global administrator">Global administrator</option>
+                            <option value="Privileged role administrator">Privileged role administrator</option>
+                            <option value="Security administrator">Security administrator</option>
+                            <option value="User access administrator">User access administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        aadRoleAssignments: "Privileged role administrator",
+        azureResourceAssignments: "User access administrator"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            To manage Azure AD built-in role assignments, use:
+            <strong>Privileged role administrator</strong>
+        </p>
+
+        <p>
+            To manage Azure resource role assignments, use:
+            <strong>User access administrator</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            For Azure AD roles in Privileged Identity Management, only users in the Privileged Role Administrator or Global Administrator role can manage assignments for other administrators.
+        </p>
+
+        <p>
+            For Azure resource roles in Privileged Identity Management, role assignments can be managed by a subscription administrator, resource Owner, or User Access Administrator.
+        </p>
+
+        <p>
+            Therefore:
+        </p>
+
+        <ul>
+            <li>
+                Azure AD built-in role assignments → <strong>Privileged role administrator</strong>
+            </li>
+
+            <li>
+                Azure resource role assignments → <strong>User access administrator</strong>
+            </li>
+        </ul>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-configure
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/roles/permissions-reference
+        </p>
+    `
+},
+{
+    id: 449,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q449_table1.jpg" alt="q449 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+
+                <li>Use custom programs for Identity Governance.</li>
+
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+
+                <li>Implement a banned password list for the litware.com forest.</li>
+
+                <li>Enforce MFA when accessing on-premises applications.</li>
+
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 449",
+
+    questionText: `
+        <p>
+            You need to create the LWGroup1 group to meet the management requirements.
+        </p>
+
+        <p>
+            How should you complete the dynamic membership rule?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;font-family:Consolas,'Courier New',monospace;">
+                        (user.objectId -ne
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="firstValue" style="min-width:160px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value='"Guest"'>"Guest"</option>
+                            <option value='"Member"'>"Member"</option>
+                            <option value="null">null</option>
+                        </select>
+                    </td>
+
+                    <td style="padding:12px;font-family:Consolas,'Courier New',monospace;">
+                        ) and (user.userType -eq
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="secondValue" style="min-width:160px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value='"Guest"'>"Guest"</option>
+                            <option value='"Member"'>"Member"</option>
+                            <option value="null">null</option>
+                        </select>
+                    </td>
+
+                    <td style="padding:12px;font-family:Consolas,'Courier New',monospace;">
+                        )
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        firstValue: "null",
+        secondValue: '"Member"'
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            First box: <strong>null</strong>
+        </p>
+
+        <p>
+            Second box: <strong>"Member"</strong>
+        </p>
+
+        <p><strong>Resulting rule:</strong></p>
+
+        <div style="
+            background:#f8f8f8;
+            border:1px solid #d1d5db;
+            border-left:4px solid #0078d4;
+            border-radius:4px;
+            padding:12px;
+            margin:10px 0;
+            font-family:Consolas,'Courier New',monospace;
+            white-space:pre-wrap;
+        ">(user.objectId -ne null) and (user.userType -eq "Member")</div>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            LWGroup1 must contain all Azure AD user accounts for Litware while excluding all guest accounts.
+        </p>
+
+        <p>
+            The condition <strong>(user.userType -eq "Member")</strong> ensures that only member accounts are included and guest users are excluded.
+        </p>
+
+        <p>
+            Using <strong>(user.objectId -ne null)</strong> ensures that all valid user objects are included.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/external-identities/use-dynamic-groups
+        </p>
+    `
+},
+{
+    id: 450,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q450_table1.jpg" alt="q450 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 450",
+
+    questionText: `
+        <p>
+            You need to meet the technical requirements for the probability that user identities were compromised.
+        </p>
+
+        <p>
+            What should the users do first, and what should you configure?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p>
+            <em>NOTE: Each correct selection is worth one point.</em>
+        </p>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:240px;">
+                        The users must first:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="usersMustFirst" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Provide consent for any app to access the data of Contoso">
+                                Provide consent for any app to access the data of Contoso
+                            </option>
+                            <option value="Register for multi-factor authentication (MFA)">
+                                Register for multi-factor authentication (MFA)
+                            </option>
+                            <option value="Register for self-service password reset (SSPR)">
+                                Register for self-service password reset (SSPR)
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        You must configure:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="configurePolicy" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="A sign-in risk policy">
+                                A sign-in risk policy
+                            </option>
+                            <option value="A user risk policy">
+                                A user risk policy
+                            </option>
+                            <option value="An Azure AD Password Protection policy">
+                                An Azure AD Password Protection policy
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        usersMustFirst: "Register for self-service password reset (SSPR)",
+        configurePolicy: "A user risk policy"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            The users must first:
+            <strong>Register for self-service password reset (SSPR)</strong>
+        </p>
+
+        <p>
+            You must configure:
+            <strong>A user risk policy</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            A user risk policy in Microsoft Entra ID Identity Protection can require users to change their passwords when a high user risk is detected.
+        </p>
+
+        <p>
+            To allow automatic remediation through password changes, users must first be registered for Self-Service Password Reset (SSPR).
+        </p>
+
+        <p>
+            Sign-in risk policies evaluate individual sign-ins and can require MFA, but they do not directly enforce password changes when user identities are believed to be compromised.
+        </p>
+
+        <p>
+            Azure AD Password Protection helps prevent weak passwords but does not address the requirement to force users to change passwords when a compromise is suspected.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/identity-protection/concept-identity-protection-policies
+        </p>
+    `
+},
+{
+    id: 451,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q451_table1.jpg" alt="q451 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+                <li>Use custom programs for Identity Governance.</li>
+                <li>Ensure that User1 can create enterprise applications in Azure AD by using the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+                <li>Implement a banned password list for the litware.com forest.</li>
+                <li>Enforce MFA when accessing on-premises applications.</li>
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 451",
+
+    questionText: `
+        <p>
+            You need to configure the MFA settings for users who connect from the Boston office.
+        </p>
+
+        <p>
+            The solution must meet the authentication requirements and the access requirements.
+        </p>
+
+        <p>
+            What should you include in the configuration?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "named locations that have a private IP address range",
+        "named locations that have a public IP address range",
+        "trusted IPs that have a public IP address range",
+        "trusted IPs that have a private IP address range"
+    ],
+
+    correctAnswer: 1,
+
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The requirement is to exempt users from MFA when authenticating to Azure AD from the Boston office while using Conditional Access policies.
+        </p>
+
+        <p>
+            Conditional Access uses <strong>Named Locations</strong>, not legacy Trusted IPs.
+        </p>
+
+        <p>
+            Azure AD sees the public IP address presented to the internet after Network Address Translation (NAT), not the internal private address range.
+        </p>
+
+        <p>
+            Therefore, the Conditional Access policy should use a <strong>named location that contains the public IP address range of the Boston office</strong>.
+        </p>
+
+        <p>
+            Named Locations are part of the Conditional Access framework and are the recommended method for location-based policy exclusions.
+        </p>
+    `
+},
+{
+    id: 452,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q452_table1.jpg" alt="q452 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+                <li>Use custom programs for Identity Governance.</li>
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+                <li>Implement a banned password list for the litware.com forest.</li>
+                <li>Enforce MFA when accessing on-premises applications.</li>
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 452",
+
+    questionText: `
+        <p>
+            You need to support the planned changes and meet the technical requirements for MFA.
+        </p>
+
+        <p>
+            Which feature should you use, and how long before the users must complete the registration?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p>
+            <em>NOTE: Each correct selection is worth one point.</em>
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:180px;">
+                        Feature:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="feature" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="An authentication method policy">An authentication method policy</option>
+                            <option value="A Conditional Access policy">A Conditional Access policy</option>
+                            <option value="An MFA registration policy">An MFA registration policy</option>
+                            <option value="The Multi-Factor Authentication Server settings">The Multi-Factor Authentication Server settings</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        Grace period:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="gracePeriod" style="min-width:220px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="7 days">7 days</option>
+                            <option value="14 days">14 days</option>
+                            <option value="28 days">28 days</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        feature: "An MFA registration policy",
+        gracePeriod: "14 days"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Feature: <strong>An MFA registration policy</strong>
+        </p>
+
+        <p>
+            Grace period: <strong>14 days</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Multi-factor authentication (MFA) registration policies can require users to register for MFA and provide a grace period for registration.
+        </p>
+
+        <p>
+            Azure AD Identity Protection provides a default grace period of 14 days before users must complete MFA registration.
+        </p>
+
+        <p>
+            This supports the requirement to implement MFA while allowing users time to register before enforcement begins.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/identity-protection/howto-identity-protection-configure-mfa-policy#policy-configuration
+        </p>
+    `
+},
+{
+    id: 453,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q453_table1.jpg" alt="q453 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 453",
+
+    questionText: `
+        <p>
+            You need to meet the planned changes and technical requirements for App1.
+        </p>
+
+        <p>
+            What should you implement?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "a policy set in Microsoft Endpoint Manager",
+        "an app configuration policy in Microsoft Endpoint Manager",
+        "an app registration in Azure AD",
+        "Azure AD Application Proxy"
+    ],
+
+    correctAnswer: 2,
+
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            App1 must be accessible from the internet, authenticated by using Azure AD accounts, and must use the redirect URI:
+        </p>
+
+        <p>
+            https://contoso.com/auth-response
+        </p>
+
+        <p>
+            Redirect URIs are configured as part of an Azure AD application registration.
+        </p>
+
+        <p>
+            Registering App1 in Azure AD enables Azure AD authentication and allows the redirect URI to be configured.
+        </p>
+
+        <p>
+            Policy sets and app configuration policies are Intune features and do not provide Azure AD application authentication.
+        </p>
+
+        <p>
+            Azure AD Application Proxy is used to publish on-premises applications and is not required to satisfy the stated App1 requirements.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app
+        </p>
+    `
+},
+{
+    id: 454,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q454_table1.jpg" alt="q454 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 454",
+
+    questionText: `
+        <p>
+            You need to implement on-premises application and SharePoint Online restrictions to meet the authentication requirements and the access requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p>
+            <em>NOTE: Each correct selection is worth one point.</em>
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:260px;">
+                        For on-premises applications:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="onPremApps" style="min-width:420px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Configure Cloud App Security policies.">
+                                Configure Cloud App Security policies.
+                            </option>
+                            <option value="Modify the User consent settings for the enterprise applications.">
+                                Modify the User consent settings for the enterprise applications.
+                            </option>
+                            <option value="Publish the applications by using Azure AD Application Proxy.">
+                                Publish the applications by using Azure AD Application Proxy.
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        For SharePoint Online:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="sharePointOnline" style="min-width:420px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Configure app-enforced restrictions.">
+                                Configure app-enforced restrictions.
+                            </option>
+                            <option value="Modify the User consent settings for the enterprise applications.">
+                                Modify the User consent settings for the enterprise applications.
+                            </option>
+                            <option value="Publish an application by using Azure AD Application Proxy.">
+                                Publish an application by using Azure AD Application Proxy.
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        onPremApps: "Publish the applications by using Azure AD Application Proxy.",
+        sharePointOnline: "Configure app-enforced restrictions."
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            For on-premises applications:
+            <strong>Publish the applications by using Azure AD Application Proxy.</strong>
+        </p>
+
+        <p>
+            For SharePoint Online:
+            <strong>Configure app-enforced restrictions.</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The requirement for on-premises applications is to enforce MFA when accessing the applications.
+        </p>
+
+        <p>
+            Because Contoso already implements Azure AD Application Proxy and MFA is enforced through Azure AD, publishing the applications through Azure AD Application Proxy ensures Azure AD authentication and MFA are required before users can access the applications.
+        </p>
+
+        <p>
+            For SharePoint Online, the requirement specifically calls for session controls.
+        </p>
+
+        <p>
+            App-enforced restrictions provide Conditional Access session controls for SharePoint Online and can limit download, copy, and print operations for unmanaged devices.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/sharepoint/app-enforced-restrictions
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-session
+        </p>
+    `
+},
+{
+    id: 455,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q455_table1.jpg" alt="q455 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+
+                <li>Use custom programs for Identity Governance.</li>
+
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+
+                <li>Implement a banned password list for the litware.com forest.</li>
+
+                <li>Enforce MFA when accessing on-premises applications.</li>
+
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 455",
+
+    questionText: `
+        <p>
+            You need to configure app registration in Azure AD to meet the delegation requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:300px;">
+                        Azure AD tenant-level setting to modify:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="tenantSetting" style="min-width:450px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Allow users to register application">
+                                Allow users to register application
+                            </option>
+                            <option value="Users can consent to apps accessing company data on their behalf">
+                                Users can consent to apps accessing company data on their behalf
+                            </option>
+                            <option value="Users can request admin consent to apps they are unable to consent to">
+                                Users can request admin consent to apps they are unable to consent to
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        Role to assign to User1:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="userRole" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="Application administrator">
+                                Application administrator
+                            </option>
+                            <option value="Application developer">
+                                Application developer
+                            </option>
+                            <option value="Cloud application administrator">
+                                Cloud application administrator
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        tenantSetting: "Allow users to register application",
+        userRole: "Application developer"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Azure AD tenant-level setting to modify:
+            <strong>Allow users to register application</strong>
+        </p>
+
+        <p>
+            Role to assign to User1:
+            <strong>Application developer</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            To prevent nonprivileged users from registering applications, set the Users can register applications setting to No.
+        </p>
+
+        <p>
+            After disabling the default capability, assign the least privileged role that allows User1 to create application registrations.
+        </p>
+
+        <p>
+            The appropriate role is <strong>Application developer</strong>.
+        </p>
+
+        <p>
+            This satisfies the requirement to prevent standard users from registering applications while ensuring that User1 can create enterprise applications by using the principle of least privilege.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/roles/delegate-app-roles
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/roles/delegate-app-roles#restrict-who-can-create-applications
+        </p>
+    `
+},
+{
+    id: 456,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q456_table1.jpg" alt="q456 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+                <li>Use custom programs for Identity Governance.</li>
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+                <li>Implement a banned password list for the litware.com forest.</li>
+                <li>Enforce MFA when accessing on-premises applications.</li>
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 456",
+
+    questionText: `
+        <p>
+            How should the access be setup to the on-premises applications?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:340px;">
+                        Configure the Azure AD Password Protection proxy service on:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="proxyServer" style="min-width:220px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="DC1">DC1</option>
+                            <option value="SERVER1">SERVER1</option>
+                            <option value="SERVER2">SERVER2</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        Configure the password list:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="passwordList" style="min-width:220px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="In Azure AD">In Azure AD</option>
+                            <option value="On DC1">On DC1</option>
+                            <option value="On SERVER1">On SERVER1</option>
+                            <option value="On SERVER2">On SERVER2</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div style="margin-top:15px;text-align:center;">
+            &lt;insert image answer area here&gt;
+        </div>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        proxyServer: "SERVER2",
+        passwordList: "On DC1"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Configure the Azure AD Password Protection proxy service on:
+            <strong>SERVER2</strong>
+        </p>
+
+        <p>
+            Configure the password list:
+            <strong>On DC1</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        
+
+<p>Box 1: Server2 - Incorrect:</p>
+<p>Not Server 1: If you've deployed Azure AD Password Protection Proxy, do not install Azure AD Application Proxy and Azure AD Password Protection Proxy together on the same machine. Azure AD Application Proxy and Azure AD Password Protection Proxy install different versions of the Azure AD Connect Agent
+Updater service. These different versions are incompatible when installed together on the same machine. Server1 runs the Azure AD application Proxy connector.</p>
+<p>To use Application Proxy, you need a Windows server running Windows Server 2012 R2 or later. You'll install the he Application Proxy connector on the server. This connector server needs to connect to the Application Proxy services in Azure, and the on-premises applications that you plan to publish.</p>
+
+<p>Scenario:
+
+Requirements. Authentication Requirements include: Enforce MFA when accessing on-premises applications. Existing Environment. On-premises Environment
+The on-premises network contains the servers shown in the following table.</p>
+
+<div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q456_table2.jpg" alt="q456 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+<p>
+Existing Environment. Identity Environment
+
+The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com. Azure AD
+Connect uses pass-through authentication and has password hash synchronization disabled. Litware.com contains a user named User1 who oversees all application development.
+Box 2: DC1 -
+
+The Azure AD Password Protection proxy service is typically on a member server in your on-premises AD DS environment. Once installed, the Azure AD
+Password Protection proxy service communicates with Azure AD to maintain a copy of the global and customer banned password lists for your Azure AD tenant.
+Reference:
+
+https://docs.microsoft.com/en-us/azure/active-directory/authentication/howto-password-ban-bad-on-    premises-deploy   https://docs.microsoft.com/en-us/azure/active-directory/app-proxy/application-proxy-add- on-premises-application
+</p>
+    `
+},
+{
+    id: 457,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q457_table1.jpg" alt="q457 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 457",
+
+    questionText: `
+        <p>
+            You create a Log Analytics workspace.
+        </p>
+
+        <p>
+            You need to implement the technical requirements for auditing.
+        </p>
+
+        <p>
+            What should you configure in Azure AD?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "Company branding",
+        "Diagnostics settings",
+        "External Identities",
+        "App registrations"
+    ],
+
+    correctAnswer: 1,
+
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Azure AD activity logs must be sent to a Log Analytics workspace before they can be analyzed, queried, and retained in Azure Monitor.
+        </p>
+
+        <p>
+            This is configured from Azure AD Diagnostic settings.
+        </p>
+
+        <p>
+            Diagnostic settings can stream Azure AD audit logs and sign-in logs to a Log Analytics workspace.
+        </p>
+
+        <p>
+            This satisfies the technical requirements:
+        </p>
+
+        <ul>
+            <li>Administrative actions performed in Azure AD must be audited.</li>
+            <li>Audit logs must be retained for one year.</li>
+            <li>Analyze Azure audit activity logs by using Azure Monitor.</li>
+        </ul>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/overview-monitoring
+        </p>
+    `
+},
+{
+    id: 458,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle. Contoso has a partnership with a company named Fabrikam, Inc. Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com. The domain contains an organizational unit (OU) named Contoso_Resources. The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q458_table1.jpg" alt="q458 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5.</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS). Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses. All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "dropdown",
+
+    title: "Question 457",
+
+    questionText: `
+        <p>
+            You need to implement the planned changes and technical requirements for the marketing department.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p>
+            <em>NOTE: Each correct selection is worth one point.</em>
+        </p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+                <tr>
+                    <td style="padding:12px;width:330px;">
+                        To configure user access:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="userAccess" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="An access package">An access package</option>
+                            <option value="An access review">An access review</option>
+                            <option value="A conditional access policy">A conditional access policy</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        To enable collaboration with fabrikam.com:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="fabrikamCollaboration" style="min-width:320px;padding:5px;">
+                            <option value="">-- Select --</option>
+                            <option value="An accepted domain">An accepted domain</option>
+                            <option value="A connected organization">A connected organization</option>
+                            <option value="A custom domain name">A custom domain name</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        userAccess: "An access package",
+        fabrikamCollaboration: "A connected organization"
+    },
+
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            To configure user access:
+            <strong>An access package</strong>
+        </p>
+
+        <p>
+            To enable collaboration with fabrikam.com:
+            <strong>A connected organization</strong>
+        </p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-organization
+        </p>
+    `
+},
+{
+    id: 459,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q459_table1.jpg" alt="q459 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365 / Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 459",
+
+    questionText: `
+        <p>
+            You need to meet the planned changes for the User administrator role.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "Create an access review.",
+        "Create an administrative unit.",
+        "Modify Active assignments.",
+        "Modify Role settings."
+    ],
+
+    correctAnswer: 3,
+
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+	Role Setting details is where you need to be: Role setting details - User Administrator Privileged Identity Management | Azure AD roles
+Default Setting State
+
+Require justification on activation Yes Require ticket information on activation No On activation, require Azure MFA Yes Require approval to activate No
+Approvers None <br><p><strong>Reference:</strong></p> https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-add-role-to-user?tabs=new
+        </p>
+    `
+},
+{
+    id: 460,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q460_table1.jpg" alt="q460 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "checkbox",
+
+    title: "Question 459",
+
+    questionText: `
+        <p>
+            You need to modify the settings of the User administrator role to meet the technical requirements.
+        </p>
+
+        <p>
+            Which two actions should you perform? Each correct answer presents part of the solution.
+        </p>
+
+        <p>
+            <em>NOTE: Each correct selection is worth one point.</em>
+        </p>
+    `,
+
+    prompt: "Select all correct options:",
+
+    options: [
+        "Select Require justification on activation.",
+        "Select Require ticket information on activation.",
+        "Modify the Expire eligible assignments after setting.",
+        "Set all assignments to Eligible.",
+        "Set all assignments to Active."
+    ],
+
+    correctAnswer: [0, 3],
+
+    correctAnswerText: `
+        <p><strong>Answer: A, D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The planned change requires:
+        </p>
+
+        <ul>
+            <li>
+                Configure the User administrator role to require justification and approval to activate.
+            </li>
+        </ul>
+
+        <p>
+            To require justification during role activation, the role must use eligible assignments rather than permanently active assignments.
+        </p>
+
+        <p>
+            Therefore:
+        </p>
+
+        <ul>
+            <li>
+                <strong>Select Require justification on activation.</strong>
+            </li>
+
+            <li>
+                <strong>Set all assignments to Eligible.</strong>
+            </li>
+        </ul>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-configure
+        </p>
+    `
+},
+{
+    id: 461,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q461_table1.jpg" alt="q461 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 461",
+
+    questionText: `
+        <p>
+            You need to resolve the issue of the guest user invitations.
+        </p>
+
+        <p>
+            What should you do for the Azure AD tenant?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "Configure the Continuous access evaluation settings.",
+        "Configure a Conditional Access policy.",
+        "Configure the Access reviews settings.",
+        "Modify the External collaboration settings."
+    ],
+
+    correctAnswer: 3,
+
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Guest user invitations are controlled by the External collaboration settings in Azure AD.
+        </p>
+
+        <p>
+            External collaboration settings determine who can invite guest users and how guest access is managed.
+        </p>
+
+        <p>
+            You can allow anyone in the organization to invite guest users or restrict invitations to specific administrator roles and Guest Inviters.
+        </p>
+
+        <p>
+            Access reviews do not manage guest invitations.
+        </p>
+
+        <p>
+            Continuous access evaluation and Conditional Access policies are unrelated to guest invitation permissions.
+        </p>
+
+        <p>
+            Therefore, modify the External collaboration settings.
+        </p>
+    `
+},
+{
+    id: 462,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q462_table1.jpg" alt="q462 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 462",
+
+    questionText: `
+        <p>
+            You need to sync the ADatum users. The solution must meet the technical requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "From the Microsoft Azure Active Directory Connect wizard, select Customize synchronization options.",
+        "From PowerShell, run Set-ADSyncScheduler.",
+        "From PowerShell, run Start-ADSyncSyncCycle.",
+        "From the Microsoft Azure Active Directory Connect wizard, select Change user sign-in."
+    ],
+
+    correctAnswer: 0,
+
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            You need to select <strong>Customize synchronization options</strong> to configure Azure AD Connect to sync the Adatum organizational unit (OU).
+        </p>
+
+        <p>
+            Only the Contoso_Resources OU is currently synced. Running a PowerShell synchronization command would only synchronize the OUs already included in the existing synchronization scope.
+        </p>
+
+        <p>
+            Because the new users will be created in a new OU named Adatum, the OU must first be added to Azure AD Connect filtering and synchronization settings.
+        </p>
+
+        <p>
+            Therefore, from the Microsoft Azure Active Directory Connect wizard, select <strong>Customize synchronization options</strong>.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-sync-configure-filtering#filtering-options
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-sync-whatis#azure-ad-connect-sync-topics
+        </p>
+    `
+},
+{
+    id: 463,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q463_table1.jpg" alt="q463 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+                <li>Use custom programs for Identity Governance.</li>
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+                <li>Implement a banned password list for the litware.com forest.</li>
+                <li>Enforce MFA when accessing on-premises applications.</li>
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 463",
+
+    questionText: `
+        <p>
+            You need to configure the detection of multi-staged attacks to meet the monitoring requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "Customize the Microsoft Sentinel rule logic.",
+        "Create a workbook.",
+        "Add Microsoft Sentinel data connectors.",
+        "Add a Microsoft Sentinel playbook."
+    ],
+
+    correctAnswer: 0,
+
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Advanced Multistage Attack Detection (Fusion) in Microsoft Sentinel uses a built-in machine learning correlation engine to detect multi-staged attacks automatically.
+        </p>
+
+        <p>
+            Fusion is implemented as the native analytics rule named <strong>Advanced Multistage Attack Detection</strong>.
+        </p>
+
+        <p>
+            To meet organization-specific monitoring requirements, you must customize the rule logic so that the Fusion rule processes the required signals and detection scenarios.
+        </p>
+
+        <p><strong>Why the other options are incorrect</strong></p>
+
+        <p>
+            B. Create a workbook – Workbooks provide dashboards and visualizations but do not alter threat detection logic.
+        </p>
+
+        <p>
+            C. Add Microsoft Sentinel data connectors – Data connectors ingest data but do not configure multi-stage attack correlation logic.
+        </p>
+
+        <p>
+            D. Add a Microsoft Sentinel playbook – Playbooks automate responses after incidents are generated and do not configure threat detection models.
+        </p>
+    `
+},
+{
+    id: 464,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Litware, Inc. is a pharmaceutical company that has a subsidiary named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Litware has offices in Boston and Seattle, but has employees located across the United States.
+            </p>
+
+            <p>
+                Employees connect remotely to either office by using a VPN connection.
+            </p>
+        `,
+
+        "Identity Environment": `
+            <p>
+                The network contains an Active Directory forest named litware.com that is linked to an Azure Active Directory (Azure AD) tenant named litware.com.
+            </p>
+
+            <p>
+                Azure AD Connect uses pass-through authentication and has password hash synchronization disabled.
+            </p>
+
+            <p>
+                Litware.com contains a user named User1 who oversees all application development.
+            </p>
+
+            <p>
+                Litware implements Azure AD Application Proxy.
+            </p>
+
+            <p>
+                Fabrikam has an Azure AD tenant named fabrikam.com.
+            </p>
+
+            <p>
+                The users at Fabrikam access the resources in litware.com by using guest accounts in the litware.com tenant.
+            </p>
+        `,
+
+        "Cloud Environment": `
+            <p>
+                All the users at Litware have Microsoft 365 Enterprise E5 licenses.
+            </p>
+
+            <p>
+                All the built-in anomaly detection policies in Microsoft Cloud App Security are enabled.
+            </p>
+
+            <p>
+                Litware has an Azure subscription associated to the litware.com Azure AD tenant.
+            </p>
+
+            <p>
+                The subscription contains an Azure Sentinel instance that uses the Azure Active Directory connector and the Office 365 connector.
+            </p>
+
+            <p>
+                Azure Sentinel currently collects the Azure AD sign-ins logs and audit logs.
+            </p>
+        `,
+
+        "On-Premises Environment": `
+            <p>
+                The on-premises network contains the servers shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q464_table1.jpg" alt="q464 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Both Litware offices connect directly to the internet.
+            </p>
+
+            <p>
+                Both offices connect to virtual networks in the Azure subscription by using a site-to-site VPN connection.
+            </p>
+
+            <p>
+                All on-premises domain controllers are prevented from accessing the internet.
+            </p>
+        `,
+
+        "Delegation Requirements": `
+            <ul>
+                <li>Delegate the management of privileged roles by using Azure AD Privileged Identity Management (PIM).</li>
+                <li>Prevent nonprivileged users from registering applications in the litware.com Azure AD tenant.</li>
+                <li>Use custom programs for Identity Governance.</li>
+                <li>Ensure that User1 can create enterprise applications in Azure AD. Use the principle of least privilege.</li>
+            </ul>
+        `,
+
+        "Licensing Requirements": `
+            <p>
+                Litware recently added a custom user attribute named LWLicenses to the litware.com Active Directory forest.
+            </p>
+
+            <p>
+                Litware wants to manage the assignment of Azure AD licenses by modifying the value of the LWLicenses attribute.
+            </p>
+
+            <p>
+                Users who have the appropriate value for LWLicenses must be added automatically to a Microsoft 365 group that has the appropriate licenses assigned.
+            </p>
+        `,
+
+        "Management Requirements": `
+            <p>
+                Litware wants to create a group named LWGroup1 that will contain all the Azure AD user accounts for Litware but exclude all the Azure AD guest accounts.
+            </p>
+        `,
+
+        "Authentication Requirements": `
+            <ul>
+                <li>Implement multi-factor authentication (MFA) for all Litware users by using conditional access policies.</li>
+                <li>Exempt users from using MFA to authenticate to Azure AD from the Boston office of Litware.</li>
+                <li>Implement a banned password list for the litware.com forest.</li>
+                <li>Enforce MFA when accessing on-premises applications.</li>
+                <li>Automatically detect and remediate externally leaked credentials.</li>
+            </ul>
+        `,
+
+        "Access Requirements": `
+            <ul>
+                <li>Control all access to all Azure resources and Azure AD applications by using conditional access policies.</li>
+                <li>Implement a conditional access policy that has session controls for Microsoft SharePoint Online.</li>
+                <li>Control privileged access to applications by using access reviews in Azure AD.</li>
+            </ul>
+        `,
+
+        "Monitoring Requirements": `
+            <p>
+                Litware wants to use the Fusion rule in Azure Sentinel to detect multi-staged attacks that include a combination of suspicious Azure AD sign-ins followed by anomalous Microsoft Office 365 activity.
+            </p>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 464",
+
+    questionText: `
+        <p>
+            You need to track application access assignments by using Identity Governance.
+        </p>
+
+        <p>
+            The solution must meet the delegation requirements.
+        </p>
+
+        <p>
+            What should you do first?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "Modify the User consent settings for the enterprise applications.",
+        "Create a catalog.",
+        "Create a program.",
+        "Modify the Admin consent requests settings for the enterprise applications."
+    ],
+
+    correctAnswer: 1,
+
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            <strong>Create a catalog.</strong>
+        </p>
+
+        <p>
+            In Microsoft Entra ID Governance, a catalog is the foundational logical container used to bundle related resources such as enterprise applications, groups, and SharePoint Online sites.
+        </p>
+
+        <p>
+            To delegate the tracking and management of application access assignments to non-administrator business stakeholders, you must first place those resources into a catalog.
+        </p>
+
+        <p>
+            After a catalog is created, Catalog owners and Access package managers can manage access packages without requiring global administrative privileges.
+        </p>
+
+        <p><strong>Why the other options are incorrect</strong></p>
+
+        <p>
+            User consent settings and Admin consent request settings control OAuth consent behavior and application permissions, not access assignment tracking.
+        </p>
+
+        <p>
+            A program is used to organize governance reporting and access reviews and is not used to package application resources or delegate access assignment management.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-organization
+        </p>
+    `
+},
+
 ];
