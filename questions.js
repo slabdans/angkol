@@ -15791,7 +15791,7 @@ You create the Azure resources shown in the following table.
         </p>
     `
 },
-	{
+{
     id: 444,
     isCaseStudy: true,
 
@@ -21395,5 +21395,4 @@ Approvers None <br><p><strong>Reference:</strong></p> https://docs.microsoft.com
         </p>
     `
 },
-
 ];
