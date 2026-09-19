@@ -27,11 +27,50 @@
         'results-screen',
         'practice-mode-btn',
         'simulation-mode-btn',
-        'finish-exam-btn'
+        'finish-exam-btn',
+        'practice-start',
+        'practice-end',
+        'practice-random',
+        'practice-case-studies',
+        'practice-case-only',
+        'selected-count',
     ];
 
     const byId = (id) => document.getElementById(id);
 
+    function saveProgress() {
+    localStorage.setItem(
+        'sc300-progress',
+        JSON.stringify({
+            currentIndex: state.currentIndex,
+            answers: state.answers,
+            activeQuestions: state.activeQuestions,
+            mode: state.mode
+        })
+    );
+}
+
+    function loadProgress() {
+    const saved =
+        localStorage.getItem('sc300-progress');
+
+    if (!saved) return null;
+
+    return JSON.parse(saved);
+}
+    function updateSelectedCount() {
+    const start =
+        Number(byId('practice-start').value) || 1;
+
+    const end =
+        Number(byId('practice-end').value) || start;
+
+    const total =
+        Math.max(0, end - start + 1);
+
+    byId('selected-count').textContent =
+        `Selected Questions: ${total}`;
+}
     function escapeHtml(value) {
         return String(value ?? '')
             .replaceAll('&', '&amp;')
@@ -165,10 +204,23 @@ function cleanExplanationHtml(value) {
 
     function selectSimulationQuestions(master) {
         if (master.length < 60) throw new Error('At least 60 questions are required for Simulation Exam mode.');
-        const caseStudies = master.filter(question => question.isCaseStudy);
-        const regular = shuffle(master.filter(question => !question.isCaseStudy));
-        const selectedCases = caseStudies.slice(0, 60);
-        return [...selectedCases, ...regular.slice(0, 60 - selectedCases.length)];
+        const caseStudies =
+    shuffle(
+        master.filter(question => question.isCaseStudy)
+    );
+
+const regular =
+    shuffle(
+        master.filter(question => !question.isCaseStudy)
+    );
+
+const selectedCases =
+    caseStudies.slice(0, 5);
+
+return [
+    ...selectedCases,
+    ...regular.slice(0, 55)
+];
     }
 
     function validateQuestionBank(questionBank) {
@@ -746,6 +798,7 @@ ${sanitizeRichHtml(
 
         state.answers[question.id] = answer;
 
+          saveProgress();
         if (state.mode === 'simulation') {
             state.submitted.add(question.id);
             const feedback = byId('feedback-box');
@@ -850,11 +903,43 @@ ${sanitizeRichHtml(
         state.completed = false;
 
         try {
-            state.activeQuestions = mode === 'simulation' ? selectSimulationQuestions(master) : [...master];
-        } catch (error) {
-            alert(error.message);
-            return;
-        }
+    if (mode === 'simulation') {
+        state.activeQuestions = selectSimulationQuestions(master);
+    } else {
+        const start =
+            Number(byId('practice-start').value) || 1;
+        const end =
+            Number(byId('practice-end').value) || master.length;
+
+        const caseOnly =
+        byId('practice-case-only').checked;
+        state.activeQuestions =
+            master.slice(start - 1, end);
+        if (byId('practice-random').checked) {
+    const questionCount = end - start + 1;
+
+    let randomPool = master.slice(end - 1);
+
+    if (caseOnly) {
+    randomPool = randomPool.filter(
+        question => question.isCaseStudy
+    );
+}
+else if (!byId('practice-case-studies').checked) {
+    randomPool = randomPool.filter(
+        question => !question.isCaseStudy
+    );
+}
+
+
+    state.activeQuestions =
+        shuffle(randomPool).slice(0, questionCount);
+}
+    }
+} catch (error) {
+    alert(error.message);
+    return;
+}
 
         state.timerSeconds = mode === 'simulation' ? 120 * 60 : 0;
         byId('setup-screen').hidden = true;
@@ -944,12 +1029,13 @@ ${sanitizeRichHtml(
             if (layout) showFatalError('The page is missing required HTML elements.', missingElements);
             return;
         }
-
+          
         const questionBank = getQuestions();
         if (!questionBank || questionBank.length === 0) {
             showFatalError('The questions array is missing or empty. Load questions.fixed.js before app.fixed.js.');
             return;
         }
+          byId('practice-end').value = questionBank.length;
 
         const validationErrors = validateQuestionBank(questionBank);
         if (validationErrors.length > 0) {
@@ -973,15 +1059,42 @@ ${sanitizeRichHtml(
             state.activeCaseSection = null;
             renderQuestion();
         });
+        byId('practice-start').addEventListener('input', updateSelectedCount);
+        byId('practice-end').addEventListener('input', updateSelectedCount);
         byId('next-btn').addEventListener('click', () => moveQuestion(1));
         byId('prev-btn').addEventListener('click', () => moveQuestion(-1));
         byId('submit-btn').addEventListener('click', submitCurrentAnswer);
-        byId('practice-mode-btn').addEventListener('click', () => startExam('practice'));
-        byId('simulation-mode-btn').addEventListener('click', () => startExam('simulation'));
-        byId('finish-exam-btn').addEventListener('click', () => {
-            if (confirm('Finish the simulation and show the results?')) finishSimulation(false);
-        });
-        byId('restart-exam-btn').addEventListener('click', () => window.location.reload());
+          byId('practice-mode-btn').addEventListener('click', () => startExam('practice'));
+          byId('simulation-mode-btn').addEventListener('click', () => startExam('simulation'));
+          byId('new-session-btn').addEventListener('click', () => {
+         localStorage.removeItem('sc300-progress');
+        window.location.reload();
+          });
+          byId('resume-btn').addEventListener('click', () => {
+          const saved = loadProgress();
+
+          if (!saved) return;
+          state.currentIndex = saved.currentIndex;
+          state.answers = saved.answers;
+          state.activeQuestions = saved.activeQuestions;
+          state.mode = saved.mode;
+
+          byId('setup-screen').hidden = true;
+          byId('results-screen').hidden = true;
+          byId('exam-screen').hidden = false;
+          populateJumpMenu();
+          renderQuestion();
+            })
+          byId('finish-exam-btn').addEventListener('click', () => {
+              if (confirm('Finish the simulation and show the results?')) finishSimulation(false);
+          });
+          byId('restart-exam-btn').addEventListener('click', () => window.location.reload());
+
+        const savedProgress = loadProgress();
+
+            if (savedProgress) {
+              byId('resume-prompt').hidden = false;
+            }
 
         byId('setup-screen').hidden = false;
         byId('exam-screen').hidden = true;
