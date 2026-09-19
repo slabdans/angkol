@@ -11,13 +11,64 @@
         <section id="setup-screen" class="mode-screen">
             <h1>SC-300 Exam Portal</h1>
             <p>Choose how you want to study.</p><br><p><strong>Prepared By:Angkol</strong>
-
-            <div class="mode-grid">
+    <div id="resume-prompt" hidden>
+        <p><strong>Resume previous session?</strong></p>
+          <button id="resume-btn" class="mode-btn simulation-btn">
+        Resume
+            </button>
+            <button id="new-session-btn" class="mode-btn practice-btn">
+        Start New Session
+               </button>
+                </div>
                 <article class="mode-card">
-                    <h2>Practice Mode</h2>
-                    <p>Use the complete question bank with immediate grading and explanations after each submission.</p>
-                    <button id="practice-mode-btn" class="mode-btn practice-btn">Start Practice</button>
-                </article>
+                  <h2>Practice Mode</h2>
+                    <div class="practice-settings">
+                      <h3>Question Range:</h3>
+                        <div class="range-row">
+                                <input
+                                  type="number"
+                                     id="practice-start"
+                                      min="1"
+                                      value="1">
+                                  <span>to</span>
+                                  <input
+                                type="number"
+                              id="practice-end"
+                            min="1"
+                          value="">
+                    </div>
+
+        <p class="range-note">
+            Specify start and end question numbers.
+        </p>
+
+        <label class="setting-option">
+            <input
+                type="checkbox"
+                id="practice-case-studies"
+                checked>
+            Include Case Study
+        </label>
+
+        <label class="setting-option">
+            <input
+                type="checkbox"
+                id="practice-random">
+            Randomize Questions
+        </label>
+        <label class="setting-option">
+                <input type="checkbox" id="practice-case-only">
+            Case Studies Only
+        </label>
+        <p id="selected-count">
+            Selected Questions: 0
+            </p>
+    </div>
+
+    <button id="practice-mode-btn" class="mode-btn practice-btn">
+        Start Exam
+    </button>
+</article>
 
                 <article class="mode-card simulation-card">
                     <div class="mode-badge">Exam conditions</div>
@@ -25,7 +76,7 @@
                     <ul>
                         <li>60 questions</li>
                         <li>120-minute limit</li>
-                        <li>Case studies appear first</li>
+                        <li>5 Case studies appear first</li>
                         <li>No feedback until completion</li>
                         <li>Passing score: 70%</li>
                     </ul>
