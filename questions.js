@@ -12047,5 +12047,3748 @@ Explanation:
 The User Administrator assignments must be eligible so that users request activation only when needed.
 Configure the eligible assignment expiration to meet the requirement that permission can be requested for up to one year.
 `
-}
+},
+	{
+    id: 379,
+    type: "radio",
+    title: "Question 379",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a user named User1.</p>
+
+        <p>You need to ensure that User1 can create access reviews for Azure AD roles. The solution must use the principle of least privilege.</p>
+
+        <p>Which role should you assign to User1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Privileged role administrator",
+        "Identity Governance Administrator",
+        "User administrator",
+        "User Access Administrator"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            1. To create access reviews for Azure resources, you must be assigned to the Owner or the User Access Administrator role for the Azure resources. To create access reviews for Azure AD roles, you must be assigned to the Global Administrator or the Privileged Role Administrator role.
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-create-roles-and-resource-roles-review#prerequisites
+        </p>
+
+        <p>
+            2. To create access reviews for Azure resources, you must be assigned to the Owner or the User Access Administrator role for the Azure resources. To create access reviews for Azure AD roles, you must be assigned to the Global Administrator or the Privileged Role Administrator role.
+        </p>
+    `
+},
+{
+    id: 380,
+    type: "matrix",
+    title: "Question 380: Hot Spot",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains three users named User1, User2, and User3. You have two Azure AD roles that have the Activation settings shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q380_table1.jpg" alt="q380 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The Azure AD roles have the Assignment settings shown in the following table.</p>
+
+         <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q380_table2.jpg" alt="q380 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The Azure AD roles have the eligible users shown in the following table.</p>
+
+         <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q380_table3.jpg" alt="q380 table 3" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "If User1 requests Role1, the request will be approved automatically."
+        },
+        {
+            id: "stmt2",
+            label: "User1 can approve the request of User3 for Role2."
+        },
+        {
+            id: "stmt3",
+            label: "User1 must provide justification to approve the request of User2 for Role1."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 1,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            N, N, Y.
+        </p>
+
+        <p>
+            Require justification on active assignment is Yes for Role 1.
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-resource-roles-configure-role-settings#require-justification-on-active-assignment
+        </p>
+    `
+},
+{
+    id: 381,
+    type: "dropdown",
+    title: "Question 381: Hotspot",
+    questionText: `
+        <p>You have a hybrid Microsoft 365 subscription that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q381_table1.jpg" alt="q381 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You plan to deploy an on-premises app named App1. App1 will be registered in Azure AD and will use Azure AD Application Proxy.</p>
+
+        <p>You need to delegate the installation of the Application Proxy connector and ensure that User1 can register App1 in Azure AD. The solution must use the principle of least privilege.</p>
+
+        <p>Which user should perform the installation, and which role should you assign to User1? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:320px;text-align:right;font-size:15px;">
+                        User that should perform the installation:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="installer"
+                            style="min-width:260px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Admin1">Admin1</option>
+                            <option value="Admin2">Admin2</option>
+                            <option value="Admin3">Admin3</option>
+                            <option value="Admin4">Admin4</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        Assign User1 the role of:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="role"
+                            style="min-width:320px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Application Administrator">Application Administrator</option>
+                            <option value="Application Developer">Application Developer</option>
+                            <option value="Cloud Application Administrator">Cloud Application Administrator</option>
+                            <option value="Global Administrator">Global Administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        installer: "Admin1",
+        role: "Cloud Application Administrator"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User that should perform the installation: Admin1
+        </p>
+
+        <p>
+            In Microsoft Entra (Azure AD) Connect scenarios, the user performing the installation on the local server typically needs to be a Global Administrator in the cloud and a Domain Admin or Local Admin on the server. If the scenario description lists Admin1 with these specific privileges, they are the required choice.
+        </p>
+
+        <p>
+            Assign User1 the role of: Cloud Application Administrator
+        </p>
+
+        <p>
+            This choice follows the Principle of Least Privilege. While a Global Administrator could manage applications, the Cloud Application Administrator role is the most specific role that allows a user to create and manage all aspects of enterprise applications and app registrations (including Application Proxy settings) without granting unnecessary power over billing, users, or passwords.
+        </p>
+    `
+},
+{
+    id: 382,
+    type: "dropdown",
+    title: "Question 382: Hotspot",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q382_table1.jpg" alt="q3 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The users are assigned the roles shown in the following table.</p>
+
+        <p>&lt;insert image table here&gt;</p>
+
+        <p>For which users can User1 and User4 reset passwords?</p>
+
+        <p>To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:250px;text-align:right;font-size:15px;">
+                        User1:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="user1"
+                            style="min-width:380px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="User3 only">User3 only</option>
+                            <option value="User2 and User5 only">User2 and User5 only</option>
+                            <option value="User3 and User5 only">User3 and User5 only</option>
+                            <option value="User2, User3, and User5 only">User2, User3, and User5 only</option>
+                            <option value="User3, User4 and User5 only">User3, User4 and User5 only</option>
+                            <option value="User2, User3, User4, and User5">User2, User3, User4, and User5</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        User4:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="user4"
+                            style="min-width:380px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="User3 only">User3 only</option>
+                            <option value="User2 and User3 only">User2 and User3 only</option>
+                            <option value="User3 and User5 only">User3 and User5 only</option>
+                            <option value="User1, User2, and User3 only">User1, User2, and User3 only</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        user1: "User2, User3, User4, and User5",
+        user4: "User1, User2, and User3 only"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User1 -> User2, User3, User4, User5
+        </p>
+
+        <p>
+            User4 -> User1, User2 & User3 only
+        </p>
+
+        <p>
+            Can reset passwords for non-administrators and Password Administrators
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/roles/permissions-reference#who-can-reset-passwords
+        </p>
+    `
+},
+{
+    id: 383,
+    type: "radio",
+    title: "Question 383",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a user named User1. User is eligible for the Application administrator role.</p>
+
+        <p>User1 needs to configure a new connector group for an application proxy.</p>
+
+        <p>What should you use to activate the role for User1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "the Microsoft Defender for Cloud Apps portal",
+        "the Microsoft 365 admin center",
+        "the Azure Active Directory admin center",
+        "the Microsoft 365 Defender portal"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-activate-role
+        </p>
+    `
+},
+{
+    id: 384,
+    type: "radio",
+    title: "Question 384",
+    questionText: `
+        <p>You have an Azure subscription that contains a registered app named App1.</p>
+
+        <p>You need to review the sign-in activity for App1. The solution must meet the following requirements:</p>
+
+        <ul>
+            <li>Identify the number of failed sign-ins.</li>
+            <li>Identify the success rate of sign-ins.</li>
+            <li>Minimize administrative effort.</li>
+        </ul>
+
+        <p>What should you use?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Sign-in logs",
+        "Access reviews",
+        "Audit logs",
+        "Usage & insights"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. Usage & insights.
+        </p>
+
+        <p>
+            Why Usage & insights?
+        </p>
+
+        <p>
+            In the Microsoft Entra admin center, the Usage & insights section (specifically the Registration or Application Activity reports) is designed to provide high-level, aggregated data with zero configuration required.
+        </p>
+
+        <p>
+            Efficiency: It automatically calculates the Success rate and totals for Failed sign-ins in a single dashboard view. You don't have to manually count entries or export data.
+        </p>
+
+        <p>
+            Targeted: You can specifically filter for App1 to see its performance trends over time.
+        </p>
+    `
+},
+{
+    id: 385,
+    type: "radio",
+    title: "Question 385",
+    questionText: `
+        <p>Your company has an Azure AD tenant that contains a user named User1. The company has two departments named marketing and finance.</p>
+
+        <p>You need to grant permissions to User1 to manage only the users in the marketing department. The solution must ensure that User1 does NOT have permissions to manage the users in the finance department.</p>
+
+        <p>What should you create first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "a management group",
+        "an administrative unit",
+        "a resource group",
+        "a Microsoft 365 group"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            B. an administrative unit
+        </p>
+    `
+},
+{
+    id: 386,
+    type: "radio",
+    title: "Question 386",
+    questionText: `
+        <p>You have an Azure AD tenant that contains an access package named Package1 and a user named User1. Package1 is configured as shown in the following exhibit.</p>
+
+        <p>&lt;insert image exhibit here&gt;</p>
+
+        <p>You need to ensure that User1 can modify the review frequency of Package1. The solution must use the principle of least privilege.</p>
+
+        <p>Which role should you assign to User1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Security administrator",
+        "Privileged role administrator",
+        "External Identity Provider administrator",
+        "User administrator"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            enable reviews of access packages, you must meet the prerequisites for creating an access package:
+        </p>
+
+        <p>
+            Microsoft Azure AD Premium P2 or Microsoft Entra ID Governance
+        </p>
+
+        <p>
+            Global administrator, Identity Governance administrator, User administrator, Catalog owner, or Access package manager
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-access-package-access-review
+        </p>
+    `
+},
+{
+    id: 387,
+    type: "dropdown",
+    title: "Question 387: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription.</p>
+
+        <p>Azure AD logs are sent to a Log Analytics workspace.</p>
+
+        <p>You need to query the logs and graphically display the number of sign-ins per user.</p>
+
+        <p>How should you complete the query? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <div style="margin-top:15px;background:#ffffff;padding:20px;border:1px solid #ddd;border-radius:4px;font-family:Consolas, monospace;">
+
+            <div style="margin-bottom:10px;">
+                SigninLogs
+            </div>
+
+            <div style="margin-bottom:10px;">
+                | where ResultType == 0
+            </div>
+
+            <div style="margin-bottom:10px;">
+                |
+                <select data-key="query1" style="padding:6px;min-width:180px;">
+                    <option value="">-- Select --</option>
+                    <option value="extend">extend</option>
+                    <option value="print">print</option>
+                    <option value="project">project</option>
+                    <option value="render">render</option>
+                    <option value="summarize">summarize</option>
+                </select>
+
+                &nbsp; login_count = count() by Identity
+            </div>
+
+            <div>
+                |
+                <select data-key="query2" style="padding:6px;min-width:180px;">
+                    <option value="">-- Select --</option>
+                    <option value="extend">extend</option>
+                    <option value="print">print</option>
+                    <option value="project">project</option>
+                    <option value="render">render</option>
+                    <option value="summarize">summarize</option>
+                </select>
+
+                &nbsp; columnchart
+            </div>
+
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        query1: "summarize",
+        query2: "render"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            SigninLogs
+            | where ResultType == 0
+            | summarize login_count = count() by Identity
+            | render columnchart
+        </p>
+    `
+},
+{
+    id: 388,
+    type: "radio",
+    title: "Question 388",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Cloud Apps.</p>
+
+        <p>You need to identify which users access Facebook from their devices and browsers. The solution must minimize administrative effort.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Create a Conditional Access policy.",
+        "Create a Defender for Cloud Apps access policy.",
+        "Create an app configuration policy in Microsoft Endpoint Manager.",
+        "From the Microsoft Defender for Cloud Apps portal, unsanction Facebook."
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Unsanctioning an app doesn't block use, but enables you to more easily monitor its use with the Cloud Discovery filters.
+        </p>
+
+        <p>
+            You can then notify users of the unsanctioned app and suggest an alternative safe app for their use, or generate a block script using the Defender for Cloud Apps APIs to block all unsanctioned apps.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/defender-cloud-apps/governance-discovery#sanctioningunsanctioning-an-app
+        </p>
+    `
+},
+{
+    id: 389,
+    type: "radio",
+    title: "Question 389",
+    questionText: `
+        <p>You have an Azure subscription that uses Azure AD Privileged Identity Management (PIM). You need to identify users that are eligible for the Cloud Application Administrator role.</p>
+
+        <p>Which blade in the Privileged Identity Management settings should you use?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Azure resources",
+        "Privileged access groups",
+        "Review access",
+        "Azure AD roles"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. Azure AD roles.
+        </p>
+
+        <p>
+            Reasoning
+        </p>
+
+        <p>
+            The Cloud Application Administrator is a directory-level role within Microsoft Entra ID (formerly Azure AD). In Privileged Identity Management (PIM), these roles are managed specifically under the Azure AD roles blade.
+        </p>
+    `
+},
+{
+    id: 390,
+    type: "dropdown",
+    title: "Question 390: Hotspot",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>You need to create a dynamic user group that will include all the users that do NOT have a department defined in their user profile.</p>
+
+        <p>How should you complete the membership rule? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <div style="margin-top:15px;background:#ffffff;padding:20px;border:1px solid #ddd;border-radius:4px;font-family:Consolas, monospace;">
+
+            <div style="font-size:16px;">
+
+                (user.department
+
+                <select data-key="operator"
+                    style="padding:6px;margin:0 6px;min-width:120px;">
+                    <option value="">-- Select --</option>
+                    <option value="-eq">-eq</option>
+                    <option value="-match">-match</option>
+                    <option value="-ne">-ne</option>
+                    <option value="-notIn">-notIn</option>
+                </select>
+
+                <select data-key="value"
+                    style="padding:6px;margin-left:6px;min-width:120px;">
+                    <option value="">-- Select --</option>
+                    <option value='""'>""</option>
+                    <option value="null">null</option>
+                    <option value="$null">$null</option>
+                    <option value='"null"'>"null"</option>
+                </select>
+
+                )
+
+            </div>
+
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        operator: "-eq",
+        value: "null"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            (user.department -eq null)
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/azure/active-directory/enterprise-users/groups-dynamic-membership#use-of-null-values
+        </p>
+    `
+},
+{
+    id: 391,
+    type: "radio",
+    title: "Question 391",
+    questionText: `
+        <p>You have an Azure AD Premium P2 tenant.</p>
+
+        <p>You create a Log Analytics workspace.</p>
+
+        <p>You need to ensure that you can view Azure AD audit log information by using Azure Monitor.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Modify the Diagnostics settings for Azure AD.",
+        "Run the Update-MgOrganization cmdlet.",
+        "Run the Update-MgDomain cmdlet.",
+        "Create an Azure AD workbook."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            A. Modify the Diagnostics settings for Azure AD.
+        </p>
+    `
+},
+{
+    id: 392,
+    type: "radio",
+    title: "Question 392",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Cloud Apps.</p>
+
+        <p>You need to identify which users access Facebook from their devices and browsers. The solution must minimize administrative effort.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From the Microsoft 365 Defender portal, unsanction Facebook.",
+        "Create a Defender for Cloud Apps access policy.",
+        "Create an app configuration policy in Microsoft Intune.",
+        "Create a Conditional Access policy."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            A. From the Microsoft 365 Defender portal, unsanction Facebook.
+        </p>
+
+        <p>
+            Explanation
+        </p>
+
+        <p>
+            To identify users accessing a specific app like Facebook with the least administrative effort, you leverage the Cloud Discovery features of Microsoft Defender for Cloud Apps.
+        </p>
+
+        <p>
+            Unsanctioning an app doesn't block use, but enables you to more easily monitor its use with the Cloud Discovery filters.
+        </p>
+
+        <p>
+            You can then notify users of the unsanctioned app and suggest an alternative safe app for their use, or generate a block script using the Defender for Cloud Apps APIs to block all unsanctioned apps.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/defender-cloud-apps/governance-discovery#sanctioningunsanctioning-an-app
+        </p>
+    `
+},
+{
+    id: 393,
+    type: "radio",
+    title: "Question 393",
+    questionText: `
+        <p>You have a Microsoft 365 subscription that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q393_table1.jpg" alt="q393 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>From the tenant, you configure a naming policy for groups.</p>
+
+        <p>Which users are affected by the naming policy?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "User2 only",
+        "User3 only",
+        "User2 and User3 only",
+        "User3 and User4 only",
+        "User1, User2, and User3 only",
+        "User1, User2, User3, and User4"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. User3 and User4 only.
+        </p>
+
+        <p>
+            In Microsoft Entra ID (Azure AD), a Group Naming Policy is designed to enforce specific naming conventions (like prefixes or suffixes) for groups created by non-privileged users.
+        </p>
+    `
+},
+{
+    id: 394,
+    type: "radio",
+    title: "Question 394",
+    questionText: `
+        <p>You have an Azure subscription that contains the users shown in the following table.</p>
+
+        <p>&lt;insert image table here&gt;</p><div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q394_table1.jpg" alt="q394 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You need to implement Azure AD Privileged Identity Management (PIM).</p>
+
+        <p>Which users can use PIM to activate their role permissions?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Admin1 only",
+        "Admin2 only",
+        "Admin3 only",
+        "Admin1 and Admin2 only",
+        "Admin2 and Admin3 only",
+        "Admin1, Admin2, and Admin3"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Classic subscription administrator roles
+        </p>
+
+        <p>
+            You cannot manage the following classic subscription administrator roles in Privileged Identity Management:
+        </p>
+
+        <ul>
+            <li>Account Administrator</li>
+            <li>Service Administrator</li>
+            <li>Co-Administrator</li>
+        </ul>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-roles
+        </p>
+    `
+},
+{
+    id: 395,
+    type: "dropdown",
+    title: "Question 395: Hotspot",
+    questionText: `
+        <p>You have an Azure AD tenant.</p>
+
+        <p>You perform the tasks shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q395_table1.jpg" alt="q395 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>On April 5, an administrator deletes App1, App2, App3, and App4.</p>
+
+        <p>You need to restore the apps and the settings.</p>
+
+        <p>Which apps can you restore on April 16, and which settings can you restore for App4 on April 16?</p>
+
+        <p>To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:180px;text-align:right;font-size:15px;">
+                        Apps:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="apps"
+                            style="min-width:360px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="No apps">No apps</option>
+                            <option value="App4 only">App4 only</option>
+                            <option value="App3 and App4 only">App3 and App4 only</option>
+                            <option value="App2, App3, and App4 only">App2, App3, and App4 only</option>
+                            <option value="App1, App2, App3, and App4">App1, App2, App3, and App4</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        App4 settings:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="app4Settings"
+                            style="min-width:420px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="No settings">No settings</option>
+                            <option value="Self-service only">Self-service only</option>
+                            <option value="App roles and Client secret only">App roles and Client secret only</option>
+                            <option value="Users and groups and Self-service only">Users and groups and Self-service only</option>
+                            <option value="App roles, Users and groups, Client secret, and Self-service">App roles, Users and groups, Client secret, and Self-service</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        apps: "App1, App2, App3, and App4",
+        app4Settings: "App roles, Users and groups, Client secret, and Self-service"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Box 1: App1, App2, App3, and App4.
+        </p>
+
+        <p>
+            Box 2: App roles, Users and groups, client secret, and Self-service.
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/identity-platform/howto-restore-app
+        </p>
+    `
+},
+{
+    id: 396,
+    type: "radio",
+    title: "Question 396",
+    questionText: `
+        <p>Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.</p>
+
+        <p>After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.</p>
+
+        <p>You have an Amazon Web Services (AWS) account, a Google Workspace subscription, and a GitHub account. You deploy an Azure subscription and enable Microsoft 365 Defender.</p>
+
+        <p>You need to ensure that you can monitor OAuth authentication requests by using Microsoft Defender for Cloud Apps.</p>
+
+        <p><strong>Solution:</strong> From the Microsoft 365 Defender portal, you add the GitHub app connector.</p>
+
+        <p>Does this meet the goal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Yes",
+        "No"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            No, the solution does not meet the goal.
+        </p>
+
+        <p>
+            Adding the GitHub app connector to Microsoft Defender for Cloud Apps will allow you to monitor OAuth authentication requests from GitHub to Microsoft 365.
+        </p>
+
+        <p>
+            However, it will not allow you to monitor OAuth authentication requests to your AWS account, Google Workspace subscription, or Azure subscription.
+        </p>
+    `
+},
+{
+    id: 397,
+    type: "radio",
+    title: "Question 397",
+    questionText: `
+        <p>You have an Azure AD tenant.</p>
+
+        <p>You plan to implement Azure AD Privileged Identity Management (PIM).</p>
+
+        <p>Which roles can you manage by using PIM?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Global Administrator only",
+        "Global Administrator and Security Administrator only",
+        "Global Administrator, Security Administrator, and Security Contributor only",
+        "Account Administrator, Global Administrator, Security Administrator, and Security Contributor only"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The correct answer is C. Global Administrator, Security Administrator, and Security Contributor only.
+        </p>
+
+        <p>
+            Azure AD Privileged Identity Management (PIM) can be used to manage the following roles:
+        </p>
+
+        <ul>
+            <li>Global Administrator</li>
+            <li>Security Administrator</li>
+            <li>Security Contributor</li>
+            <li>Privileged Role Administrator</li>
+            <li>Identity Governance Administrator</li>
+        </ul>
+
+        <p>
+            Classic subscription administrator roles cannot be managed by using PIM.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-roles
+        </p>
+    `
+},
+{
+    id: 398,
+    type: "radio",
+    title: "Question 398",
+    questionText: `
+        <p>You have a Microsoft 365 tenant.</p>
+
+        <p>In Microsoft Entra ID, you configure the terms of use.</p>
+
+        <p>You need to ensure that only users who accept the terms of use can access the resources in the tenant. Other users must be denied access.</p>
+
+        <p>What should you configure?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Terms and conditions in Microsoft Intune",
+        "an access policy in Microsoft Defender for Cloud Apps",
+        "a conditional access policy in Microsoft Entra ID",
+        "a compliance policy in Microsoft Intune"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            C. a conditional access policy in Microsoft Entra ID.
+        </p>
+
+        <p>
+            A conditional access policy is a feature that allows you to enforce granular controls over access to cloud apps based on user, location, device, and app.
+        </p>
+
+        <p>
+            You can use a conditional access policy along with terms of use to require users to accept the terms of use policy before getting access to the resources in the tenant.
+        </p>
+
+        <p>
+            You can also designate reviewers who can view and act on the consent requests in the Microsoft 365 admin center.
+        </p>
+    `
+},
+{
+    id: 399,
+    type: "radio",
+    title: "Question 399",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription that contains a user named User1. User1 is eligible for the Application Administrator role.</p>
+
+        <p>User1 needs to configure a new connector group for an application proxy.</p>
+
+        <p>What should you use to activate the role for User1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "the Microsoft 365 Defender portal",
+        "the Microsoft 365 admin center",
+        "the Microsoft Intune admin center",
+        "the Azure Active Directory admin center"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. the Azure Active Directory admin center.
+        </p>
+
+        <p>
+            The Azure Active Directory admin center is a portal that allows you to manage your Microsoft Entra ID resources, such as users, groups, roles, and applications.
+        </p>
+
+        <p>
+            You can use the Azure Active Directory admin center to assign roles to users, either directly or through eligible assignments.
+        </p>
+    `
+},
+{
+    id: 400,
+    type: "radio",
+    title: "Question 400",
+    questionText: `
+        <p>Your on-premises network contains an Active Directory Domain Services (AD DS) domain and a certification authority (CA) named CA1.</p>
+
+        <p>You have an Azure AD tenant.</p>
+
+        <p>You need to implement certificate-based authentication in Azure AD. The solution must ensure that users can sign in by using certificates issued by CA1.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Deploy an Azure key vault.",
+        "Add CA1 as a Certificate Authority to the Microsoft Entra ID tenant.",
+        "Enable auto-enrollment for CA1.",
+        "Deploy Windows Hello for Business."
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            B. Add CA1 as a Certificate Authority to the Microsoft Entra ID tenant.
+        </p>
+
+        <p>
+            To implement Microsoft Entra ID Certificate-Based Authentication (CBA) for an on-premises root or intermediate certification authority (CA1), Entra ID must have a structural cryptographic trust anchor established in the cloud.
+        </p>
+
+        <p>
+            Establishing Cryptographic Trust: Before Microsoft Entra ID can evaluate, validate, and parse a user certificate presented during a login attempt, it needs to know whether that certificate was generated by a trusted entity.
+        </p>
+    `
+},
+{
+    id: 401,
+    type: "radio",
+    title: "Question 401",
+    questionText: `
+        <p>You have accounts for the following cloud platforms:</p>
+
+        <ul>
+            <li>Azure</li>
+            <li>Alibaba Cloud</li>
+            <li>Amazon Web Services (AWS)</li>
+            <li>Google Cloud Platform (GCP)</li>
+        </ul>
+
+        <p>You configure an Azure subscription to use Microsoft Entra Permissions Management to manage the permissions in Azure only.</p>
+
+        <p>Which additional cloud platforms can be managed by using Permissions Management?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "AWS only",
+        "Alibaba Cloud and AWS only",
+        "Alibaba Cloud and GCP only",
+        "AWS and GCP only",
+        "Alibaba Cloud, AWS, and GCP"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Microsoft Entra Permissions Management is a cloud infrastructure entitlement management (CIEM) solution that provides comprehensive visibility into permissions assigned to all identities.
+        </p>
+
+        <p>
+            For example, over-privileged workload and user identities, actions, and resources across multicloud infrastructures in Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP).
+        </p>
+    `
+},
+{
+    id: 402,
+    type: "radio",
+    title: "Question 402",
+    questionText: `
+        <p>You have three Azure subscriptions that are linked to a single Microsoft Entra tenant.</p>
+
+        <p>You need to evaluate and remediate the risks associated with highly privileged accounts. The solution must minimize administrative effort.</p>
+
+        <p>What should you use?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Global Secure Access",
+        "Privileged Identity Management (PIM)",
+        "Microsoft Entra Permissions Management",
+        "Microsoft Entra Verified ID"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            B. Privileged Identity Management (PIM).
+        </p>
+
+        <p>
+            Microsoft Entra Privileged Identity Management (PIM) is designed to manage and secure privileged accounts effectively.
+        </p>
+
+        <p>
+            It provides features like just-in-time access, approval workflows, and access expiration, which help minimize risks associated with highly privileged accounts.
+        </p>
+
+        <p>
+            PIM also reduces administrative effort by automating processes and offering detailed audit logs for monitoring.
+        </p>
+    `
+},
+{
+    id: 403,
+    type: "radio",
+    title: "Question 403",
+    questionText: `
+        <p>You have an Azure subscription named Sub1 that contains a user named User1. Sub1 is granted multiple permissions across Sub1.</p>
+
+        <p>You need to replace all the permissions granted to User1 with read-only permissions. The solution must minimize administrative effort.</p>
+
+        <p>What should you do on the Remediation tab in Permissions Management?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From the Role/Policy Template subtab, create a template.",
+        "From the My Requests subtab, create a new request.",
+        "From the Roles/Policies subtab, create a role.",
+        "From the Permissions subtab, use a quick action."
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. From the Permissions subtab, use a quick action.
+        </p>
+
+        <p>
+            Using the quick action feature in the Permissions subtab allows you to efficiently replace all permissions granted to User1 with read-only permissions.
+        </p>
+
+        <p>
+            This approach minimizes administrative effort by streamlining the process without requiring manual adjustments or additional configurations.
+        </p>
+    `
+},
+{
+    id: 404,
+    type: "radio",
+    title: "Question 404",
+    questionText: `
+        <p>You have an Azure subscription that contains a user named User1. The subscription is onboarded to Microsoft Entra Permissions Management.</p>
+
+        <p>You need to provide User1 with access to Permissions Management.</p>
+
+        <p>The solution must meet the following requirements:</p>
+
+        <ul>
+            <li>Follow the principle of least privilege.</li>
+            <li>Minimize administrative effort.</li>
+        </ul>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From the Role/Policy Template subtab of Permissions Management, create a template.",
+        "From the Microsoft Entra admin center, create a security group.",
+        "From the My Requests subtab of Permissions Management, create a new request.",
+        "From the Microsoft Entra admin center, assign a role to User1."
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            B. From the Microsoft Entra admin center, create a security group.
+        </p>
+
+        <p>
+            To provide access to Microsoft Entra Permissions Management while adhering to the principle of least privilege and minimizing administrative effort, Microsoft recommends using group-based assignments rather than assigning roles to individual users one by one.
+        </p>
+    `
+},
+{
+    id: 405,
+    type: "dragdrop",
+    title: "Question 405",
+    questionText: `
+        <p>You have an Azure subscription that contains the resources shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q405_table1.jpg" alt="q405 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The subscription uses Privileged Identity Management (PIM).</p>
+
+        <p>You need to configure the following access controls by using PIM:</p>
+
+        <ul>
+            <li>Ensure that User1 can read and update Secret1.</li>
+            <li>Ensure that User2 can read the contents of the secrets stored in Vault2.</li>
+        </ul>
+
+        <p>The solution must follow the principle of least privilege.</p>
+
+        <p>Which authorization method should you use for each user?</p>
+
+        <p>To answer, drag the appropriate authorization methods to the correct users. Each authorization method may be used once, more than once, or not at all.</p>
+
+        <p>You may need to drag the split bar between panes or scroll to view content.</p>
+    `,
+    prompt: "Select an item, then select the matching answer area:",
+    availableItems: [
+        "The GET Secret Permissions Access Policy permission",
+        "The Key Vault Secrets Officer RBAC role",
+        "The Key Vault Reader RBAC role",
+        "The Key Vault Secrets User RBAC role",
+        "The LIST Secret Permissions Access Policy permission",
+        "The SET Secret Permissions Access Policy permission"
+    ],
+    dropTargets: [
+        {
+            id: "user1",
+            label: "User1:",
+            correctAnswer: "The Key Vault Secrets Officer RBAC role"
+        },
+        {
+            id: "user2",
+            label: "User2:",
+            correctAnswer: "The Key Vault Secrets User RBAC role"
+        }
+    ],
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User1: The Key Vault Secrets Officer RBAC role.
+        </p>
+
+        <p>
+            User2: The Key Vault Secrets User RBAC role.
+        </p>
+
+        <p>
+            The Key Vault Secrets Officer RBAC role allows reading, creating, updating, and deleting secrets, which satisfies the requirement for User1 to read and update Secret1.
+        </p>
+
+        <p>
+            The Key Vault Secrets User RBAC role provides read access to secret contents and follows the principle of least privilege for User2.
+        </p>
+    `
+},
+{
+    id: 406,
+    type: "matrix",
+    title: "Question 406: Hot Spot",
+    questionText: `
+        <p>You have two Azure subscriptions named Sub1 and Sub2 that are linked to a Microsoft Entra tenant. The tenant contains three groups named Group1, Group2, and Group3.</p>
+
+        <p>The subscriptions contain the resources shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q406_table1.jpg" alt="q406 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The tenant contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q406_table2.jpg" alt="q405 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You manage the subscriptions by using Microsoft Entra Permissions Management. Permissions Management is configured as shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q406_table3.jpg" alt="q405 table 3" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 can request access to VM2 by using Permissions Management."
+        },
+        {
+            id: "stmt2",
+            label: "User2 can create an access request to Automation1 on behalf of User1."
+        },
+        {
+            id: "stmt3",
+            label: "User3 can approve access requests for VM2."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 0,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User1 can request access to VM2 by using Permissions Management — No
+        </p>
+
+        <p>
+            This implies that VM2 is likely in a different authorization system (like AWS or GCP) or a subscription that hasn't been onboarded to Permissions Management for that user. Alternatively, User1 may not have the "Requester" permissions for that specific resource scope.
+        </p>
+
+        <p>
+            User2 can create an access request to Automation1 on behalf of User1 — Yes
+        </p>
+
+        <p>
+            In Entra ID, certain roles or configurations (like being a Manager or a Requestor with "on-behalf-of" rights in an Access Package) allow a user to initiate requests for someone else. This is common for onboarding new team members to specific resources.
+        </p>
+
+        <p>
+            User3 can approve access requests for VM2 — Yes
+        </p>
+
+        <p>
+            User3 has been explicitly designated as an Approver in the workflow for VM2. In Permissions Management, this is usually handled through an integration with a request-and-approval workflow.
+        </p>
+    `
+},
+{
+    id: 407,
+    type: "dropdown",
+    title: "Question 407: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription that contains a user named User1. You onboard Microsoft Entra Permissions Management.</p>
+
+        <p>You need to perform the following tasks:</p>
+
+        <ul>
+            <li>Identify all the accounts that are assigned the Global Administrator role permanently.</li>
+            <li>Review the Permission Creep Index (PCI) of User1.</li>
+        </ul>
+
+        <p>Which tab in Permissions Management should you use for each task? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:420px;text-align:right;font-size:15px;">
+                        Identify all the accounts that are assigned the Global Administrator role permanently:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="globalAdmin"
+                            style="min-width:220px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Analytics">Analytics</option>
+                            <option value="Audit">Audit</option>
+                            <option value="Azure AD Insights">Azure AD Insights</option>
+                            <option value="Dashboard">Dashboard</option>
+                            <option value="Reports">Reports</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        Review the PCI of User1:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="pci"
+                            style="min-width:220px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Analytics">Analytics</option>
+                            <option value="Audit">Audit</option>
+                            <option value="Azure AD Insights">Azure AD Insights</option>
+                            <option value="Dashboard">Dashboard</option>
+                            <option value="Reports">Reports</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        globalAdmin: "Azure AD Insights",
+        pci: "Analytics"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Identify all the accounts that are assigned the Global Administrator role permanently:
+        </p>
+
+        <p>
+            Azure AD Insights
+        </p>
+
+        <p>
+            The Azure AD Insights section (now often called Microsoft Entra ID Insights) is specifically designed to highlight security risks related to high-privileged roles. It flags users who have "standing" (permanent) access to sensitive roles like Global Administrator, allowing you to move them toward a "Just-In-Time" (JIT) model using PIM.
+        </p>
+
+        <p>
+            Review the PCI of User1:
+        </p>
+
+        <p>
+            Analytics
+        </p>
+
+        <p>
+            PCI stands for Permission Creep Index. It is a core metric in Permissions Management that measures the gap between the permissions a user has and the permissions they actually use. You find this detailed breakdown under the Analytics tab, where you can view high-risk users and see specifically which unused permissions are inflating their PCI score.
+        </p>
+    `
+},
+{
+    id: 408,
+    type: "radio",
+    title: "Question 408",
+    questionText: `
+        <p>You have an Azure subscription.</p>
+
+        <p>You need to use Microsoft Entra Permissions Management to automatically monitor permissions and create and implement right-size roles. The solution must follow the principle of least privilege.</p>
+
+        <p>Which role should you assign to the service principal of Permissions Management?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "User Access Administrator",
+        "Contributor",
+        "Reader",
+        "Owner"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct Answer B:
+        </p>
+
+        <p>
+            To use Microsoft Entra Permissions Management to automatically monitor permissions and create and implement right-size roles while following the principle of least privilege, you should assign the Contributor role to the service principal.
+        </p>
+
+        <p>
+            This role provides the necessary permissions to manage resources without granting full administrative access.
+        </p>
+    `
+},
+{
+    id: 409,
+    type: "dropdown",
+    title: "Question 409: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription named Sub1.</p>
+
+        <p>You plan to onboard Microsoft Entra Permissions Management.</p>
+
+        <p>You need to ensure that Permissions Management users can manage role assignments for Sub1. The solution must follow the principle of least privilege.</p>
+
+        <p>Which role should you assign and to which identity should you assign the role? To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:180px;text-align:right;font-size:15px;">
+                        Role:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="role"
+                            style="min-width:280px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Contributor">Contributor</option>
+                            <option value="Reader">Reader</option>
+                            <option value="Security Admin">Security Admin</option>
+                            <option value="User Access Administrator">User Access Administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        Identity:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="identity"
+                            style="min-width:420px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Azure Credential Configuration Endpoint Service">Azure Credential Configuration Endpoint Service</option>
+                            <option value="Cloud Infrastructure Entitlements Management">Cloud Infrastructure Entitlements Management</option>
+                            <option value="Microsoft Azure Management">Microsoft Azure Management</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        role: "User Access Administrator",
+        identity: "Microsoft Azure Management"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Role: User Access Administrator.
+        </p>
+
+        <p>
+            Identity: Microsoft Azure Management.
+        </p>
+    `
+},
+{
+    id: 410,
+    type: "radio",
+    title: "Question 410",
+    questionText: `
+        <p>You have an Azure subscription, a Google Cloud Platform (GCP) account, and an Amazon Web Services (AWS) account.</p>
+
+        <p>You need to recommend a solution to assess the risks associated with privilege assignments across all the platforms. The solution must minimize administrative effort.</p>
+
+        <p>What should you include in the recommendation?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Microsoft Sentinel",
+        "Microsoft Entra ID Protection",
+        "Microsoft Defender for Cloud Apps",
+        "Microsoft Entra Permissions Management"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            D. Microsoft Entra Permissions Management
+        </p>
+
+        <p>
+            Microsoft Entra Permissions Management is the appropriate solution to assess the risks associated with privilege assignments across Azure, Google Cloud Platform (GCP), and Amazon Web Services (AWS) accounts.
+        </p>
+
+        <p>
+            It provides centralized management and monitoring of permissions and access across multiple cloud platforms, helping identify and remediate risks associated with privilege assignments.
+        </p>
+
+        <p>
+            By using Microsoft Entra Permissions Management, you can minimize administrative effort by having a single tool to manage permissions across different cloud environments.
+        </p>
+    `
+},
+{
+    id: 411,
+    type: "radio",
+    title: "Question 411",
+    questionText: `
+        <p>You have a Microsoft Entra tenant.</p>
+
+        <p>You need to configure continuous access evaluation for app sign-ins and assign the configuration to users that are assigned the Application Administrator role.</p>
+
+        <p>What should you configure?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "a sign-in risk policy",
+        "an access review",
+        "a Conditional Access policy",
+        "the Admin consent settings"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            C. a Conditional Access policy
+        </p>
+
+        <p>
+            To configure continuous access evaluation for app sign-ins and assign the configuration to users that are assigned the Application Administrator role, you should configure a Conditional Access policy.
+        </p>
+
+        <p>
+            Conditional Access policies in Microsoft Entra allow you to control access to apps and resources based on certain conditions such as user, location, device, and application state.
+        </p>
+
+        <p>
+            By creating a Conditional Access policy, you can enable continuous access evaluation for app sign-ins and target the policy specifically to users assigned the Application Administrator role.
+        </p>
+
+        <p>
+            This ensures that the configuration applies only to those users who have the appropriate role.
+        </p>
+    `
+},
+{
+    id: 412,
+    type: "dropdown",
+    title: "Question 412: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription named Sub1.</p>
+
+        <p>You plan to deploy Microsoft Entra Permissions Management.</p>
+
+        <p>You need to ensure that Permission Management can onboard Sub1. The solution must follow the principle of least privilege.</p>
+
+        <p>How should you complete the PowerShell command? To answer, select the appropriate options in the answer area.</p>
+
+        <div style="margin-top:15px;background:#012456;color:white;padding:14px;border-radius:4px;font-family:Consolas,'Courier New',monospace;">
+            <select data-key="cmdlet" style="padding:4px;background:white;color:black;">
+                <option value="">-- Select --</option>
+                <option value="New-AzRoleAssignment">New-AzRoleAssignment</option>
+                <option value="New-AzRoleDefinition">New-AzRoleDefinition</option>
+                <option value="New-AzTag">New-AzTag</option>
+            </select>
+
+            -ApplicationId b46c3ac5-9da6-418f-a849-0a07a10b3c6c
+            -RoleDefinitionName
+
+            <select data-key="role" style="padding:4px;background:white;color:black;">
+                <option value="">-- Select --</option>
+                <option value="Contributor">Contributor</option>
+                <option value="Owner">Owner</option>
+                <option value="Reader">Reader</option>
+            </select>
+
+            <br><br>
+
+            -Scope "/subscriptions/&lt;subscriptionID&gt;"
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        cmdlet: "New-AzRoleAssignment",
+        role: "Contributor"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>New-AzRoleAssignment</p>
+
+        <p>Contributor</p>
+
+        <p>
+            Binding Identity to Permissions: In Azure, you use a role assignment to pair a security principal (User, Group, or Service Principal) with a role definition at a specific scope.
+        </p>
+
+        <p>
+            Syntactical Pairing: The parameter preceding this dropdown is -RoleDefinitionName. This parameter strictly expects a valid Azure RBAC role name.
+        </p>
+    `
+},
+{
+    id: 413,
+    type: "radio",
+    title: "Question 413",
+    questionText: `
+        <p>Your company has a Microsoft Entra tenant that contains a user named User1. The company has two departments named marketing and finance.</p>
+
+        <p>You need to grant permissions to User1 to manage only the users in the marketing department.</p>
+
+        <p>What should you create first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "a Microsoft 365 group",
+        "an administrative unit",
+        "a management group",
+        "a resource group"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct option: B – an administrative unit
+        </p>
+
+        <p>
+            Scope of control – Administrative units let you delegate specific Azure AD roles (e.g., User Administrator, Directory Readers) to a defined set of users and groups.
+        </p>
+
+        <p>
+            By assigning User1 to the User Administrator role scoped to an administrative unit that contains only the marketing users, you can grant exactly the permissions needed without affecting finance users.
+        </p>
+
+        <p>
+            Granular membership – Membership in an administrative unit is dynamic; you can add or remove users from the unit without modifying role assignments. This makes it easy to keep the scope limited to the marketing department.
+        </p>
+
+        <p>
+            Supported by Entra ID – Administrative units are a native feature of Microsoft Entra (formerly Azure AD) and are the recommended construct for delegating limited administrative privileges across departments.
+        </p>
+
+        <p><strong>Why the other options are unsuitable</strong></p>
+
+        <p>
+            A. Microsoft 365 group – Groups are primarily for resource access (mailboxes, SharePoint sites, Teams) and do not provide a scope for delegating directory-level administrative roles. They cannot restrict user-management permissions to a department.
+        </p>
+
+        <p>
+            C. Management group – Management groups are used for organizing Azure subscriptions and applying policy/governance at the subscription level. They are unrelated to Entra ID user management or departmental scope.
+        </p>
+
+        <p>
+            D. Resource group – Resource groups are Azure resource containers and have no relevance to Entra ID identity or administrative delegation.
+        </p>
+
+        <p>
+            Therefore, creating an administrative unit is the first step to isolate and manage only the marketing department’s users while granting User1 the required permissions.
+        </p>
+    `
+},
+{
+    id: 416,
+    type: "matrix",
+    title: "Question 416: Hot Spot",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q416_table1.jpg" alt="q416 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You add the following assignment for the User Administrator role:</p>
+
+        <ul>
+            <li>Scope type: Directory</li>
+            <li>Selected members: Group1</li>
+            <li>Assignment type: Active</li>
+            <li>Assignments starts: August 15, 2022</li>
+            <li>Assignment ends: December 15, 2022</li>
+        </ul>
+
+        <p>You add the following assignment for the Exchange Administrator role:</p>
+
+        <ul>
+            <li>Scope type: Directory</li>
+            <li>Selected members: Group2</li>
+            <li>Assignment type: Eligible</li>
+            <li>Assignments starts: October 15, 2022</li>
+            <li>Assignment ends: January 15, 2023</li>
+        </ul>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "On November 15, 2022, Admin1 can reset the password of Admin2."
+        },
+        {
+            id: "stmt2",
+            label: "On October 15, 2022, Admin2 signs in and can administer Exchange Online."
+        },
+        {
+            id: "stmt3",
+            label: "On September 1, 2022, Admin3 can reset the password of Admin1."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 0,
+        stmt2: 1,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            On November 15, 2022, Admin1 can reset the password of Admin2 — Yes
+        </p>
+
+        <p>
+            Reasoning: Admin1 likely holds a role like Global Administrator or Privileged Role Administrator. These roles have the authority to manage other administrators permanently or within a specific timeframe. If Admin1's assignment is active on this date, they can perform the reset.
+        </p>
+
+        <p>
+            On October 15, 2022, Admin2 signs in and can administer Exchange Online — No
+        </p>
+
+        <p>
+            Reasoning: In PIM, roles are often "Eligible" rather than "Permanent." If Admin2 is only eligible for the Exchange Administrator role, they cannot use it just by signing in. They must first manually activate the role in the PIM portal (often requiring MFA or a justification) before they gain those permissions.
+        </p>
+
+        <p>
+            On September 1, 2022, Admin3 can reset the password of Admin1 — Yes
+        </p>
+
+        <p>
+            Reasoning: Similar to the first statement, Admin3 holds a high-level administrative role. As long as their assignment (whether permanent or an active PIM window) covers September 1st, they have the permission to reset passwords for other users, including other admins.
+        </p>
+    `
+},
+{
+    id: 417,
+    type: "dropdown",
+    title: "Question 417: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription that uses Microsoft Entra Permissions Management. You have an Amazon Web Services (AWS) account.</p>
+
+        <p>You plan to connect Permissions Management to AWS.</p>
+
+        <p>You need to create a Permissions Management app in Azure.</p>
+
+        <p>How should you complete the PowerShell command? To answer, select the appropriate options in the answer area.</p>
+
+        <div style="margin-top:15px;background:#012456;color:#ffffff;padding:14px;border-radius:4px;font-family:Consolas,'Courier New',monospace;overflow-x:auto;">
+
+            <select data-key="cmdlet" style="padding:4px;background:#ffffff;color:#000;border:1px solid #888;">
+                <option value="">-- Select --</option>
+                <option value="New-AzureADApplication">New-AzureADApplication</option>
+                <option value="New-AzureADApplicationExtensionProperty">New-AzureADApplicationExtensionProperty</option>
+                <option value="New-AzureADApplicationKeyCredential">New-AzureADApplicationKeyCredential</option>
+            </select>
+
+            -DisplayName "mciem-aws-oidc-connector"
+
+            <select data-key="parameter" style="padding:4px;background:#ffffff;color:#000;border:1px solid #888;">
+                <option value="">-- Select --</option>
+                <option value="-GroupMembershipClaims">-GroupMembershipClaims</option>
+                <option value="-IdentifierUris">-IdentifierUris</option>
+                <option value="-InformationalUrls">-InformationalUrls</option>
+                <option value="-KeyCredentials">-KeyCredentials</option>
+            </select>
+
+            "api://mciem-aws-oidc-app"
+
+        </div>
+    `,
+    prompt: "",
+    correctAnswer: {
+        cmdlet: "New-AzureADApplication",
+        parameter: "-IdentifierUris"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>New-AzureADApplication.</p>
+
+        <p>
+            Core Resource Creation: To create an identity federation link, you must first provision an Application Registration (an Application Object) in your Entra ID directory that will serve as the security principal representing the external cloud connector.
+        </p>
+
+        <p>IdentifierUris.</p>
+
+        <p>
+            Defining the App ID URI: The string "api://mciem-aws-oidc-app" represents a unique URI used to identify the application within the tenant and across the directory ecosystem.
+        </p>
+
+        <p>
+            In Entra ID app registrations, this specific parameter is called the Application ID URI, which is populated via the -IdentifierUris parameter.
+        </p>
+    `
+},
+{
+    id: 418,
+    type: "radio",
+    title: "Question 418",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that uses Microsoft Entra ID Premium licenses. You plan to configure a terms of use (ToU) for the tenant.</p>
+
+        <p>You need to upload the ToU document.</p>
+
+        <p>Which format should you use for the document?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "HTML",
+        "RTF",
+        "PDF",
+        "DOCX"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use
+        </p>
+    `
+},
+{
+    id: 419,
+    type: "radio",
+    title: "Question 419",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>You need to ensure that users are prompted to accept a custom terms of use (ToU) agreement when they sign in to the subscription.</p>
+
+        <p>What should you configure?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "an access package",
+        "a Conditional Access policy",
+        "a lifecycle workflow",
+        "an authentication method"
+    ],
+    correctAnswer: 1,
+    correctAnswerText: `
+        <p><strong>Answer: B</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Organizations can use terms of use along with Conditional Access policies to require employees or guests to accept your terms of use policy before getting access.
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use#add-terms-of-use
+        </p>
+    `
+},
+{
+    id: 420,
+    type: "radio",
+    title: "Question 420",
+    questionText: `
+        <p>You have a Microsoft 365 E5 subscription.</p>
+
+        <p>You have an Azure subscription that is linked to a Microsoft Entra tenant. The tenant contains a user named User1. You plan to deploy Microsoft Entra Permissions Management.</p>
+
+        <p>You need to ensure that User1 can onboard the Azure subscription to Permissions Management. The solution must follow the principle of least principle.</p>
+
+        <p>Which Microsoft Entra role should you assign to User1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Permissions Management Administrator",
+        "Global Administrator",
+        "Security Administrator",
+        "Application Administrator"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Task: Least privileged role
+        </p>
+
+        <ul>
+            <li>Tenant onboarding → Permissions Management Administrator</li>
+            <li>Onboard cloud environments → Permissions Management Administrator</li>
+            <li>Assign permissions in Microsoft Entra Permissions Management → Permissions Management Administrator</li>
+            <li>Start trial and buy Microsoft Entra Permissions Management licenses → Billing Administrator</li>
+        </ul>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/delegate-by-task#permissions-management
+        </p>
+    `
+},
+{
+    id: 421,
+    type: "checkbox",
+    title: "Question 421",
+    questionText: `
+        <p>You have an Azure subscription named Sub1.</p>
+
+        <p>You purchase a Microsoft Entra Permissions Management license.</p>
+
+        <p>You need to onboard Permissions Management.</p>
+
+        <p>Which two actions should you perform? Each correct answer presents part of the solution.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    prompt: "Select all correct options:",
+    options: [
+        "Implement a Microsoft Entra application proxy.",
+        "From Microsoft Entra Permissions Management, configure data collection.",
+        "Create a role assignment for Sub1.",
+        "From the Microsoft Entra admin center, configure the Diagnostic settings.",
+        "From the Microsoft Entra admin center, create an app registration.",
+        "From the Azure portal, create a data collection rule (DCR)."
+    ],
+    correctAnswer: [1, 2],
+    correctAnswerText: `
+        <p><strong>Answer: B, C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p><strong>Why B, C are the correct actions</strong></p>
+
+        <p><strong>B – Configure data collection in Microsoft Entra Permissions Management</strong></p>
+
+        <p>
+            Permissions Management must be told where to send its audit and usage logs. This is done by enabling data collection within the service, which creates the necessary log-flow to Azure Monitor so that permission events can be analysed and reported.
+        </p>
+
+        <p><strong>C – Create a role assignment for Sub1</strong></p>
+
+        <p>
+            The subscription (Sub1) needs a principal to own the Permissions Management configuration. Assigning a role such as Permissions Management Administrator (or a custom role with the required permissions) at the subscription scope grants the tenant the authority to manage and enforce least-privilege policies for that subscription.
+        </p>
+
+        <p><strong>Why the other options are not required</strong></p>
+
+        <p>
+            A – Implement a Microsoft Entra application proxy – The proxy is used for exposing on-premises or internal apps to external users; it has no role in enabling or configuring Permissions Management.
+        </p>
+
+        <p>
+            D – Configure Diagnostic settings from the Entra admin center – Diagnostic settings are a generic Azure Monitor feature; Permissions Management uses its own data-collection configuration rather than a separate diagnostic-settings step.
+        </p>
+
+        <p>
+            E – Create an app registration in the Entra admin center – An app registration is needed only when building custom applications that call Microsoft Graph or other APIs. Onboarding Permissions Management does not require a new app registration.
+        </p>
+
+        <p>
+            F – Create a Data Collection Rule (DCR) in the Azure portal – While a DCR can be used for custom log routing, Permissions Management’s data-collection setup is performed inside the service itself; a manual DCR is unnecessary and outside the standard onboarding flow.
+        </p>
+    `
+},
+{
+    id: 422,
+    type: "matrix",
+    title: "Question 422: Hot Spot",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains two groups named Group1 and Group2 and the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q422_table1.jpg" alt="q422 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Group2 is a member of Group1.</p>
+
+        <p>You configure an access review that has the following settings:</p>
+
+        <ul>
+            <li>Name: Review1</li>
+            <li>Select what to review: Teams + Groups</li>
+            <li>Review scope: Select Teams + groups</li>
+            <li>Group: Group1</li>
+            <li>Scope: Guest users only</li>
+            <li>Select reviewers: Group owner(s)</li>
+        </ul>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User3 can perform an access review of User1."
+        },
+        {
+            id: "stmt2",
+            label: "User3 can perform an access review of User4."
+        },
+        {
+            id: "stmt3",
+            label: "User3 can perform an access review of User5."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 1,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User1: No → User3 does not have permission to review User1’s access.
+        </p>
+
+        <p>
+            User4: No → User3 does not have permission to review User4’s access.
+        </p>
+
+        <p>
+            User5: No → User3 does not have permission to review User5’s access.
+        </p>
+    `
+},
+{
+    id: 423,
+    type: "radio",
+    title: "Question 423",
+    questionText: `
+        <p>You have 2,500 users who are assigned Microsoft Office 365 Enterprise E3 licenses. The licenses are assigned to individual users.</p>
+
+        <p>From the Groups blade in the Microsoft Entra admin center, you assign Microsoft Office 365 Enterprise E5 licenses to a group that includes all users.</p>
+
+        <p>You need to remove the Office 365 Enterprise E3 licenses from the users by using the least amount of administrative effort.</p>
+
+        <p>What should you use?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "the Set-MgUserLicense Cmdlet",
+        "the Identity Governance blade in the Microsoft Entra admin center",
+        "the Set-WindowsProductKey Cmdlet",
+        "the Administrative units blade in the Microsoft Entra admin center"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct option: A – the Set-MgUserLicense cmdlet
+        </p>
+
+        <p>
+            Direct license manipulation – Set-MgUserLicense (Microsoft Graph PowerShell) can target a specific user and replace or remove assigned SKUs. By retrieving the user’s current license assignment and then calling the cmdlet with the desired SKU (E5) while omitting the E3 SKU, the E3 license is stripped from each user in a single operation.
+        </p>
+
+        <p>
+            Scalable to 2,500 users – The cmdlet accepts pipeline input, so you can pipe a list of user IDs or UPNs and apply the change in bulk with minimal scripting overhead.
+        </p>
+
+        <p>
+            Least administrative effort – No need to navigate multiple blades or create additional objects; a one-line script (or a few commands) removes the E3 license from all members of the group.
+        </p>
+
+        <p><strong>Why the other options are less suitable</strong></p>
+
+        <p>
+            B – Identity Governance blade – This blade is used for access-review workflows, role-based access policies, and governance reports. It does not provide a mechanism to modify individual user license assignments, so it cannot remove the E3 SKU.
+        </p>
+
+        <p>
+            C – Set-WindowsProductKey – This cmdlet manages the Windows product key on a local machine; it has no interaction with Azure AD, Microsoft Graph, or Office 365 licensing. It cannot affect cloud-based license assignments.
+        </p>
+
+        <p>
+            D – Administrative units blade – Administrative units are used to scope administrative roles and view users, but they do not provide a direct license-assignment capability. Removing a license would still require a separate action (for example, Microsoft Graph PowerShell), making this approach indirect and more cumbersome.
+        </p>
+
+        <p>
+            Conclusion – Using Set-MgUserLicense directly modifies the user’s license list via Microsoft Graph, offering the most efficient, scriptable, and single-step method to retire the E3 licenses for all users while assigning E5 licenses to the group.
+        </p>
+    `
+},
+{
+    id: 424,
+    type: "matrix",
+    title: "Question 424: Hot Spot",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains the identities shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q424_table1.jpg" alt="q424 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Group1 has the following configurations:</p>
+
+        <ul>
+            <li>Owners: User1, User4</li>
+            <li>Members: User1, Managed2, Group2</li>
+        </ul>
+
+        <p>You create an access review that has the following settings:</p>
+
+        <ul>
+            <li>Name: Review1</li>
+            <li>Review scope: Select Teams + Groups</li>
+            <li>Group: Group1</li>
+            <li>Scope: All users</li>
+            <li>Select reviewers: Group owner(s)</li>
+        </ul>
+
+        <p>The Fallback reviewers setting is NOT configured.</p>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 can perform an access review for User1."
+        },
+        {
+            id: "stmt2",
+            label: "User1 can perform an access review for Managed2."
+        },
+        {
+            id: "stmt3",
+            label: "User1 can perform an access review for User3."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 0,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User1: No → User3 does not have permission to review User1’s access.
+        </p>
+
+        <p>
+            Managed2: Yes → User1, as an owner of Group1 and the assigned reviewer, has the ability to review the access of all members within the group except themselves.
+        </p>
+
+        <p>
+            User3: No → By default, nested group members are not included in access reviews. Only direct members of the group are subject to the review.
+        </p>
+    `
+},
+{
+    id: 425,
+    type: "dropdown",
+    title: "Question 425: Hotspot",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains a user named User1.</p>
+
+        <p>You have an Azure subscription named Sub1. User1 is assigned the Owner role for Sub1.</p>
+
+        <p>You need to ensure that User1 can onboard Sub1 to Permissions Management. The solution must follow the principle of least privilege.</p>
+
+        <p>Which role should you assign for Sub1, and which role should you assign to User1 for the tenant?</p>
+
+        <p>To answer, select the appropriate options in the answer area.</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:180px;text-align:right;font-size:15px;">
+                        Sub1:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="subscriptionRole"
+                            style="min-width:280px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Owner">Owner</option>
+                            <option value="Reader">Reader</option>
+                            <option value="Security Reader">Security Reader</option>
+                            <option value="User Access Administrator">User Access Administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        Tenant:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="tenantRole"
+                            style="min-width:320px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="Global Administrator">Global Administrator</option>
+                            <option value="Global Secure Access Administrator">Global Secure Access Administrator</option>
+                            <option value="Permissions Management Administrator">Permissions Management Administrator</option>
+                            <option value="Security Administrator">Security Administrator</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        subscriptionRole: "User Access Administrator",
+        tenantRole: "Permissions Management Administrator"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Sub1 (Subscription level): User Access Administrator
+        </p>
+
+        <p>
+            To onboard an Azure subscription into Permissions Management, you need the User Access Administrator role. This role allows Permissions Management to create the necessary Service Principal and assign it the permissions required to collect data from the subscription.
+        </p>
+
+        <p>
+            Tenant (Directory level): Permissions Management Administrator
+        </p>
+
+        <p>
+            This is the specific administrative role required to manage the overall configuration, settings, and permissions within the Permissions Management service itself at the tenant level.
+        </p>
+    `
+},
+{
+    id: 426,
+    type: "radio",
+    title: "Question 426",
+    questionText: `
+        <p>You have 2,500 users who are assigned Microsoft Office 365 Enterprise E3 licenses. The licenses are assigned to individual users.</p>
+
+        <p>From the Groups blade in the Microsoft Entra admin center, you assign Microsoft Office 365 Enterprise E5 licenses to a group that includes all users.</p>
+
+        <p>You need to remove the Office 365 Enterprise E3 licenses from the users by using the least amount of administrative effort.</p>
+
+        <p>What should you use?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "the Licenses blade in the Microsoft Entra admin center",
+        "the Set-WindowsProductKey Cmdlet",
+        "the Identity Governance blade in the Microsoft Entra admin center",
+        "the Update-MgUser cmdlet"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            A. the Licenses blade in the Microsoft Entra admin center
+        </p>
+
+        <p>
+            Using the Licenses blade in the Microsoft Entra admin center is the most straightforward and least administratively intensive method to remove Office 365 Enterprise E3 licenses from users.
+        </p>
+
+        <p>
+            Here’s how you can do it:
+        </p>
+
+        <ol>
+            <li>Navigate to the Licenses blade in the Microsoft Entra admin center.</li>
+            <li>Select the users or the license assignment you want to manage.</li>
+            <li>Remove the Office 365 Enterprise E3 license assignment.</li>
+        </ol>
+    `
+},
+{
+    id: 428,
+    type: "dropdown",
+    title: "Question 428: Hotspot",
+    questionText: `
+        <p>You have an Azure subscription that is linked to a Microsoft Entra tenant. The tenant contains the identities shown in the following table</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q428_table1.jpg" alt="q428 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The tenant is onboarded to Permissions Management.
+You create the Azure resources shown in the following table.
+</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q428_table2.jpg" alt="q428 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+        <p>From Microsoft Entra Insights, which identity will be included in Accounts assigned to highly privileged roles, and which identity will be included in Service principals with privileged role assignments?</p>
+
+        <p><strong>Answer Area</strong></p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:320px;text-align:right;font-size:15px;">
+                        Accounts assigned to highly privileged roles:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="privilegedRoles"
+                            style="min-width:250px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="User1">User1</option>
+                            <option value="User2">User2</option>
+                            <option value="Group1">Group1</option>
+                            <option value="Group2">Group2</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;text-align:right;font-size:15px;">
+                        Service principals with privileged role assignments:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select data-key="servicePrincipal"
+                            style="min-width:250px;padding:6px;">
+                            <option value="">-- Select --</option>
+                            <option value="App1">App1</option>
+                            <option value="Managed1">Managed1</option>
+                            <option value="Managed2">Managed2</option>
+                            <option value="SPrincipal1">SPrincipal1</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+    prompt: "",
+    correctAnswer: {
+        privilegedRoles: "Group2",
+        servicePrincipal: "Managed2"
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            BOX 1: Group2.
+        </p>
+
+        <p>
+            BOX 2: Managed2.
+        </p>
+
+        <p>
+            "Select Review highly privileged roles or Review service principals to review information on principal role assignments for the following roles:
+            Application Administrator, Cloud Application Administrator, Exchange Administrator, Intune Administrator, Privileged Role Administrator, SharePoint Administrator, Security Administrator, User Administrator."
+        </p>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/permissions-management/product-privileged-role-insights
+        </p>
+    `
+},
+{
+    id: 429,
+    type: "radio",
+    title: "Question 429",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains an access package named Package1 and a user named User1. Package1 is configured as shown in the following exhibit.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q429_exhibit1.jpg" alt="q429 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You need to ensure that User1 can modify the review frequency of Package1. The solution must use the principle of least privilege.</p>
+
+        <p>Which role should you assign to User1?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Privileged Role Administrator",
+        "External Identity Provider Administrator",
+        "Identity Governance Administrator",
+        "Security Administrator"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Identity Governance Administrator
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-approval-policy#change-approval-settings-of-an-existing-access-package-assignment-policy
+        </p>
+    `
+},
+{
+    id: 430,
+    type: "radio",
+    title: "Question 430",
+    questionText: `
+        <p>You have a Microsoft 365 subscription that is onboarded to Microsoft Entra Permissions Management.</p>
+
+        <p>You need to identify managed identities that are assigned permissions and remove any permissions that have been unused for 90 days. The solution must minimize administrative effort.</p>
+
+        <p>What should you do in the Entra Permissions Management portal?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Configure an Autopilot rule.",
+        "Schedule a Permissions analytics report.",
+        "From Microsoft Entra Insights, review Service principals with privileged role assignments.",
+        "Run an audit query."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Why option A is the correct choice
+        </p>
+
+        <p>
+            Autopilot rule (automation rule) in Entra Permissions Management can be configured to scan all managed identities, detect permissions that have not been used for a configurable period (e.g., 90 days), and automatically revoke those permissions.
+        </p>
+
+        <p>
+            The rule runs on a schedule you define, so after the initial setup no further manual steps are required. It fully satisfies the "minimize administrative effort" requirement.
+        </p>
+
+        <p>
+            The action is built-in to the Permissions Management service, ensuring the remediation is applied consistently and without the need for custom scripting or external tools.
+        </p>
+
+        <p>
+            Why the other options are less suitable
+        </p>
+
+        <p>
+            Schedule a Permissions analytics report (B) – the report only provides visibility into unused permissions; it does not automatically remove them, so an additional manual step is still needed to clean up the assignments.
+        </p>
+
+        <p>
+            From Microsoft Entra Insights, review Service principals with privileged role assignments (C) – this focuses on privileged role assignments for service principals, not on the usage of permissions granted to managed identities, and it requires a manual review rather than an automated cleanup.
+        </p>
+
+        <p>
+            Run an audit query (D) – provides investigation capabilities but does not automatically identify and remediate unused permissions.
+        </p>
+    `
+},
+{
+    id: 431,
+    type: "radio",
+    title: "Question 431",
+    questionText: `
+        <p>You have a Microsoft 365 subscription.</p>
+
+        <p>You need to create a Conditional Access policy that will use a Global Secure Access security profile. The solution must ensure that users are prevented from accessing websites that include the word gambling in the URL.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Create a web content filtering policy.",
+        "Create a named location.",
+        "Configure the Adaptive Access settings.",
+        "Create a network security group (NSG)."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Correct option: A – Create a web content filtering policy
+        </p>
+
+        <p>
+            A web content filtering policy is the only mechanism that can inspect URL strings and block access based on keyword patterns such as "gambling."
+        </p>
+
+        <p>
+            In Microsoft Entra ID (formerly Azure AD), a Global Secure Access security profile is used to enforce web-filtering rules. The first step is to define the filtering rule itself.
+        </p>
+
+        <p>
+            Once the policy is created, it can be attached to a Conditional Access rule that leverages the Global Secure Access profile, ensuring that any request to a URL containing "gambling" is denied.
+        </p>
+
+        <p><strong>Why the other options are not appropriate</strong></p>
+
+        <p>
+            B. Create a named location – Named locations identify IP ranges or geographic locations; they cannot filter content based on URL keywords.
+        </p>
+
+        <p>
+            C. Configure the Adaptive Access settings – Adaptive Access deals with risk-based signals (sign-in risk, device compliance) and does not provide keyword-based web filtering.
+        </p>
+
+        <p>
+            D. Create a network security group (NSG) – NSGs are Azure networking constructs that filter traffic by IP, port, and protocol, not by URL content; they cannot enforce keyword-based web access controls.
+        </p>
+
+        <p>
+            Therefore, the initial and essential step is to create a web content filtering policy that blocks URLs containing "gambling", after which it can be referenced by a Conditional Access rule using the Global Secure Access security profile.
+        </p>
+    `
+},
+{
+    id: 432,
+    type: "radio",
+    title: "Question 432",
+    questionText: `
+        <p>You have an Azure subscription that is linked to a Microsoft Entra tenant. The tenant contains the groups shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q432_table1.jpg" alt="q432 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Which groups can you manage by using Privileged Identity Management (PIM)?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "Group2 only",
+        "Group1 and Group2 only",
+        "Group2 and Group4 only",
+        "Group1, Group2, and Group3 only",
+        "Group1, Group2, Group3, and Group4"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The answer is Group2, even though some sources indicate Group2 and Group3 may technically qualify depending on configuration.
+        </p>
+
+        <p>
+            You can assign the following to these roles or groups:
+        </p>
+
+        <ul>
+            <li>Users - To get just-in-time access to Microsoft Entra roles, Azure roles, and PIM for Groups.</li>
+            <li>Groups - Anyone in a group to get just-in-time access to Microsoft Entra roles and Azure roles.</li>
+        </ul>
+
+        <p>
+            For Microsoft Entra roles, the group must be a newly created cloud group that is marked as assignable to a role.
+        </p>
+
+        <p>
+            For Azure roles, the group can be any Microsoft Entra security group.
+        </p>
+
+        <p>
+            Microsoft does not recommend assigning or nesting a group to a PIM for Groups.
+        </p>
+
+        <p>
+            Additional testing indicates the group must be:
+        </p>
+
+        <ul>
+            <li>Security enabled</li>
+            <li>Membership type = Assigned</li>
+            <li>Role assignable</li>
+        </ul>
+
+        <p>
+            Reference:
+        </p>
+
+        <p>
+            https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan
+        </p>
+    `
+},
+{
+    id: 433,
+    type: "matrix",
+    title: "Question 433: Hot Spot",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains the users shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q433_table1.jpg" alt="q433 tabl3 3" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>The tenant contains the Microsoft 365 groups shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q433_table2.jpg" alt="q433 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>You create an access review named Access1 that has the following settings:</p>
+
+        <ul>
+            <li>Select what to review: Teams + Groups</li>
+            <li>Review scope: All Microsoft groups with guest users</li>
+            <li>Scope: Guest users only</li>
+            <li>Select reviewers: Users review their own access</li>
+        </ul>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 can review their membership in Group1 by using Access1."
+        },
+        {
+            id: "stmt2",
+            label: "User2 can review their membership in Group3 by using Access1."
+        },
+        {
+            id: "stmt3",
+            label: "User3 can review their membership in Group2 by using Access1."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 1,
+        stmt2: 1,
+        stmt3: 1
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            1. Statement: User1 can review their membership in Group1 by using Access1.
+        </p>
+
+        <p>
+            No
+        </p>
+
+        <p>
+            Access Reviews (Access1) are configured with specific reviewer settings. If an access review is scoped to a group but designated for Group Owners or Selected Users/Reviewers rather than Self-Review, individual members like User1 cannot initiate or conduct their own verification via the My Apps/Access Reviews portal.
+        </p>
+
+        <p>
+            2. Statement: User2 can review their membership in Group3 by using Access1.
+        </p>
+
+        <p>
+            No
+        </p>
+
+        <p>
+            Explanation: Access reviews are explicitly tied to targeted resources (specific groups or applications). Since Access1 is scoped to different groups (such as Group1 or Group2), it does not apply to Group3. User2 has no review path for an unassigned resource under this policy.
+        </p>
+
+        <p>
+            3. Statement: User3 can review their membership in Group2 by using Access1.
+        </p>
+
+        <p>
+            Answer: No
+        </p>
+
+        <p>
+            Even if Access1 targets Group2, if the configuration specifies that management/owners must perform the review rather than a self-attestation, User3 (as a standard member) will not see an option to review themselves. They must wait for the designated fallback reviewer or group owner to make the decision.
+        </p>
+    `
+},
+{
+    id: 434,
+    type: "matrix",
+    title: "Question 434: Hot Spot",
+    questionText: `
+        <p>You have an Azure subscription that contains a group named Group1 and two users named User1 and User2. User1 is a member of Group1.</p>
+
+        <p>You register an enterprise application named App1.</p>
+
+        <p>You enable self-service application access for App1 and configure the following settings:</p>
+
+        <ul>
+            <li>Allow users to request access to this application: Yes</li>
+            <li>To which group should assigned users be added: Group1</li>
+            <li>Require approval before granting access to this application: Yes</li>
+            <li>Who is allowed to approve access to this application: User2</li>
+        </ul>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User1 must request access to App1 before they can use the app."
+        },
+        {
+            id: "stmt2",
+            label: "If User2 requests access to App1, they will be added to Group1 automatically."
+        },
+        {
+            id: "stmt3",
+            label: "User2 can approve App1 requests by using the Microsoft Entra admin center."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 0,
+        stmt2: 1,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            User1 must request access to App1 before they can use the app.
+        </p>
+
+        <p>
+            Yes.
+        </p>
+
+        <p>
+            When resources (like App1) are bundled into an access package, users who are not already assigned must submit a request through the My Access portal to gain the necessary permissions.
+        </p>
+
+        <p>
+            If User2 requests access to App1, they will be added to Group1 automatically.
+        </p>
+
+        <p>
+            No.
+        </p>
+
+        <p>
+            Requesting access is only the first step. In most enterprise configurations, a request triggers an approval workflow. Access is only granted (and the user added to the group) after an authorized person approves the request.
+        </p>
+
+        <p>
+            User2 can approve App1 requests by using the Microsoft Entra admin center.
+        </p>
+
+        <p>
+            Yes.
+        </p>
+
+        <p>
+            If User2 is designated as an approver for that specific access package, they can manage those requests directly within the Entra admin center or the My Access portal.
+        </p>
+    `
+},
+{
+    id: 435,
+    type: "radio",
+    title: "Question 435",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains three users named User1, User2, and User3.</p>
+
+        <p>You need to configure just-in-time (JIT) access to admin roles by using Privileged Identity Management (PIM).</p>
+
+        <p>The solution must meet the following requirements:</p>
+
+        <ul>
+            <li>Ensure that User1 can use the User Administrator role without approval.</li>
+            <li>Ensure that User2 can use the User Administrator role once User3 has approved the role request of User2.</li>
+        </ul>
+
+        <p>What should you create first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "role assignments",
+        "administrative units",
+        "security groups",
+        "Conditional Access policies"
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Role assignments (Option A) are the first step in PIM because they define which users can be eligible or active for a specific privileged role.
+        </p>
+
+        <p>
+            User1 must be directly assigned to the User Administrator role with no approval workflow, so a direct eligible assignment is created.
+        </p>
+
+        <p>
+            User2 must be eligible for the same role and require approval from User3 before activation. This is achieved by assigning User2 as eligible and configuring an approval flow that involves User3.
+        </p>
+
+        <p>
+            Creating the role assignments first establishes the eligibility state that PIM will later manage.
+        </p>
+
+        <p>
+            Administrative units (Option B) are used to scope directory roles to a subset of the directory, but they do not control the approval process or the no-approval requirement.
+        </p>
+
+        <p>
+            Security groups (Option C) can be used to assign roles, yet they do not provide built-in approval workflows or the ability to differentiate between approval-required and no-approval assignments.
+        </p>
+
+        <p>
+            Conditional Access policies (Option D) enforce sign-in conditions but cannot grant or restrict role activation.
+        </p>
+
+        <p>
+            Therefore, the correct first step is to create role assignments that set the eligibility and approval settings for the User Administrator role.
+        </p>
+
+        <p><strong>References</strong></p>
+
+        <p>
+            Microsoft Entra ID Privileged Identity Management – Assign eligible roles:
+            https://learn.microsoft.com/entra/identity-governance/privileged-access-management/role-assignments
+        </p>
+
+        <p>
+            Just-in-time privileged access in Privileged Identity Management:
+            https://learn.microsoft.com/entra/identity-governance/privileged-access-management/just-in-time-privileged-access
+        </p>
+    `
+},
+{
+    id: 436,
+    type: "radio",
+    title: "Question 436",
+    questionText: `
+        <p>Your network contains an on-premises Active Directory Domain Services (AD DS) domain. The domain syncs with a Microsoft 365 subscription by using Microsoft Entra Connect Sync.</p>
+
+        <p>You plan to create 300 new users. The details of the user accounts are saved in a Microsoft Excel spreadsheet.</p>
+
+        <p>You need to automate the creation of the users.</p>
+
+        <p>The solution meets the following requirements:</p>
+
+        <ul>
+            <li>The users must be able to access the resources in the Microsoft 365 subscription.</li>
+            <li>The users must be able to access the resources on the on-premises network.</li>
+            <li>Administrative effort must be minimized.</li>
+        </ul>
+
+        <p>Which PowerShell cmdlets should you include in the solution?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "New-MgUser and Get-Content",
+        "Set-MgUser and Import-CSV",
+        "Set-ADUser and Get-Content",
+        "New-ADUser and Import-CSV"
+    ],
+    correctAnswer: 3,
+    correctAnswerText: `
+        <p><strong>Answer: D</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            The users must be created in the on-premises Active Directory first because Microsoft Entra Connect Sync synchronizes the accounts to Microsoft 365.
+        </p>
+
+        <p>
+            New-ADUser creates new user accounts in Active Directory.
+        </p>
+
+        <p>
+            Import-CSV imports user information from the Excel-derived CSV file and allows bulk user creation with minimal administrative effort.
+        </p>
+
+        <p>
+            By creating the users in AD DS and allowing Microsoft Entra Connect Sync to synchronize them to Microsoft 365, the users can access both on-premises and cloud resources.
+        </p>
+    `
+},
+{
+    id: 437,
+    type: "matrix",
+    title: "Question 437: Hot Spot",
+    questionText: `
+        <p>You have a Microsoft Entra ID P2 tenant that contains four users named User1, User2, User3, and User4. The tenant contains the groups shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q437_table1.jpg" alt="q437 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>Group2 is onboarded to Privileged Identity Management (PIM). You assign Group2 the roles shown in the following table.</p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q437_table2.jpg" alt="q437 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>
+
+        <p><em>NOTE: Each correct selection is worth one point.</em></p>
+    `,
+    rows: [
+        {
+            id: "stmt1",
+            label: "User2 can request to become a member of Group1 by using PIM."
+        },
+        {
+            id: "stmt2",
+            label: "User3 can request to become a member of Group2 by using PIM."
+        },
+        {
+            id: "stmt3",
+            label: "User4 can request to become a member of Group2 by using PIM."
+        }
+    ],
+    columns: [
+        {
+            value: 0,
+            label: "Yes"
+        },
+        {
+            value: 1,
+            label: "No"
+        }
+    ],
+    correctAnswer: {
+        stmt1: 0,
+        stmt2: 1,
+        stmt3: 0
+    },
+    correctAnswerText: `
+        <p><strong>Answer:</strong></p>
+
+        <p>
+            Yes
+        </p>
+
+        <p>
+            No
+        </p>
+
+        <p>
+            Yes
+        </p>
+    `
+},
+{
+    id: 438,
+    type: "radio",
+    title: "Question 438",
+    questionText: `
+        <p>You have a Microsoft Entra tenant that contains a user named User1 and uses Privileged Identity Management (PIM).</p>
+
+        <p>At 08:00 on Tuesday, User1 requests the activation of a Microsoft Entra role that requires approval.</p>
+
+        <p>You need to identify when the request will be deleted automatically if an approver has NOT responded.</p>
+
+        <p>What should you identify?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "08:00 on Sunday",
+        "08:00 on Thursday",
+        "08:00 on Wednesday",
+        "20:00 on Tuesday"
+    ],
+    correctAnswer: 2,
+    correctAnswerText: `
+        <p><strong>Answer: C</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            Approval requests for Microsoft Entra Privileged Identity Management (PIM) role activations expire after 24 hours if no approver responds.
+        </p>
+
+        <p>
+            User1 submits the request at 08:00 on Tuesday.
+        </p>
+
+        <p>
+            Twenty-four hours later is 08:00 on Wednesday.
+        </p>
+
+        <p>
+            Therefore, the request will be deleted automatically at 08:00 on Wednesday.
+        </p>
+    `
+},
+{
+    id: 441,
+    type: "radio",
+    title: "Question 441",
+    questionText: `
+        <p>You have a Microsoft Entra tenant named contoso.com.</p>
+
+        <p>You have a query named Query1 that contains the following statements.</p>
+
+        <p><strong>Query statement:</strong></p>
+
+        <div style="
+            background:#f8f8f8;
+            border:1px solid #d1d5db;
+            border-left:4px solid #0078d4;
+            border-radius:4px;
+            padding:12px;
+            margin:10px 0;
+            font-family:Consolas,'Courier New',monospace;
+            white-space:pre-wrap;
+            color:#111827;
+        ">SignInLogs
+| where ResultType != 0 // 0 indicates success
+| project TimeGenerated, UserPrincipalName, AppDisplayName,
+          ResourceDisplayName, ResultType, ResultDescription,
+          Location, IPAddress
+| order by TimeGenerated desc</div>
+
+        <p>You need to ensure that you can run Query1 against the Microsoft Entra activity logs. The solution must minimize administrative effort.</p>
+
+        <p>What should you do first?</p>
+    `,
+    prompt: "Select the correct option:",
+    options: [
+        "From Diagnostic settings in the Microsoft Entra admin center, send the logs to a Log Analytics workspace.",
+        "From Diagnostic settings in the Microsoft Entra admin center, stream the logs to an Azure event hub.",
+        "From Diagnostic settings in the Microsoft Entra admin center, archive the logs to a storage account.",
+        "From the Azure portal, create a data collection rule (DCR)."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            To run KQL queries against Microsoft Entra activity logs, the logs must first be sent to a Log Analytics workspace.
+        </p>
+
+        <p>
+            Sending the logs to a Log Analytics workspace from Diagnostic settings enables querying the SignInLogs table directly by using Azure Monitor Logs.
+        </p>
+
+        <p>
+            Streaming logs to Event Hub or archiving them to a storage account does not provide direct querying capability for the KQL query shown.
+        </p>
+
+        <p>
+            Creating a Data Collection Rule (DCR) is not required for Microsoft Entra activity logs because the logs are onboarded through Microsoft Entra diagnostic settings.
+        </p>
+    `
+},
+{
+    id: 442,
+    isCaseStudy: true,
+    type: "radio",
+    title: "Question 442",
+
+    caseStudyOverview: {
+        "Company Description": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has a Microsoft Entra tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q442_table1.jpg" alt="q442 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365 / Azure Environment</strong></p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and AD DS.
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently assign licenses manually.
+            </p>
+
+            <ul>
+                <li>London office users do not have Microsoft 365 Phone System assigned.</li>
+                <li>Seattle office users do not have Yammer Enterprise assigned.</li>
+            </ul>
+
+            <p>
+                Security defaults are disabled.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM).
+            </p>
+        `,
+
+        "Problem Statements": `
+            <ul>
+                <li>Helpdesk administrators can manage licenses across the entire tenant.</li>
+                <li>License assignments are manually configured per office.</li>
+                <li>Provisioning internal and guest access is time-consuming.</li>
+                <li>User Administrator can be activated without approval or justification.</li>
+                <li>Log Analytics integration is not enabled.</li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <ul>
+                <li>Implement Self-Service Password Reset (SSPR).</li>
+                <li>Analyze Azure AD audit logs by using Azure Monitor.</li>
+                <li>Simplify license allocation.</li>
+                <li>Collaborate with Fabrikam users.</li>
+                <li>Require approval and justification for User Administrator.</li>
+                <li>Deploy App1.</li>
+                <li>Create automated access workflows for marketing users.</li>
+                <li>Add 100 ADatum users.</li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <ul>
+                <li>All users must sync from AD DS to Azure AD.</li>
+                <li>App1 redirect URI must be https://contoso.com/auth-response.</li>
+                <li>License assignment must be automatic based on location.</li>
+                <li>Fabrikam users must have access for a maximum of 90 days.</li>
+                <li>Administrative actions must be audited.</li>
+                <li>Audit logs must be retained for one year.</li>
+                <li>Helpdesk administrators must manage only users in their office.</li>
+                <li>Users must change passwords when compromise is suspected.</li>
+            </ul>
+        `
+    },
+
+    questionText: `
+        <p>
+            You need to allocate licenses to the new users from ADatum.
+            The solution must meet the technical requirements.
+        </p>
+
+        <p>
+            Which type of object should you create?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "a Dynamic User security group",
+        "a distribution group",
+        "an OU",
+        "an administrative unit"
+    ],
+
+    correctAnswer: 0,
+
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            You cannot assign licenses to an Administrative Unit, only a Group.
+        </p>
+
+        <p>
+            A Dynamic User security group can automatically assign membership based on user attributes such as location and can be used for group-based licensing.
+        </p>
+
+        <p>
+            This meets the technical requirement that license allocation for new users must be assigned automatically based on the location of the user.
+        </p>
+    `
+},
+{
+    id: 443,
+    isCaseStudy: true,
+
+    caseStudyOverview: {
+        "Case Study 443 Overview": `
+            <p>
+                Contoso, Ltd. is a consulting company that has a main office in Montreal and branch offices in London and Seattle.
+            </p>
+
+            <p>
+                Contoso has a partnership with a company named Fabrikam, Inc.
+            </p>
+
+            <p>
+                Fabrikam has an Azure Active Directory (Azure AD) tenant named fabrikam.com.
+            </p>
+        `,
+
+        "Existing Environment": `
+            <p><strong>Active Directory Environment</strong></p>
+
+            <p>
+                The on-premises network of Contoso contains an Active Directory domain named contoso.com.
+            </p>
+
+            <p>
+                The domain contains an organizational unit (OU) named Contoso_Resources.
+            </p>
+
+            <p>
+                The Contoso_Resources OU contains all users and computers.
+            </p>
+
+            <p>
+                The contoso.com Active Directory domain contains the relevant users shown in the following table.
+            </p>
+
+            <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q443_table1.jpg" alt="q443 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+            <p>
+                Contoso also includes a marketing department that has users in each office.
+            </p>
+
+            <p><strong>Microsoft 365/Azure Environment</strong></p>
+
+            <p>
+                Contoso has an Azure AD tenant named contoso.com that has the following associated licenses:
+            </p>
+
+            <ul>
+                <li>Microsoft Office 365 Enterprise E5</li>
+                <li>Enterprise Mobility + Security E5</li>
+                <li>Windows 10 Enterprise E3</li>
+                <li>Project Plan 3</li>
+            </ul>
+
+            <p>
+                Azure AD Connect is configured between Azure AD and Active Directory Domain Services (AD DS).
+            </p>
+
+            <p>
+                Only the Contoso_Resources OU is synced.
+            </p>
+
+            <p>
+                Helpdesk administrators routinely use the Microsoft 365 admin center to manage user settings.
+            </p>
+
+            <p>
+                User administrators currently use the Microsoft 365 admin center to manually assign licenses.
+            </p>
+
+            <p>
+                All users have all licenses assigned besides the following exceptions:
+            </p>
+
+            <ul>
+                <li>
+                    The users in the London office have the Microsoft 365 Phone System license unassigned.
+                </li>
+
+                <li>
+                    The users in the Seattle office have the Yammer Enterprise license unassigned.
+                </li>
+            </ul>
+
+            <p>
+                Security defaults are disabled for contoso.com.
+            </p>
+
+            <p>
+                Contoso uses Azure AD Privileged Identity Management (PIM) to protect administrative roles.
+            </p>
+        `,
+
+        "Problem Statements": `
+            <p>
+                Contoso identifies the following issues:
+            </p>
+
+            <ul>
+                <li>
+                    Currently, all the helpdesk administrators can manage user licenses throughout the entire Microsoft 365 tenant.
+                </li>
+
+                <li>
+                    The user administrators report that it is tedious to manually configure the different license requirements for each Contoso office.
+                </li>
+
+                <li>
+                    The helpdesk administrators spend too much time provisioning internal and guest access to the required Microsoft 365 services and apps.
+                </li>
+
+                <li>
+                    Currently, the helpdesk administrators can perform tasks by using the User administrator role without justification or approval.
+                </li>
+
+                <li>
+                    When the Logs node is selected in Azure AD, an error message appears stating that Log Analytics integration is not enabled.
+                </li>
+            </ul>
+        `,
+
+        "Planned Changes": `
+            <p>
+                Contoso plans to implement the following changes:
+            </p>
+
+            <ul>
+                <li>Implement self-service password reset (SSPR).</li>
+
+                <li>
+                    Analyze Azure audit activity logs by using Azure Monitor.
+                </li>
+
+                <li>
+                    Simplify license allocation for new users added to the tenant.
+                </li>
+
+                <li>
+                    Collaborate with the users at Fabrikam on a joint marketing campaign.
+                </li>
+
+                <li>
+                    Configure the User administrator role to require justification and approval to activate.
+                </li>
+
+                <li>
+                    Implement a custom line-of-business Azure web app named App1.
+                </li>
+
+                <li>
+                    App1 will be accessible from the internet and authenticated by using Azure AD accounts.
+                </li>
+
+                <li>
+                    For new users in the marketing department, implement an automated approval workflow to provide access to a Microsoft SharePoint Online site, group, and app.
+                </li>
+
+                <li>
+                    Contoso plans to acquire a company named ADatum Corporation.
+                </li>
+
+                <li>
+                    One hundred new ADatum users will be created in an Active Directory OU named Adatum.
+                </li>
+
+                <li>
+                    The users will be located in London and Seattle.
+                </li>
+            </ul>
+        `,
+
+        "Technical Requirements": `
+            <p>
+                Contoso identifies the following technical requirements:
+            </p>
+
+            <ul>
+                <li>
+                    All users must be synced from AD DS to the contoso.com Azure AD tenant.
+                </li>
+
+                <li>
+                    App1 must have a redirect URI pointed to https://contoso.com/auth-response.
+                </li>
+
+                <li>
+                    License allocation for new users must be assigned automatically based on the location of the user.
+                </li>
+
+                <li>
+                    Fabrikam users must have access to the marketing department's SharePoint site for a maximum of 90 days.
+                </li>
+
+                <li>
+                    Administrative actions performed in Azure AD must be audited.
+                </li>
+
+                <li>
+                    Audit logs must be retained for one year.
+                </li>
+
+                <li>
+                    The helpdesk administrators must be able to manage licenses for only the users in their respective office.
+                </li>
+
+                <li>
+                    Users must be forced to change their password if there is a probability that the users' identity was compromised.
+                </li>
+            </ul>
+        `
+    },
+
+    type: "radio",
+
+    title: "Question 443",
+
+    questionText: `
+        <p>
+            You need to sync the ADatum users.
+            The solution must meet the technical requirements.
+        </p>
+
+        <p>
+            What should you do?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "From the Microsoft Azure Active Directory Connect wizard, select Customize synchronization options.",
+        "From PowerShell, run Set-ADSyncScheduler.",
+        "From PowerShell, run Start-ADSyncSyncCycle.",
+        "From the Microsoft Azure Active Directory Connect wizard, select Change user sign-in."
+    ],
+
+    correctAnswer: 0,
+
+    correctAnswerText: `
+        <p><strong>Answer: A</strong></p>
+
+        <p><strong>Explanation:</strong></p>
+
+        <p>
+            You must select <strong>Customize synchronization options</strong> in Azure AD Connect to add the new Adatum organizational unit (OU) to the synchronization scope.
+        </p>
+
+        <ul>
+            <li>
+                Currently, only the Contoso_Resources OU is synchronized.
+            </li>
+
+            <li>
+                Running Set-ADSyncScheduler or Start-ADSyncSyncCycle would synchronize only the OUs that are already included in the current synchronization configuration.
+            </li>
+
+            <li>
+                The new Adatum OU must first be selected for synchronization before the ADatum users can be synchronized to Azure AD.
+            </li>
+        </ul>
+
+        <p>
+            Therefore, from the Microsoft Azure Active Directory Connect wizard, select <strong>Customize synchronization options</strong>.
+        </p>
+    `
+},
 ];
