@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-    const state = {
+        const state = {
         currentIndex: 0,
         activeCaseSection: null,
         selectedPolicyItem: null,
@@ -11,8 +11,9 @@
         submitted: new Set(),
         timerSeconds: 0,
         timerId: null,
-        completed: false
-    };
+        completed: false,
+        incorrectQuestionIds: []
+        };
 
     const REQUIRED_ELEMENT_IDS = [
         'portal-layout',
@@ -857,8 +858,81 @@ ${sanitizeRichHtml(
             });
         }
         displayFeedback(isCorrect, question);
-    }
+        // Show Finish Practice button after the last question is submitted
+          if (
+             state.mode === 'practice' &&
+             state.currentIndex === questionBank.length - 1
+      ) {
+          const submitBtn = byId('submit-btn');
+          const finishBtn = byId('finish-practice-btn');
 
+          if (submitBtn) submitBtn.style.display = 'none';
+          if (finishBtn) finishBtn.style.display = 'inline-block';
+                }
+    }
+    
+    function finishPractice() {
+    const bank = getQuestions();
+    let correct = 0;
+    state.incorrectQuestionIds = [];
+    const reviewItems = bank.map((question, index) => {
+        const answer = state.answers[question.id];
+        const isCorrect =
+            isAnswerComplete(question, answer) &&
+            evaluateAnswer(question, answer);
+        if (isCorrect) { correct += 1; } else { state.incorrectQuestionIds.push(question.id);
+     }
+        return `
+            <details class="review-item ${isCorrect ? 'review-correct' : 'review-incorrect'}">
+                <summary>
+                    Question ${index + 1} | ID #${question.id} | ${isCorrect ? 'Correct' : 'Incorrect'}
+                </summary>
+
+                <div class="review-content">
+                    <div>${renderQuestionText(question)}</div>
+
+                    <div>
+                        <strong>Answer details:</strong>
+                    </div>
+
+                    <div>
+                        ${sanitizeRichHtml(
+                            decodeHtmlEntities(
+                                question.correctAnswerText ||
+                                'No explanation provided.'
+                            )
+                        )}
+                    </div>
+                </div>
+            </details>
+        `;
+    }).join('');
+    const percentage =
+        Math.round((correct / bank.length) * 100);
+    byId('exam-screen').hidden = true;
+    byId('results-screen').hidden = false;
+    byId('result-status').textContent =
+        percentage >= 70 ? 'PASS' : 'FAIL';
+    byId('result-status').className =
+        `result-status ${percentage >= 70 ? 'pass' : 'fail'}`;
+    byId('result-score').textContent =
+        `${correct} of ${bank.length} correct (${percentage}%)`;
+    byId('result-note').textContent =
+        'Practice Mode Results';
+    byId('review-list').innerHTML =
+        reviewItems;
+    const retakeBtn =
+    byId('retake-incorrect-btn');
+          if (
+          retakeBtn &&
+          state.incorrectQuestionIds.length > 0
+          ) {
+          retakeBtn.style.display =
+          'inline-block';
+          retakeBtn.textContent =
+      `↻ Retake Incorrect Questions (${state.incorrectQuestionIds.length})`;
+    }
+    }
     function finishSimulation(timedOut) {
         if (state.completed || state.mode !== 'simulation') return;
         state.completed = true;
@@ -1021,6 +1095,33 @@ else if (!byId('practice-case-studies').checked) {
         }
     }
 
+      function retakeIncorrectQuestions() {
+          const master = getMasterQuestions();
+          state.activeQuestions =
+          master.filter(question =>
+          state.incorrectQuestionIds.includes(
+          question.id));
+          if (!state.activeQuestions.length) {
+          alert('No incorrect questions available.');
+          return;
+        }
+          state.currentIndex = 0;
+          state.answers = {};
+          state.submitted = new Set();
+          state.completed = false;
+    byId('results-screen').hidden = true;
+    byId('exam-screen').hidden = false;
+    const finishBtn =
+    byId('finish-practice-btn');
+          if (finishBtn) {
+          finishBtn.style.display = 'none';
+        }
+    byId('submit-btn').style.display =
+        'inline-block';
+    populateJumpMenu();
+    renderQuestion();
+    }
+
     function initializeApp() {
         const missingElements = REQUIRED_ELEMENT_IDS.filter(id => !byId(id));
         if (missingElements.length > 0) {
@@ -1059,11 +1160,18 @@ else if (!byId('practice-case-studies').checked) {
             state.activeCaseSection = null;
             renderQuestion();
         });
+        byId('finish-practice-btn').addEventListener('click', () => {
+            if (!confirm('Finish Practice and view results?')) {
+            return;
+            }
+            finishPractice();
+            });
         byId('practice-start').addEventListener('input', updateSelectedCount);
         byId('practice-end').addEventListener('input', updateSelectedCount);
         byId('next-btn').addEventListener('click', () => moveQuestion(1));
         byId('prev-btn').addEventListener('click', () => moveQuestion(-1));
         byId('submit-btn').addEventListener('click', submitCurrentAnswer);
+        byId('retake-incorrect-btn')?.addEventListener('click', retakeIncorrectQuestions);
           byId('practice-mode-btn').addEventListener('click', () => startExam('practice'));
           byId('simulation-mode-btn').addEventListener('click', () => startExam('simulation'));
           byId('new-session-btn').addEventListener('click', () => {
