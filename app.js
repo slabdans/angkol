@@ -1161,15 +1161,11 @@ else if (!byId('practice-case-studies').checked) {
             renderQuestion();
         });
         byId('finish-practice-btn').addEventListener('click', () => {
-
-    const modal =
-        byId('finish-modal');
-
-    if (modal) {
-        modal.hidden = false;
-    }
-
-});
+            if (!confirm('Finish Practice and view results?')) {
+            return;
+            }
+            finishPractice();
+            });
         byId('practice-start').addEventListener('input', updateSelectedCount);
         byId('practice-end').addEventListener('input', updateSelectedCount);
         byId('next-btn').addEventListener('click', () => moveQuestion(1));
