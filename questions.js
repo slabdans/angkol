@@ -78,7 +78,7 @@ const questions = [
     </div>
 
         <p>
-            Which users will receive a one-time passcode (OTP)?
+            Which users will be emailed a passcode?
         </p>
     `,
 
