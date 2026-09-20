@@ -261,6 +261,14 @@ body {
     background: #2563eb;
 }
 
+.retake-btn {
+    background: #ea580c;
+}
+
+.retake-btn:hover {
+    background: #c2410c;
+}
+
 .finish-btn {
     margin-left: auto;
     background: #b91c1c;
