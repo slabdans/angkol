@@ -154,61 +154,15 @@ const questions = [
       <p>
         Users are invited to collaborate with contoso.com as shown in the following table:
       </p>
-      <table style="width:100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #000; font-size: 14px;">
-        <thead>
-          <tr style="background-color: #fff2cc;">
-            <th style="padding:6px; border:1px solid #000;">User email</th>
-            <th style="padding:6px; border:1px solid #000;">User type</th>
-            <th style="padding:6px; border:1px solid #000;">Invitation accepted</th>
-            <th style="padding:6px; border:1px solid #000;">Shared resource</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:6px; border:1px solid #000;">
-              User1@outlook.com
-            </td>
-            <td style="padding:6px; border:1px solid #000;">
-              Guest
-            </td>
-            <td style="padding:6px; border:1px solid #000;">
-              No
-            </td>
-            <td style="padding:6px; border:1px solid #000;">
-              Enterprise application
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:6px; border:1px solid #000;">
-              User2@fabrikam.com
-            </td>
-            <td style="padding:6px; border:1px solid #000;">
-              Guest
-            </td>
-            <td style="padding:6px; border:1px solid #000;">
-              Yes
-            </td>
-            <td style="padding:6px; border:1px solid #000;">
-              Enterprise application
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q5_table1.jpg" alt="q405 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
       <p>
-        From the External collaboration settings in the Azure Active Directory admin center,
-        you configure the Collaboration restrictions settings so that invitations are allowed
-        only to the specified domains.
-      </p>
-      <p>
-        The only allowed target domain is:
-      </p>
-      <ul>
-        <li>Outlook.com</li>
-      </ul>
-      <p>
-        From a Microsoft SharePoint Online site, a user invites
-        <code>User3@fabrikam.com</code>
-        to the site.
+        From the External collaboration settings in the Azure Active Directory admin center, you configure the Collaboration restrictions settings as shown in the following exhibit.
+
+<div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q5_exhibit1.jpg" alt="q5 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
       </p>
       <p>
         For each of the following statements,
@@ -309,22 +263,78 @@ const questions = [
     ]
   },
   {
-    "id": 7,
-    "type": "radio",
-    "title": "Question 7",
-    "questionText": "\n      <p><strong>Question 7</strong></p>\n      <p>You have an Azure Active Directory (Azure AD) tenant that contains the objects shown in the following table:</p>\n      \n      <!-- Styled Tenant Objects Table -->\n      <table style=\"width:100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #000; font-size: 14px;\">\n        <thead>\n          <tr style=\"background-color: #fff2cc; border-bottom: 1px solid #000;\">\n            <th style=\"padding: 6px; border-right: 1px solid #000; text-align: left;\">Name</th>\n            <th style=\"padding: 6px; border-right: 1px solid #000; text-align: left;\">Type</th>\n            <th style=\"padding: 6px; text-align: left;\">Directly assigned license</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr style=\"border-bottom: 1px solid #000;\">\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">User1</td>\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">User</td>\n            <td style=\"padding: 6px; font-style: italic;\">None</td>\n          </tr>\n          <tr style=\"border-bottom: 1px solid #000;\">\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">User2</td>\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">User</td>\n            <td style=\"padding: 6px;\">Microsoft Office 365 Enterprise E5</td>\n          </tr>\n          <tr style=\"border-bottom: 1px solid #000;\">\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">Group1</td>\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">Security group</td>\n            <td style=\"padding: 6px;\">Microsoft Office 365 Enterprise E5</td>\n          </tr>\n          <tr style=\"border-bottom: 1px solid #000;\">\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">Group2</td>\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">Microsoft 365 group</td>\n            <td style=\"padding: 6px; font-style: italic;\">None</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">Group3</td>\n            <td style=\"padding: 6px; border-right: 1px solid #000;\">Mail-enabled security group</td>\n            <td style=\"padding: 6px; font-style: italic;\">None</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <p>Which objects can you add as members to Group3?</p>\n    ",
-    "prompt": "Select the correct option:",
-    "correctAnswer": 4,
-    "correctAnswerText": "\n\t<p>Answer: E</p><br>\n      <p>The answer is User2 only. I just tested. You can't assign the users with no license. 100%</p>\n      <p><strong>Tested in Lab environment:</strong></p>\n      <p>Mail enabled Security Group can only be managed in the M365 Admin Center.</p>\n      <p>In AAD, you can't modify the membership. - \"Some groups can't be managed in the Azure Portal.\"<br>\n      In the M365 admin center, only users can be added to the mail-enabled security group.<br>\n      You can only add licensed users to the group, unlicensed users won't even show up on the member select page.</p>\n      <p><strong>Why the other options are incorrect:</strong></p>\n      <p><strong>User1:</strong> User1 does not hold a proper active license seat configuration in this context, meaning the system filters them out from the membership selection page entirely.</p>\n      <p><strong>Group1 &amp; Group2:</strong> Mail-enabled security groups managed through these administration scopes do not support standard sub-group nesting or associative object groupings, making any group inclusion invalid.</p>\n    ",
-    "isCaseStudy": false,
-    "options": [
-      "User2 and Group2 only",
-      "User2, Group1, and Group2 only",
-      "User1, User2, Group1 and Group2",
-      "User1 and User2 only",
-      "User2 only"
-    ]
-  },
+    id: 7,
+    type: "radio",
+    title: "Question 7",
+
+    questionText: `
+        <p>
+            You have an Azure Active Directory (Azure AD) tenant that contains the objects shown in the following table.
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q7_table1.jpg" alt="q7 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+        <p>Which objects can you add as members to Group3?</p>
+    `,
+	
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "User2 and Group2 only",
+        "User2, Group1, and Group2 only",
+        "User1, User2, Group1 and Group2",
+        "User1 and User2 only",
+        "User2 only"
+    ],
+
+    correctAnswer: 4,
+
+    correctAnswerText: `
+        <p>
+            <strong>Answer: E</strong>
+        </p>
+
+        <p>
+            The answer is User2 only. I just tested. You can't assign the users with no license. 100%
+        </p>
+
+        <p>
+            Tested in Lab environment:
+        </p>
+
+        <p>
+            Mail enabled Security Group can only be managed in the M365 Admin Center.
+        </p>
+
+        <p>
+            In AAD, you can't modify the membership. - "Some groups can't be managed in the Azure Portal."
+        </p>
+
+        <p>
+            In the M365 admin center, only users can be added to the mail-enabled security group.
+        </p>
+
+        <p>
+            You can only add licensed users to the group, unlicensed users won't even show up on the member select page.
+        </p>
+
+        <p>
+            Why the other options are incorrect:
+        </p>
+
+        <p>
+            User1: User1 does not hold a proper active license seat configuration in this context, meaning the system filters them out from the membership selection page entirely.
+        </p>
+
+        <p>
+            Group1 &amp; Group2: Mail-enabled security groups managed through these administration scopes do not support standard sub-group nesting or associative object groupings, making any group inclusion invalid.
+        </p>
+    `,
+
+    isCaseStudy: false
+},
   {
     "id": 8,
     "type": "dragdrop",
