@@ -1,7 +1,13 @@
 'use strict';
 
 (() => {
-        const state = {
+    const STORAGE_KEY = 'sc300-progress';
+    const PASSING_PERCENTAGE = 70;
+    const SIMULATION_QUESTION_COUNT = 60;
+    const SIMULATION_CASE_STUDY_COUNT = 5;
+    const SIMULATION_DURATION_SECONDS = 120 * 60;
+
+    const state = {
         currentIndex: 0,
         activeCaseSection: null,
         selectedPolicyItem: null,
@@ -13,9 +19,9 @@
         timerId: null,
         completed: false,
         incorrectQuestionIds: []
-        };
+    };
 
-    const REQUIRED_ELEMENT_IDS = [
+        const REQUIRED_ELEMENT_IDS = [
         'portal-layout',
         'question-counter',
         'feedback-box',
@@ -40,39 +46,38 @@
     const byId = (id) => document.getElementById(id);
 
     function saveProgress() {
-    localStorage.setItem(
-        'sc300-progress',
-        JSON.stringify({
+        const progress = {
             currentIndex: state.currentIndex,
             answers: state.answers,
             activeQuestions: state.activeQuestions,
             mode: state.mode
-        })
-    );
-}
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    }
 
     function loadProgress() {
-    const saved =
-        localStorage.getItem('sc300-progress');
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return null;
 
-    if (!saved) return null;
+        try {
+            return JSON.parse(saved);
+        } catch (error) {
+            console.warn('Saved progress could not be loaded.', error);
+            localStorage.removeItem(STORAGE_KEY);
+            return null;
+        }
+    }
 
-    return JSON.parse(saved);
-}
     function updateSelectedCount() {
-    const start =
-        Number(byId('practice-start').value) || 1;
+        const start = Number(byId('practice-start').value) || 1;
+        const end = Number(byId('practice-end').value) || start;
+        const total = Math.max(0, end - start + 1);
 
-    const end =
-        Number(byId('practice-end').value) || start;
+        byId('selected-count').textContent = `Selected Questions: ${total}`;
+    }
 
-    const total =
-        Math.max(0, end - start + 1);
-
-    byId('selected-count').textContent =
-        `Selected Questions: ${total}`;
-}
-    function escapeHtml(value) {
+        function escapeHtml(value) {
         return String(value ?? '')
             .replaceAll('&', '&amp;')
             .replaceAll('<', '&lt;')
@@ -204,27 +209,32 @@ function cleanExplanationHtml(value) {
     }
 
     function selectSimulationQuestions(master) {
-        if (master.length < 60) throw new Error('At least 60 questions are required for Simulation Exam mode.');
-        const caseStudies =
-    shuffle(
-        master.filter(question => question.isCaseStudy)
-    );
+        if (master.length < SIMULATION_QUESTION_COUNT) {
+            throw new Error(
+                `At least ${SIMULATION_QUESTION_COUNT} questions are required for Simulation Exam mode.`
+            );
+        }
 
-const regular =
-    shuffle(
-        master.filter(question => !question.isCaseStudy)
-    );
+        const caseStudies = shuffle(
+            master.filter(question => question.isCaseStudy)
+        );
+        const regularQuestions = shuffle(
+            master.filter(question => !question.isCaseStudy)
+        );
+        const selectedCaseStudies = caseStudies.slice(
+            0,
+            SIMULATION_CASE_STUDY_COUNT
+        );
+        const regularQuestionCount =
+            SIMULATION_QUESTION_COUNT - selectedCaseStudies.length;
 
-const selectedCases =
-    caseStudies.slice(0, 5);
-
-return [
-    ...selectedCases,
-    ...regular.slice(0, 55)
-];
+        return [
+            ...selectedCaseStudies,
+            ...regularQuestions.slice(0, regularQuestionCount)
+        ];
     }
 
-    function validateQuestionBank(questionBank) {
+        function validateQuestionBank(questionBank) {
         const errors = [];
         const seenIds = new Set();
         const validTypes = new Set(['radio', 'checkbox', 'dragdrop', 'dropdown', 'matrix']);
@@ -871,103 +881,180 @@ ${sanitizeRichHtml(
                 }
     }
     
+    function buildReviewItems(bank, trackIncorrectQuestions = false) {
+        let correctCount = 0;
+        const incorrectQuestionIds = [];
+
+        const html = bank.map((question, index) => {
+            const answer = state.answers[question.id];
+            const isCorrect =
+                isAnswerComplete(question, answer) &&
+                evaluateAnswer(question, answer);
+
+            if (isCorrect) {
+                correctCount += 1;
+            } else if (trackIncorrectQuestions) {
+                incorrectQuestionIds.push(question.id);
+            }
+
+            return `
+                <details class="review-item ${isCorrect ? 'review-correct' : 'review-incorrect'}">
+                    <summary>
+                        Question ${index + 1} | ID #${escapeHtml(question.id)} |
+                        ${isCorrect ? 'Correct' : 'Incorrect'}
+                    </summary>
+                    <div class="review-content">
+                        <div>${renderQuestionText(question)}</div>
+                        <div><strong>Answer details:</strong></div>
+                        <div>
+                            ${sanitizeRichHtml(
+                                decodeHtmlEntities(
+                                    question.correctAnswerText ||
+                                    'No explanation provided.'
+                                )
+                            )}
+                        </div>
+                    </div>
+                </details>
+            `;
+        }).join('');
+
+        return { correctCount, incorrectQuestionIds, html };
+    }
+
+    function showResults({ correctCount, bank, note, reviewHtml }) {
+        const percentage = bank.length
+            ? Math.round((correctCount / bank.length) * 100)
+            : 0;
+        const passed = percentage >= PASSING_PERCENTAGE;
+
+        byId('exam-screen').hidden = true;
+        byId('results-screen').hidden = false;
+        byId('result-status').textContent = passed ? 'PASS' : 'FAIL';
+        byId('result-status').className =
+            `result-status ${passed ? 'pass' : 'fail'}`;
+        byId('result-score').textContent =
+            `${correctCount} of ${bank.length} correct (${percentage}%)`;
+        byId('result-note').textContent = note;
+        byId('review-list').innerHTML = reviewHtml;
+    }
+
+    function updateRetakeButton() {
+        const retakeButton = byId('retake-incorrect-btn');
+        if (!retakeButton) return;
+
+        const incorrectCount = state.incorrectQuestionIds.length;
+        retakeButton.style.display = incorrectCount > 0 ? 'inline-block' : 'none';
+        retakeButton.textContent =
+            `↻ Retake Incorrect Questions (${incorrectCount})`;
+    }
+
     function finishPractice() {
-    const bank = getQuestions();
-    let correct = 0;
-    state.incorrectQuestionIds = [];
-    const reviewItems = bank.map((question, index) => {
-        const answer = state.answers[question.id];
-        const isCorrect =
-            isAnswerComplete(question, answer) &&
-            evaluateAnswer(question, answer);
-        if (isCorrect) { correct += 1; } else { state.incorrectQuestionIds.push(question.id);
-     }
-        return `
-            <details class="review-item ${isCorrect ? 'review-correct' : 'review-incorrect'}">
-                <summary>
-                    Question ${index + 1} | ID #${question.id} | ${isCorrect ? 'Correct' : 'Incorrect'}
-                </summary>
+        const bank = getQuestions();
+        const result = buildReviewItems(bank, true);
 
-                <div class="review-content">
-                    <div>${renderQuestionText(question)}</div>
+        state.incorrectQuestionIds = result.incorrectQuestionIds;
 
-                    <div>
-                        <strong>Answer details:</strong>
-                    </div>
+        showResults({
+            correctCount: result.correctCount,
+            bank,
+            note: 'Practice Mode Results',
+            reviewHtml: result.html
+        });
 
-                    <div>
-                        ${sanitizeRichHtml(
-                            decodeHtmlEntities(
-                                question.correctAnswerText ||
-                                'No explanation provided.'
-                            )
-                        )}
-                    </div>
-                </div>
-            </details>
-        `;
-    }).join('');
-    const percentage =
-        Math.round((correct / bank.length) * 100);
-    byId('exam-screen').hidden = true;
-    byId('results-screen').hidden = false;
-    byId('result-status').textContent =
-        percentage >= 70 ? 'PASS' : 'FAIL';
-    byId('result-status').className =
-        `result-status ${percentage >= 70 ? 'pass' : 'fail'}`;
-    byId('result-score').textContent =
-        `${correct} of ${bank.length} correct (${percentage}%)`;
-    byId('result-note').textContent =
-        'Practice Mode Results';
-    byId('review-list').innerHTML =
-        reviewItems;
-    const retakeBtn =
-    byId('retake-incorrect-btn');
-          if (
-          retakeBtn &&
-          state.incorrectQuestionIds.length > 0
-          ) {
-          retakeBtn.style.display =
-          'inline-block';
-          retakeBtn.textContent =
-      `↻ Retake Incorrect Questions (${state.incorrectQuestionIds.length})`;
+        updateRetakeButton();
     }
-    }
+
     function finishSimulation(timedOut) {
         if (state.completed || state.mode !== 'simulation') return;
+
         state.completed = true;
         if (state.timerId) clearInterval(state.timerId);
 
         const bank = getQuestions();
-        let correct = 0;
-        const reviewItems = bank.map((question, index) => {
-            const answer = state.answers[question.id];
-            const isCorrect = isAnswerComplete(question, answer) && evaluateAnswer(question, answer);
-            if (isCorrect) correct += 1;
-            return `<details class="review-item ${isCorrect ? 'review-correct' : 'review-incorrect'}">
-                <summary>Question ${index + 1} | ID #${escapeHtml(question.id)} | ${isCorrect ? 'Correct' : 'Incorrect'}</summary>
-                <div class="review-content">
-                    <div>${renderQuestionText(question)}</div>
-                    <div><strong>Answer details:</strong></div>
-                    <div>${sanitizeRichHtml(decodeHtmlEntities(question.correctAnswerText || 'No explanation provided.'))}</div>
-                </div>
-            </details>`;
-        }).join('');
+        const result = buildReviewItems(bank);
 
-        const percentage = Math.round((correct / bank.length) * 100);
-        const passed = percentage >= 70;
-        byId('exam-screen').hidden = true;
-        byId('results-screen').hidden = false;
-        byId('result-status').textContent = passed ? 'PASS' : 'FAIL';
-        byId('result-status').className = `result-status ${passed ? 'pass' : 'fail'}`;
-        byId('result-score').textContent = `${correct} of ${bank.length} correct (${percentage}%)`;
-        byId('result-note').textContent = `${timedOut ? 'Time expired. ' : ''}Passing score: 70% (42 of 60).`;
-        byId('review-list').innerHTML = reviewItems;
+        showResults({
+            correctCount: result.correctCount,
+            bank,
+            note: `${timedOut ? 'Time expired. ' : ''}Passing score: ${PASSING_PERCENTAGE}% (42 of 60).`,
+            reviewHtml: result.html
+        });
+
+        const retakeButton = byId('retake-incorrect-btn');
+        if (retakeButton) retakeButton.style.display = 'none';
     }
 
-    function startExam(mode) {
-        const master = getMasterQuestions();
-        if (!master) return;
+        function getPracticeSettings(masterLength) {
+        const start = Number(byId('practice-start').value) || 1;
+        const end = Number(byId('practice-end').value) || masterLength;
+
+        return {
+            start,
+            end,
+            questionCount: Math.max(0, end - start + 1),
+            includeCaseStudies: byId('practice-case-studies').checked,
+            randomizeQuestions: byId('practice-random').checked,
+            caseStudiesOnly: byId('practice-case-only').checked
+        };
+    }
+
+    function selectPracticeQuestions(master) {
+        const settings = getPracticeSettings(master.length);
+        const {
+            start,
+            end,
+            questionCount,
+            includeCaseStudies,
+            randomizeQuestions,
+            caseStudiesOnly
+        } = settings;
+
+        if (includeCaseStudies && caseStudiesOnly) {
+            throw new Error(
+                'Invalid selection. You cannot select both "Include Case Study" ' +
+                'and "Case Studies Only". Choose only one option.'
+            );
+        }
+
+        const regularQuestions = master.filter(
+            question => !question.isCaseStudy
+        );
+        const caseStudyQuestions = master.filter(
+            question => question.isCaseStudy
+        );
+
+        if (caseStudiesOnly) {
+            const selectedCaseStudies = randomizeQuestions
+                ? shuffle(caseStudyQuestions).slice(0, questionCount)
+                : caseStudyQuestions.slice(start - 1, end);
+
+            return selectedCaseStudies;
+        }
+
+        if (includeCaseStudies) {
+            const selectedRegularQuestions = randomizeQuestions
+                ? shuffle(regularQuestions).slice(0, questionCount)
+                : regularQuestions.slice(start - 1, end);
+            const selectedCaseStudy = randomizeQuestions
+                ? shuffle(caseStudyQuestions).slice(0, 1)
+                : caseStudyQuestions.slice(0, 1);
+            const combinedQuestions = [
+                ...selectedRegularQuestions,
+                ...selectedCaseStudy
+            ];
+
+            return randomizeQuestions
+                ? shuffle(combinedQuestions)
+                : combinedQuestions;
+        }
+
+        return randomizeQuestions
+            ? shuffle(regularQuestions).slice(0, questionCount)
+            : regularQuestions.slice(start - 1, end);
+    }
+
+    function resetAssessmentState(mode) {
         state.mode = mode;
         state.currentIndex = 0;
         state.activeCaseSection = null;
@@ -975,59 +1062,66 @@ ${sanitizeRichHtml(
         state.answers = {};
         state.submitted = new Set();
         state.completed = false;
+        state.incorrectQuestionIds = [];
+    }
+
+    function resetAssessmentButtons(mode) {
+        const submitButton = byId('submit-btn');
+        const finishPracticeButton = byId('finish-practice-btn');
+        const retakeButton = byId('retake-incorrect-btn');
+
+        submitButton.disabled = false;
+        submitButton.style.display = 'inline-block';
+        submitButton.textContent =
+            mode === 'simulation' ? 'Submit & Continue' : 'Submit Answer';
+
+        if (finishPracticeButton) {
+            finishPracticeButton.style.display = 'none';
+        }
+
+        if (retakeButton) {
+            retakeButton.style.display = 'none';
+        }
+    }
+
+    function startExam(mode) {
+        const master = getMasterQuestions();
+        if (!master) return;
+
+        resetAssessmentState(mode);
 
         try {
-    if (mode === 'simulation') {
-        state.activeQuestions = selectSimulationQuestions(master);
-    } else {
-        const start =
-            Number(byId('practice-start').value) || 1;
-        const end =
-            Number(byId('practice-end').value) || master.length;
+            state.activeQuestions = mode === 'simulation'
+                ? selectSimulationQuestions(master)
+                : selectPracticeQuestions(master);
 
-        const caseOnly =
-        byId('practice-case-only').checked;
-        state.activeQuestions =
-            master.slice(start - 1, end);
-        if (byId('practice-random').checked) {
-    const questionCount = end - start + 1;
+            if (!state.activeQuestions.length) {
+                throw new Error(
+                    'No questions match the selected Practice Mode options.'
+                );
+            }
+        } catch (error) {
+            alert(error.message);
+            return;
+        }
 
-    let randomPool = master.slice(end - 1);
+        state.timerSeconds =
+            mode === 'simulation' ? SIMULATION_DURATION_SECONDS : 0;
 
-    if (caseOnly) {
-    randomPool = randomPool.filter(
-        question => question.isCaseStudy
-    );
-}
-else if (!byId('practice-case-studies').checked) {
-    randomPool = randomPool.filter(
-        question => !question.isCaseStudy
-    );
-}
-
-
-    state.activeQuestions =
-        shuffle(randomPool).slice(0, questionCount);
-}
-    }
-} catch (error) {
-    alert(error.message);
-    return;
-}
-
-        state.timerSeconds = mode === 'simulation' ? 120 * 60 : 0;
         byId('setup-screen').hidden = true;
         byId('results-screen').hidden = true;
         byId('exam-screen').hidden = false;
-        byId('mode-label').textContent = mode === 'simulation' ? 'Simulation Exam' : 'Practice Mode';
+        byId('mode-label').textContent =
+            mode === 'simulation' ? 'Simulation Exam' : 'Practice Mode';
         byId('jump-select').disabled = false;
-        byId('submit-btn').textContent = mode === 'simulation' ? 'Submit & Continue' : 'Submit Answer';
+
+        resetAssessmentButtons(mode);
         populateJumpMenu();
         renderQuestion();
         startTimer();
     }
 
-    function handleLayoutClick(event) {
+        function handleLayoutClick(event) {
         const actionElement = event.target.closest('[data-action]');
         if (!actionElement) return;
 
@@ -1095,31 +1189,27 @@ else if (!byId('practice-case-studies').checked) {
         }
     }
 
-      function retakeIncorrectQuestions() {
-          const master = getMasterQuestions();
-          state.activeQuestions =
-          master.filter(question =>
-          state.incorrectQuestionIds.includes(
-          question.id));
-          if (!state.activeQuestions.length) {
-          alert('No incorrect questions available.');
-          return;
+    function retakeIncorrectQuestions() {
+        const master = getMasterQuestions();
+        const incorrectQuestionIds = new Set(state.incorrectQuestionIds);
+        const incorrectQuestions = master.filter(question =>
+            incorrectQuestionIds.has(question.id)
+        );
+
+        if (!incorrectQuestions.length) {
+            alert('No incorrect questions available.');
+            return;
         }
-          state.currentIndex = 0;
-          state.answers = {};
-          state.submitted = new Set();
-          state.completed = false;
-    byId('results-screen').hidden = true;
-    byId('exam-screen').hidden = false;
-    const finishBtn =
-    byId('finish-practice-btn');
-          if (finishBtn) {
-          finishBtn.style.display = 'none';
-        }
-    byId('submit-btn').style.display =
-        'inline-block';
-    populateJumpMenu();
-    renderQuestion();
+
+        resetAssessmentState('practice');
+        state.activeQuestions = incorrectQuestions;
+
+        byId('results-screen').hidden = true;
+        byId('exam-screen').hidden = false;
+
+        resetAssessmentButtons('practice');
+        populateJumpMenu();
+        renderQuestion();
     }
 
     function initializeApp() {
@@ -1127,20 +1217,33 @@ else if (!byId('practice-case-studies').checked) {
         if (missingElements.length > 0) {
             console.error('Missing required HTML elements:', missingElements);
             const layout = byId('portal-layout');
-            if (layout) showFatalError('The page is missing required HTML elements.', missingElements);
+            if (layout) {
+                showFatalError(
+                    'The page is missing required HTML elements.',
+                    missingElements
+                );
+            }
             return;
         }
-          
+
         const questionBank = getQuestions();
         if (!questionBank || questionBank.length === 0) {
-            showFatalError('The questions array is missing or empty. Load questions.fixed.js before app.fixed.js.');
+            showFatalError(
+                'The questions array is missing or empty. ' +
+                'Load questions.js before app.js.'
+            );
             return;
         }
-          byId('practice-end').value = questionBank.length;
+
+        byId('practice-end').value = questionBank.length;
+        updateSelectedCount();
 
         const validationErrors = validateQuestionBank(questionBank);
         if (validationErrors.length > 0) {
-            showFatalError('Question data validation failed.', validationErrors);
+            showFatalError(
+                'Question data validation failed.',
+                validationErrors
+            );
             return;
         }
 
@@ -1149,67 +1252,85 @@ else if (!byId('practice-case-studies').checked) {
             if (event.target.matches('input[name="answer"]')) {
                 setOptionVisualState();
             }
+
             if (event.target.matches('select[data-key]')) {
                 event.target.style.backgroundColor = '#fff';
                 event.target.style.borderColor = '#2563eb';
                 event.target.removeAttribute('aria-invalid');
             }
         });
+
         byId('jump-select').addEventListener('change', event => {
             state.currentIndex = Number(event.target.value);
             state.activeCaseSection = null;
             renderQuestion();
         });
+
         byId('finish-practice-btn').addEventListener('click', () => {
-            if (!confirm('Sure ka humana?')) {
-            return;
+            if (confirm('Sure na gyud ka?')) {
+                finishPractice();
             }
-            finishPractice();
-            });
+        });
+
         byId('practice-start').addEventListener('input', updateSelectedCount);
         byId('practice-end').addEventListener('input', updateSelectedCount);
         byId('next-btn').addEventListener('click', () => moveQuestion(1));
         byId('prev-btn').addEventListener('click', () => moveQuestion(-1));
         byId('submit-btn').addEventListener('click', submitCurrentAnswer);
-        byId('retake-incorrect-btn')?.addEventListener('click', retakeIncorrectQuestions);
-          byId('practice-mode-btn').addEventListener('click', () => startExam('practice'));
-          byId('simulation-mode-btn').addEventListener('click', () => startExam('simulation'));
-          byId('new-session-btn').addEventListener('click', () => {
-         localStorage.removeItem('sc300-progress');
-        window.location.reload();
-          });
-          byId('resume-btn').addEventListener('click', () => {
-          const saved = loadProgress();
+        byId('retake-incorrect-btn')?.addEventListener(
+            'click',
+            retakeIncorrectQuestions
+        );
+        byId('practice-mode-btn').addEventListener(
+            'click',
+            () => startExam('practice')
+        );
+        byId('simulation-mode-btn').addEventListener(
+            'click',
+            () => startExam('simulation')
+        );
+        byId('new-session-btn').addEventListener('click', () => {
+            localStorage.removeItem(STORAGE_KEY);
+            window.location.reload();
+        });
+        byId('resume-btn').addEventListener('click', () => {
+            const saved = loadProgress();
+            if (!saved) return;
 
-          if (!saved) return;
-          state.currentIndex = saved.currentIndex;
-          state.answers = saved.answers;
-          state.activeQuestions = saved.activeQuestions;
-          state.mode = saved.mode;
+            state.currentIndex = saved.currentIndex;
+            state.answers = saved.answers || {};
+            state.activeQuestions = saved.activeQuestions || [];
+            state.mode = saved.mode;
 
-          byId('setup-screen').hidden = true;
-          byId('results-screen').hidden = true;
-          byId('exam-screen').hidden = false;
-          populateJumpMenu();
-          renderQuestion();
-            })
-          byId('finish-exam-btn').addEventListener('click', () => {
-              if (confirm('Finish the simulation and show the results?')) finishSimulation(false);
-          });
-          byId('restart-exam-btn').addEventListener('click', () => window.location.reload());
+            byId('setup-screen').hidden = true;
+            byId('results-screen').hidden = true;
+            byId('exam-screen').hidden = false;
+
+            resetAssessmentButtons(state.mode);
+            populateJumpMenu();
+            renderQuestion();
+        });
+        byId('finish-exam-btn').addEventListener('click', () => {
+            if (confirm('Finish the simulation and show the results?')) {
+                finishSimulation(false);
+            }
+        });
+        byId('restart-exam-btn').addEventListener(
+            'click',
+            () => window.location.reload()
+        );
 
         const savedProgress = loadProgress();
-
-            if (savedProgress) {
-              byId('resume-prompt').hidden = false;
-            }
+        if (savedProgress) {
+            byId('resume-prompt').hidden = false;
+        }
 
         byId('setup-screen').hidden = false;
         byId('exam-screen').hidden = true;
         byId('results-screen').hidden = true;
     }
 
-    if (document.readyState === 'loading') {
+        if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
     } else {
         initializeApp();
