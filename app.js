@@ -1161,7 +1161,7 @@ else if (!byId('practice-case-studies').checked) {
             renderQuestion();
         });
         byId('finish-practice-btn').addEventListener('click', () => {
-            if (!confirm('Finish Practice and view results?')) {
+            if (!confirm('Sure ka humana?')) {
             return;
             }
             finishPractice();
