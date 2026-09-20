@@ -55,21 +55,75 @@ const questions = [
     ]
   },
   {
-    "id": 3,
-    "type": "radio",
-    "title": "Question 3",
-    "questionText": "\n    <p>You have a Microsoft 365 tenant that uses the domain named fabrikam.com. The Guest invite settings for Azure Active Directory (Azure AD) are configured as shown in the exhibit. (Click the Exhibit tab.)</p>\n    \n    <div style=\"margin: 15px 0; text-align: center;\">\n      <img src=\"images/q3_guest.jpg\" alt=\"Exhibit\" style=\"max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 4px;\" />\n    </div>\n\n    <p style=\"text-align: left; margin-top: 10px;\">A user named <strong>bsmith@fabrikam.com</strong> shares a Microsoft SharePoint Online document library to the users shown in the following table.</p>\n\n    <div style=\"margin-bottom: 15px; text-align: center;\">\n      <img src=\"images/q3_table1.jpg\" alt=\"q3 table 1\" style=\"width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;\">\n    </div>\n\n    <p style=\"text-align: left;\">Which users will receive a one-time passcode (OTP)?</p>\n  ",
-    "prompt": "Select the correct option:",
-    "correctAnswer": 0,
-    "correctAnswerText": "\n    <p><strong>Correct Answer: A (User2 only)</strong></p>\n    <p><em>Reference User Email: bsmith@fabrikam.com</em></p>\n    <p>According to Microsoft documentation on email one-time passcode (OTP) authentication:</p>\n    <blockquote>\n      \"When the email one-time passcode feature is enabled, newly invited users who meet certain conditions will use one-time passcode authentication. Guest users who redeemed an invitation before email one-time passcode was enabled will continue to use their same authentication method.\"\n    </blockquote>\n    <ul>\n      <li><strong>User 1:</strong> Already a registered guest user in fabrikam.com, so they will not receive an additional OTP.</li>\n      <li><strong>User 2:</strong> Has never accessed fabrikam.com, so they <strong>WILL</strong> receive an OTP each time they sign in.</li>\n      <li><strong>User 3:</strong> Is an internal domain user, so they will not receive a guest OTP.</li>\n    </ul>\n  ",
-    "isCaseStudy": false,
-    "options": [
-      "User2 only",
-      "User1 and User2 only",
-      "User1, User2, and User3",
-      "User3 only"
-    ]
-  },
+    id: 3,
+    type: "radio",
+    title: "Question 3",
+
+    questionText: `
+        <p>
+            You have a Microsoft 365 tenant that uses the domain named fabrikam.com.
+            The Guest invite settings for Azure Active Directory (Azure AD) are configured as shown in the exhibit.
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q3_guest.jpg" alt="q3 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>
+            A user named <strong>bsmith@fabrikam.com</strong> shares a Microsoft SharePoint Online document library to the users shown in the following table.
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q3_table1.jpg" alt="q3 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>
+            Which users will receive a one-time passcode (OTP)?
+        </p>
+    `,
+
+    prompt: "Select the correct option:",
+
+    options: [
+        "User2 only",
+        "User1 and User2 only",
+        "User1, User2, and User3",
+        "User3 only"
+    ],
+
+    correctAnswer: 0,
+
+    correctAnswerText: `
+        <p>
+            <strong>Correct Answer: A (User2 only)</strong>
+        </p>
+
+        <p>
+            According to Microsoft documentation on email one-time passcode (OTP) authentication:
+        </p>
+
+        <blockquote>
+            Newly invited users who meet certain conditions will use one-time passcode authentication.
+            Guest users who redeemed an invitation before email one-time passcode was enabled will continue to use their existing authentication method.
+        </blockquote>
+
+        <ul>
+            <li>
+                <strong>User1:</strong> Already a guest user in fabrikam.com and therefore will not receive a new OTP.
+            </li>
+
+            <li>
+                <strong>User2:</strong> Has never accessed fabrikam.com and WILL receive a one-time passcode (OTP).
+            </li>
+
+            <li>
+                <strong>User3:</strong> Is an internal user and therefore will not receive a guest OTP.
+            </li>
+        </ul>
+    `,
+
+    isCaseStudy: false
+},
   {
     "id": 4,
     "type": "radio",
