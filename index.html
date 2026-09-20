@@ -108,6 +108,14 @@
 
             <div class="submit-wrapper">
                 <button id="submit-btn" class="submit-btn">Submit Answer</button>
+
+                <button
+                        id="finish-practice-btn"
+                          class="submit-btn"
+                           style="display: none;"
+                >
+                      Finish Practice
+                    </button>
             </div>
 
             <div id="feedback-box" class="feedback-box" style="display: none;"></div>
@@ -124,6 +132,13 @@
             <div id="result-status" class="result-status">PASS</div>
             <p id="result-score" class="result-score"></p>
             <p id="result-note" class="result-note"></p>
+            <button
+               id="retake-incorrect-btn"
+               class="mode-btn retake-btn"
+               style="display: none;">
+               Retake Incorrect Questions
+                </button>
+                
             <button id="restart-exam-btn" class="mode-btn practice-btn">Return to Start</button>
 
             <h2 class="review-heading">Answer Review</h2>
@@ -133,5 +148,32 @@
 
     <script src="questions.js"></script>
     <script src="app.js"></script>
+
+    <div id="finish-modal" class="finish-modal" hidden>
+    <div class="finish-modal-content">
+
+        <h2>Finish Assessment?</h2>
+
+        <p>
+            You're about to finish this assessment and view your results.
+        </p>
+
+        <div id="finish-summary"></div>
+
+        <div class="finish-modal-actions">
+            <button id="continue-assessment-btn"
+                    class="mode-btn">
+                Continue Assessment
+            </button>
+
+            <button id="confirm-finish-btn"
+                    class="finish-btn">
+                Finish Assessment
+            </button>
+        </div>
+
+    </div>
+        </div>
+        
 </body>
 </html>
