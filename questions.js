@@ -1083,18 +1083,122 @@ const questions = [
     ]
   },
   {
-    "id": 30,
-    "type": "dropdown",
-    "title": "Question 30",
-    "questionText": "\n    <p>You have an Azure Active Directory (Azure AD) tenant that has an Azure Active Directory Premium Plan 2 license. The tenant contains the users shown in the following table:</p>\n    <div style=\"margin-bottom: 15px;\">\n      <img src=\"images/q30_members_directory.jpg\" alt=\"Users Table\" style=\"max-width: 100%; border: 1px solid #ccc; border-radius: 4px;\">\n    </div>\n\n    <p>For which users can you configure the Job title property and the Usage location property in Azure AD?</p>\n    <p>To answer, select the appropriate options in the answer area.</p>\n    <p style=\"font-size: 13px; color: #555;\">NOTE: Each correct selection is worth one point.</p>\n    \n    <div class=\"answer-area\" style=\"margin-top: 15px;\">\n      <p><strong>Answer Area</strong></p>\n      \n      <!-- Job title horizontal row -->\n      <div style=\"display: flex; align-items: center; gap: 12px; margin-bottom: 12px;\">\n        <label style=\"font-weight: 600; min-width: 170px; white-space: nowrap;\">Job title property:</label>\n        <select class=\"inline-select\" data-key=\"job_title\" style=\"padding: 6px; border-radius: 4px; border: 1px solid #ccc; width: 100%; max-width: 350px;\">\n          <option value=\"\">-- Select --</option>\n          <option value=\"User2 only\">User2 only</option>\n          <option value=\"User2 and User3 only\">User2 and User3 only</option>\n          <option value=\"User1, User2, and User3\">User1, User2, and User3</option>\n        </select>\n      </div>\n\n      <!-- Usage location horizontal row -->\n      <div style=\"display: flex; align-items: center; gap: 12px; margin-bottom: 12px;\">\n        <label style=\"font-weight: 600; min-width: 170px; white-space: nowrap;\">Usage location property:</label>\n        <select class=\"inline-select\" data-key=\"usage_location\" style=\"padding: 6px; border-radius: 4px; border: 1px solid #ccc; width: 100%; max-width: 350px;\">\n          <option value=\"\">-- Select --</option>\n          <option value=\"User2 only\">User2 only</option>\n          <option value=\"User2 and User3 only\">User2 and User3 only</option>\n          <option value=\"User1, User2, and User3\">User1, User2, and User3</option>\n        </select>\n      </div>\n    </div>\n  ",
-    "prompt": "",
-    "correctAnswer": {
-      "job_title": "User2 and User3 only",
-      "usage_location": "User1, User2, and User3"
+    id: 30,
+    type: "dropdown",
+    title: "Question 30",
+
+    questionText: `
+        <p>
+            You have an Azure Active Directory (Azure AD) tenant that has an Azure Active Directory Premium Plan 2 license.
+            The tenant contains the users shown in the following table:
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q30_members_directory.jpg" alt="q30 members directory" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>
+            For which users can you configure the Job title property and the Usage location property in Azure AD?
+        </p>
+
+        <p>
+            To answer, select the appropriate options in the answer area.
+        </p>
+
+        <p style="font-size:13px;color:#555;">
+            NOTE: Each correct selection is worth one point.
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tbody>
+
+                <tr>
+                    <td style="padding:12px;width:180px;">
+                        Job title property:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select class="inline-select" data-key="job_title">
+                            <option value="">-- Select --</option>
+                            <option value="User2 only">User2 only</option>
+                            <option value="User2 and User3 only">User2 and User3 only</option>
+                            <option value="User1, User2, and User3">User1, User2, and User3</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:12px;">
+                        Usage location property:
+                    </td>
+
+                    <td style="padding:12px;">
+                        <select class="inline-select" data-key="usage_location">
+                            <option value="">-- Select --</option>
+                            <option value="User2 only">User2 only</option>
+                            <option value="User2 and User3 only">User2 and User3 only</option>
+                            <option value="User1, User2, and User3">User1, User2, and User3</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    `,
+
+    prompt: "",
+
+    correctAnswer: {
+        job_title: "User2 and User3 only",
+        usage_location: "User1, User2, and User3"
     },
-    "correctAnswerText": "\n    <p>Box 1: User2 and User3 only.</p>\n    <p>This selection likely applies a filter or condition that limits the scope of an operation, report, or policy to users who are associated with specific job titles.</p>\n    <p>\"User2 and User3 only\" restricts the operation to these users, possibly because their roles or responsibilities are relevant to the context being managed.</p>\n\n    <p>Box 2: User1, User2, and User3 -</p>\n    <p>Invite users with Azure Active Directory B2B collaboration, Update user's name and usage location.</p>\n    <p>To assign a license, the invited user's Usage location must be specified. Admins can update the invited user's profile on the Azure portal.</p>\n    <ol>\n      <li>Go to Azure Active Directory > Users and groups > All users. If you don't see the newly created user, refresh the page.</li>\n      <li>Click on the invited user, and then click Profile.</li>\n      <li>Update First name, Last name, and Usage location.</li>\n      <li>Click Save, and then close the Profile blade.</li>\n    </ol>\n  ",
-    "isCaseStudy": false
-  },
+
+    correctAnswerText: `
+        <p>
+            Box 1: User2 and User3 only.
+        </p>
+
+        <p>
+            This selection likely applies a filter or condition that limits the scope of an operation, report, or policy to users who are associated with specific job titles.
+        </p>
+
+        <p>
+            "User2 and User3 only" restricts the operation to these users, possibly because their roles or responsibilities are relevant to the context being managed.
+        </p>
+
+        <p>
+            Box 2: User1, User2, and User3.
+        </p>
+
+        <p>
+            Invite users with Azure Active Directory B2B collaboration, Update user's name and usage location.
+        </p>
+
+        <p>
+            To assign a license, the invited user's Usage location must be specified. Admins can update the invited user's profile on the Azure portal.
+        </p>
+
+        <ol>
+            <li>
+                Go to Azure Active Directory > Users and groups > All users. If you don't see the newly created user, refresh the page.
+            </li>
+
+            <li>
+                Click on the invited user, and then click Profile.
+            </li>
+
+            <li>
+                Update First name, Last name, and Usage location.
+            </li>
+
+            <li>
+                Click Save, and then close the Profile blade.
+            </li>
+        </ol>
+    `,
+
+    isCaseStudy: false
+},
   {
     "id": 31,
     "type": "radio",
