@@ -804,74 +804,57 @@ const questions = [
   },
 {
     id: 21,
-
     type: "matrix",
-
-    title: "Question 21: Hot Spot",
+    title: "Question 21",
 
     questionText: `
         <p>
-            You have an Azure Active Directory (Azure AD) tenant that has an
-            Azure Active Directory Premium Plan 2 license.
+            You have an Azure Active Directory (Azure AD) tenant that has an Azure Active Directory Premium Plan 2 license.
+            The tenant contains the users shown in the following table.
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q21_table1.jpg" alt="q21 table 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+
+        <p style="text-align:center; margin-top:20px;">
+            You have the Device Settings shown in the following exhibit.
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q21_exhibit1.jpg" alt="q21 exhibit 1" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p style="text-align:center; margin-top:20px;">
+            User1 has the devices shown in the following table.
+        </p>
+
+        <div style="margin-bottom: 15px; text-align: center;">
+      <img src="images/q21_table2.jpg" alt="q21 table 2" style="width: 100%; max-width: 550px; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+        <p>
+            For each of the following statements, select Yes if the statement is true. Otherwise, select No.
         </p>
 
         <p>
-            The tenant contains the users shown in the following table:
-        </p>
-
-        <div style="
-            width:100%;
-            margin-bottom:15px;
-            text-align:center;
-        ">
-            <img
-                src="images/table_q21.jpg"
-                alt="Users Table"
-                style="
-   ing exhibit:
-        </p>
-
-        <div style="
-            width:100%;
-            margin-bottom:15px;
-            text-align:center;
-        ">
-            <img
-                src="images/exhibit_q21.jpg"
-                alt="Devicedevices shown in the following table:
-        </p>
-
-        <div style="
-            width:100%;
-            margin-bottom:15px;
-            text-align:center;
-        ">
-            <img
-                src="images/devices_q21_table.jpg"
-                alt="Devices Table"
-                elect
-            <strong>Yes</strong>
-            if the statement is true.
-            Otherwise, select
-            <strong>No</strong>.
+            <em>NOTE: Each correct selection is worth one point.</em>
         </p>
     `,
 
     rows: [
         {
-            id: "statement_1",
-            label:
-                "User1 can join four additional Windows 10 devices to Azure AD."
+            id: "stmt1",
+            label: "User1 can join four additional Windows 10 devices to Azure AD."
         },
         {
-            id: "statement_2",
-            label:
-                "Admin1 can set Devices to be Azure AD joined or Azure AD registered require Multi-Factor Authentication to Yes."
+            id: "stmt2",
+            label: "Admin1 can set Devices to be Azure AD joined or Azure AD registered require Multi-Factor Authentication to Yes."
         },
         {
-            id: "statement_3",
-            label:
-                "Admin2 is a local administrator on Device3."
+            id: "stmt3",
+            label: "Admin2 is a local administrator on Device3."
         }
     ],
 
@@ -887,51 +870,53 @@ const questions = [
     ],
 
     correctAnswer: {
-        statement_1: 1,
-        statement_2: 0,
-        statement_3: 1
+        stmt1: 1,
+        stmt2: 0,
+        stmt3: 1
     },
 
     correctAnswerText: `
-        <p><strong>Correct Answers:</strong></p>
+        <p>
+            Box 1: No
+        </p>
+
+        <p>
+            Maximum number of devices: This setting enables you to select the maximum number of Azure AD joined or Azure AD registered devices that a user can have in Azure AD.
+        </p>
+
+        <p>
+            Box 2: Yes
+        </p>
+
+        <p>
+            You must be assigned one of the following roles to view or manage device settings in the Azure portal:
+        </p>
 
         <ul>
-            <li>
-                <strong>Statement 1:</strong> No
-            </li>
-
-            <li>
-                <strong>Statement 2:</strong> Yes
-            </li>
-
-            <li>
-                <strong>Statement 3:</strong> No
-            </li>
+            <li>Global Administrator</li>
+            <li>Cloud Device Administrator</li>
+            <li>Global Reader</li>
+            <li>Directory Reader</li>
         </ul>
 
         <p>
-            <strong>Statement 1:</strong><br>
-            The maximum number of devices per user is set to five.
-            The limit includes both Azure AD joined and Azure AD registered
-            devices. User1 already has four enrolled devices and can add
-            only one more device, not four.
+            Box 3: No
         </p>
 
         <p>
-            <strong>Statement 2:</strong><br>
-            Admin1 is assigned the Cloud Device Administrator role.
-            This role includes permissions to manage Azure AD device settings,
-            including Multi-Factor Authentication requirements for device
-            registration and join operations.
+            An additional local device administrator has not been applied.
         </p>
 
         <p>
-            <strong>Statement 3:</strong><br>
-            Device3 is Azure AD registered.
-            Local administrator assignments apply only to Azure AD joined
-            devices. Therefore Admin2 is not a local administrator on Device3.
+            Reference:
         </p>
-    `
+
+        <p>
+            https://docs.microsoft.com/en-us/azure/active-directory/devices/device-management-azure-portal
+        </p>
+    `,
+
+    isCaseStudy: false
 },
   {
     "id": 22,
