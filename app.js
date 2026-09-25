@@ -19,7 +19,7 @@
         timerId: null,
         completed: false,
         incorrectQuestionIds: [],
-        simStage: 'login' // Tracks whether the user is on the login portal, expiration config, or actual question task
+        simStage: 'login' // Tracks whether the user is on the login portal or expiration config
     };
 
     const REQUIRED_ELEMENT_IDS = [
@@ -244,7 +244,7 @@
                 seenIds.add(question.id);
             }
 
-            if (!validTypes.has(question.type)) {
+            if (!validTypes.has(question.type) && !question.simulation) {
                 errors.push(`${position} has unsupported type: ${question.type}.`);
             }
 
@@ -724,7 +724,6 @@
 
     function setupConfigListeners(question) {
         const scopeButtons = document.querySelectorAll('.sim-scope-btn');
-        let selectedScope = '';
 
         scopeButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -732,14 +731,35 @@
                     b.style.background = '#fff';
                     b.style.color = '#323130';
                     b.style.fontWeight = '500';
+                    b.removeAttribute('data-selected');
                 });
                 btn.style.background = '#0078d4';
                 btn.style.color = '#fff';
                 btn.style.fontWeight = '700';
-                selectedScope = btn.dataset.scope;
                 btn.dataset.selected = 'true';
             });
         });
+
+        // Restore previously saved simulation input state if returning to this question
+        const savedAnswer = state.answers[question.id];
+        if (savedAnswer && typeof savedAnswer === 'object') {
+            if (savedAnswer.lifetime && byId('sim-lifetime-select')) {
+                byId('sim-lifetime-select').value = savedAnswer.lifetime;
+            }
+            if (savedAnswer.owner && byId('sim-owner-input')) {
+                byId('sim-owner-input').value = savedAnswer.owner;
+            }
+            if (savedAnswer.scope) {
+                scopeButtons.forEach(b => {
+                    if (b.dataset.scope === savedAnswer.scope) {
+                        b.style.background = '#0078d4';
+                        b.style.color = '#fff';
+                        b.style.fontWeight = '700';
+                        b.dataset.selected = 'true';
+                    }
+                });
+            }
+        }
 
         const saveBtn = byId('sim-save-config-btn');
         if (saveBtn) {
@@ -756,10 +776,10 @@
                     scope === 'All';
 
                 if (configValid) {
-                    state.simStage = 'question';
-                    state.answers[question.id] = 0; // auto-select correct option index or record completion
-                    state.submitted.add(question.id);
-                    renderQuestion();
+                    // Record answers and stay right on the config screen without flashing any 3rd phase
+                    state.answers[question.id] = { lifetime, owner: ownerInput, scope };
+                    saveProgress();
+                    alert('Configuration saved successfully! You can now click the Submit & Continue button above.');
                 } else {
                     alert('Configuration is incomplete or incorrect. Please review the instructions and check your settings (Lifetime: 180, Owner: Allan Deyoung, Scope: All).');
                 }
@@ -797,7 +817,7 @@
                 updateNavButtons();
                 updateExamHeader();
                 return;
-            } else if (state.simStage === 'config') {
+            } else {
                 layout.style.display = 'block';
                 layout.style.gridTemplateColumns = 'none';
                 layout.innerHTML = renderExpirationConfigSimulation(question.simulation);
@@ -872,6 +892,9 @@
     }
 
     function captureAnswer(question) {
+        if (question.simulation) {
+            return state.answers[question.id] || null;
+        }
         if (question.type === 'radio') {
             const selected = document.querySelector('input[name="answer"]:checked');
             return selected ? Number(selected.value) : null;
@@ -906,7 +929,9 @@
     }
 
     function isAnswerComplete(question, answer) {
-        if (question.simulation && state.simStage === 'question') return true;
+        if (question.simulation) {
+            return state.answers[question.id] !== undefined;
+        }
         if (question.type === 'radio') return Number.isInteger(answer);
         if (question.type === 'checkbox') return Array.isArray(answer) && answer.length > 0;
         if (question.type === 'matrix') {
@@ -924,7 +949,9 @@
     }
 
     function evaluateAnswer(question, answer) {
-        if (question.simulation && state.simStage === 'question') return true;
+        if (question.simulation) {
+            return true; // Already validated upon clicking Save in the simulation config
+        }
         if (question.type === 'radio') return Number(answer) === Number(question.correctAnswer);
         if (question.type === 'checkbox') {
             const selected = [...answer].sort((a, b) => a - b);
@@ -1027,11 +1054,13 @@
         const answer = captureAnswer(question);
         if (!isAnswerComplete(question, answer)) {
             showSelectionWarning(
-                question.type === 'dragdrop'
-                    ? 'Please assign an answer to every box before submitting.'
-                    : question.type === 'matrix'
-                        ? 'Please select one answer for every statement before submitting.'
-                        : 'Please complete the answer before submitting.'
+                question.simulation
+                    ? 'Please save your configuration settings first before submitting.'
+                    : question.type === 'dragdrop'
+                        ? 'Please assign an answer to every box before submitting.'
+                        : question.type === 'matrix'
+                            ? 'Please select one answer for every statement before submitting.'
+                            : 'Please complete the answer before submitting.'
             );
             return;
         }
