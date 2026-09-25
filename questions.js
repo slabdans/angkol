@@ -2426,13 +2426,7 @@ const questions = [
 • <strong>Microsoft 365 Username:</strong> admin@contoso.com<br>
 • <strong>Password:</strong> =1122334455667788<br><br>
 <strong>Task Objective:</strong><br>
-Ensure the owner of each Microsoft 365 group is notified to renew their group every 180 days. Groups that are NOT renewed must be deleted. For groups without an owner, the notifications must be sent to Allan Deyoung.<br><br>
-<strong>Steps to complete:</strong><br>
-1. Go to Microsoft Entra ID > Groups > Expiration.<br>
-2. Set Group lifetime (in days) to <strong>180</strong>.<br>
-3. Set Email contact for groups with no owners to <strong>Allan Deyoung</strong>.<br>
-4. Set Enable expiration for these Office 365 groups to <strong>All</strong>.<br>
-5. Click <strong>Save</strong>.`
+Ensure the owner of each Microsoft 365 group is notified to renew their group every 180 days. Groups that are NOT renewed must be deleted. For groups without an owner, the notifications must be sent to Allan Deyoung.`
     }
 },
   {
