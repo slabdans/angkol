@@ -2405,6 +2405,66 @@ const questions = [
       "the Administrative units blade in the Microsoft Entra admin center"
     ]
   },
+{
+    id: 81,
+    type: "radio", // or a custom simulation type if you've built one
+    title: "Question 81",
+    questionText: "You need to ensure the owner of each Microsoft 365 group is notified to renew their group every 180 days. Groups that are NOT renewed must be deleted. For groups without an owner, the notifications must be sent to Allan Deyoung.<br><br>To complete this task, sign in to the appropriate admin center.",
+    options: [
+        "Configure the expiration policy in Microsoft Entra ID with a 180-day lifetime, set the email contact for groups with no owners to Allan Deyoung, and enable it for All groups.",
+        "Configure the expiration policy in Microsoft 365 admin center with a 90-day lifetime for selected groups only.",
+        "Configure group lifecycle management via Exchange Online PowerShell without setting an owner notification fallback.",
+        "Enable built-in Microsoft Teams expiration policies instead of Microsoft 365 group expiration policies."
+    ],
+    correctAnswer: 0,
+    correctAnswerText: "To configure Microsoft 365 group expiration policies, navigate to Microsoft Entra ID > Groups > Expiration. Set the Group lifetime to 180 days, assign the fallback email contact for unowned groups to Allan Deyoung, and apply it to All groups.",
+    simulation: {
+        portal: "entra",
+        requiredEmail: "admin@contoso.com",
+        requiredPassword: "=1122334455667788",
+        instructions: `Use the following login credentials as needed:<br>
+• <strong>Microsoft 365 Username:</strong> admin@contoso.com<br>
+• <strong>Password:</strong> =1122334455667788<br><br>
+<strong>Task Objective:</strong><br>
+Ensure the owner of each Microsoft 365 group is notified to renew their group every 180 days. Groups that are NOT renewed must be deleted. For groups without an owner, the notifications must be sent to Allan Deyoung.<br><br>
+<strong>Steps to complete:</strong><br>
+1. Go to Microsoft Entra ID > Groups > Expiration.<br>
+2. Set Group lifetime (in days) to <strong>180</strong>.<br>
+3. Set Email contact for groups with no owners to <strong>Allan Deyoung</strong>.<br>
+4. Set Enable expiration for these Office 365 groups to <strong>All</strong>.<br>
+5. Click <strong>Save</strong>.`
+    }
+},
+{
+  "questionNumber": 82,
+  "type": "simulation",
+  "credentials": {
+    "username": "admin@tenant.onmicrosoft.com",
+    "password": "=1122334455667788",
+    "labInstance": "99999999"
+  },
+  "prompt": "You need to prevent all users from using passwords that are variations of the word Falcon. To complete this task, sign in to the appropriate admin center.",
+  "steps": [
+    {
+      "stepNumber": 1,
+      "instruction": "Select Authentication methods"
+    },
+    {
+      "stepNumber": 2,
+      "instruction": "Select Password protection"
+    },
+    {
+      "stepNumber": 3,
+      "instruction": "In Custom banned passwords, Set Enforce Custom list: Yes"
+    },
+    {
+      "stepNumber": 4,
+      "instruction": "In Custom banned password list, add the word Falcon"
+    }
+  ],
+  "exhibit": "image_d496bd.jpg",
+  "reference": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad"
+},
   {
     "id": 85,
     "type": "dropdown",
