@@ -2435,36 +2435,6 @@ Ensure the owner of each Microsoft 365 group is notified to renew their group ev
 5. Click <strong>Save</strong>.`
     }
 },
-{
-  "questionNumber": 82,
-  "type": "simulation",
-  "credentials": {
-    "username": "admin@tenant.onmicrosoft.com",
-    "password": "=1122334455667788",
-    "labInstance": "99999999"
-  },
-  "prompt": "You need to prevent all users from using passwords that are variations of the word Falcon. To complete this task, sign in to the appropriate admin center.",
-  "steps": [
-    {
-      "stepNumber": 1,
-      "instruction": "Select Authentication methods"
-    },
-    {
-      "stepNumber": 2,
-      "instruction": "Select Password protection"
-    },
-    {
-      "stepNumber": 3,
-      "instruction": "In Custom banned passwords, Set Enforce Custom list: Yes"
-    },
-    {
-      "stepNumber": 4,
-      "instruction": "In Custom banned password list, add the word Falcon"
-    }
-  ],
-  "exhibit": "image_d496bd.jpg",
-  "reference": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad"
-},
   {
     "id": 85,
     "type": "dropdown",
