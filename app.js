@@ -18,10 +18,11 @@
         timerSeconds: 0,
         timerId: null,
         completed: false,
-        incorrectQuestionIds: []
+        incorrectQuestionIds: [],
+        simStage: 'login' // Tracks whether the user is on the login portal, expiration config, or actual question task
     };
 
-        const REQUIRED_ELEMENT_IDS = [
+    const REQUIRED_ELEMENT_IDS = [
         'portal-layout',
         'question-counter',
         'feedback-box',
@@ -77,7 +78,7 @@
         byId('selected-count').textContent = `Selected Questions: ${total}`;
     }
 
-        function escapeHtml(value) {
+    function escapeHtml(value) {
         return String(value ?? '')
             .replaceAll('&', '&amp;')
             .replaceAll('<', '&lt;')
@@ -92,31 +93,19 @@
         return textarea.value;
     }
 
-function cleanExplanationHtml(value) {
+    function cleanExplanationHtml(value) {
+        let html = decodeHtmlEntities(value || "");
 
-    let html = decodeHtmlEntities(value || "");
+        html = html
+            .replace(/<p>\s*<\/p>/gi, "")
+            .replace(/<\/br>/gi, "")
+            .replace(/(<br\s*\/?>\s*){2,}/gi, "<br>")
+            .replace(/^(<br\s*\/?>)+/gi, "")
+            .replace(/(<br\s*\/?>)+$/gi, "")
+            .trim();
 
-    html = html
-
-        // remove empty paragraphs
-        .replace(/<p>\s*<\/p>/gi, "")
-
-        // remove invalid </br>
-        .replace(/<\/br>/gi, "")
-
-        // collapse multiple line breaks
-        .replace(/(<br\s*\/?>\s*){2,}/gi, "<br>")
-
-        // trim excessive leading breaks
-        .replace(/^(<br\s*\/?>)+/gi, "")
-
-        // trim excessive trailing breaks
-        .replace(/(<br\s*\/?>)+$/gi, "")
-
-        .trim();
-
-    return html;
-}
+        return html;
+    }
 
     function sanitizeRichHtml(value, allowDropdowns = false) {
         const template = document.createElement('template');
@@ -234,7 +223,7 @@ function cleanExplanationHtml(value) {
         ];
     }
 
-        function validateQuestionBank(questionBank) {
+    function validateQuestionBank(questionBank) {
         const errors = [];
         const seenIds = new Set();
         const validTypes = new Set(['radio', 'checkbox', 'dragdrop', 'dropdown', 'matrix']);
@@ -561,6 +550,224 @@ function cleanExplanationHtml(value) {
         `;
     }
 
+    // --- Interactive Simulation Render & Listeners ---
+    function renderLoginSimulation(simConfig) {
+        const instructionHtml = `
+            <div class="sim-instructions" style="background: #ffffff; border: 2px solid #111827; padding: 20px; border-radius: 4px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; max-height: 650px;">
+                <h3 style="font-size: 15px; font-weight: 700; color: #111827; margin-top: 0; margin-bottom: 12px; text-align: center;">Instruction area</h3>
+                <div style="font-size: 13px; color: #1f2937; line-height: 1.4;">
+                    <div style="margin-bottom: 12px; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px;">
+                        <strong style="display:block;margin-bottom:4px;color:#0f172a;">Credentials:</strong>
+                        <code style="display: block; color: #2563eb;">Username: ${escapeHtml(simConfig.requiredEmail)}</code>
+                        <code style="display: block; color: #2563eb; margin-top: 2px;">Password: ${escapeHtml(simConfig.requiredPassword)}</code>
+                    </div>
+                    <p style="margin: 0 0 10px 0;">${sanitizeRichHtml(simConfig.instructions || '')}</p>
+                </div>
+            </div>
+        `;
+
+        const portalHtml = `
+            <div class="sim-login-container" style="display: flex; justify-content: center; align-items: center; background: #f4f7f9; padding: 20px; height: 100%; box-sizing: border-box;">
+                <div class="sim-login-box" style="background: #fff; width: 100%; max-width: 420px; padding: 40px; border: 1px solid #d1d5db; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); border-radius: 4px; box-sizing: border-box; text-align: left;">
+                    <div class="sim-logo" style="font-size: 18px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; color: #111827;">
+                        <span class="ms-grid" style="display: inline-grid; grid-template-columns: repeat(2, 6px); gap: 2px;">
+                            <i class="ms-red" style="width: 6px; height: 6px; display: inline-block; background: #f25022;"></i>
+                            <i class="ms-green" style="width: 6px; height: 6px; display: inline-block; background: #7fba00;"></i>
+                            <i class="ms-blue" style="width: 6px; height: 6px; display: inline-block; background: #00a4ef;"></i>
+                            <i class="ms-yellow" style="width: 6px; height: 6px; display: inline-block; background: #ffb900;"></i>
+                        </span>
+                        Microsoft
+                    </div>
+                    <div id="sim-step-user">
+                        <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-top: 0; margin-bottom: 8px;">Sign in</h2>
+                        <p style="font-size:13px;color:#6b7280;margin-bottom:20px;">to access Microsoft Entra admin center</p>
+                        <input type="email" id="sim-email-input" class="sim-input" placeholder="Email, phone, or Skype" value="" style="width: 100%; padding: 8px 0; font-size: 15px; border: 0; border-bottom: 1px solid #6b7280; outline: none; margin-bottom: 20px; background: transparent; box-sizing: border-box;">
+                        <div style="font-size:13px;margin-bottom:24px;">
+                            No account? <a href="#" style="color:#0067b8;text-decoration:none;">Create one!</a>
+                        </div>
+                        <div style="overflow:hidden;">
+                            <button type="button" id="sim-next-btn" class="sim-btn-primary" style="background-color: #0067b8; color: #fff; border: 0; padding: 8px 24px; font-size: 15px; font-weight: 600; cursor: pointer; float: right; min-width: 108px; border-radius: 2px;">Next</button>
+                        </div>
+                    </div>
+                    <div id="sim-step-pass" style="display:none;">
+                        <button type="button" id="sim-back-link" class="sim-back-btn" style="background: transparent; border: 0; color: #0067b8; cursor: pointer; font-size: 13px; padding: 0; margin-bottom: 16px;">← ${escapeHtml(simConfig.requiredEmail)}</button>
+                        <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-top: 0; margin-bottom: 12px;">Enter password</h2>
+                        <input type="password" id="sim-pass-input" class="sim-input" placeholder="Password" style="width: 100%; padding: 8px 0; font-size: 15px; border: 0; border-bottom: 1px solid #6b7280; outline: none; margin-bottom: 24px; background: transparent; box-sizing: border-box;">
+                        <div style="overflow:hidden;">
+                            <button type="button" id="sim-signin-btn" class="sim-btn-primary" style="background-color: #0067b8; color: #fff; border: 0; padding: 8px 24px; font-size: 15px; font-weight: 600; cursor: pointer; float: right; min-width: 108px; border-radius: 2px;">Sign in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return `
+            <div class="sim-layout-grid" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; align-items: stretch; min-height: 520px; width: 100%;">
+                ${instructionHtml}
+                ${portalHtml}
+            </div>
+        `;
+    }
+
+    function renderExpirationConfigSimulation(simConfig) {
+        const instructionHtml = `
+            <div class="sim-instructions" style="background: #ffffff; border: 2px solid #111827; padding: 20px; border-radius: 4px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; max-height: 650px;">
+                <h3 style="font-size: 15px; font-weight: 700; color: #111827; margin-top: 0; margin-bottom: 12px; text-align: center;">Instruction area</h3>
+                <div style="font-size: 13px; color: #1f2937; line-height: 1.4;">
+                    <p style="margin: 0 0 10px 0; font-weight: 600;">Task Objective:</p>
+                    <p style="margin: 0 0 14px 0;">${sanitizeRichHtml(simConfig.instructions || '')}</p>
+                    <div style="padding: 10px; background: #fefce8; border: 1px solid #fde047; border-radius: 4px;">
+                        <strong style="color: #854d0e; display: block; margin-bottom: 2px;">Configuration Target:</strong>
+                        <span style="font-size: 12px; color: #713f12;">Go to Microsoft Entra ID > Groups > Expiration and apply the required settings shown in the instructions.</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const portalHtml = `
+            <div class="sim-portal-container" style="background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <div>
+                    <div style="display: flex; gap: 16px; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 20px;">
+                        <button type="button" id="sim-save-config-btn" style="background: #0078d4; color: #fff; border: none; padding: 6px 16px; border-radius: 2px; font-weight: 600; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+                            💾 Save
+                        </button>
+                        <button type="button" style="background: #f3f2f1; color: #323130; border: 1px solid #8a8886; padding: 6px 16px; border-radius: 2px; font-weight: 600; cursor: pointer; font-size: 13px;">
+                            ✕ Discard
+                        </button>
+                    </div>
+
+                    <div style="background: #f3f2f1; border-left: 4px solid #0078d4; padding: 12px; margin-bottom: 20px; font-size: 12px; color: #323130; line-height: 1.4;">
+                        Renewal notifications are emailed to group owners 30 days, 15 days, and one day prior to group expiration. Group owners must have Exchange licenses to receive notification emails. If a group is not renewed, it is deleted along with its associated content.
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #323130; margin-bottom: 6px;">
+                            * Group lifetime (in days)
+                        </label>
+                        <select id="sim-lifetime-select" style="width: 100%; max-width: 240px; padding: 6px 8px; border: 1px solid #8a8886; border-radius: 2px; font-size: 13px; background: #fff;">
+                            <option value="">Select lifetime...</option>
+                            <option value="90">90</option>
+                            <option value="180">180</option>
+                            <option value="365">365</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #323130; margin-bottom: 6px;">
+                            * Email contact for groups with no owners
+                        </label>
+                        <input type="text" id="sim-owner-input" placeholder="Enter user name or email" style="width: 100%; max-width: 320px; padding: 6px 8px; border: 1px solid #8a8886; border-radius: 2px; font-size: 13px; box-sizing: border-box;">
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #323130; margin-bottom: 6px;">
+                            * Enable expiration for these Office 365 groups
+                        </label>
+                        <div style="display: inline-flex; border: 1px solid #8a8886; border-radius: 2px; overflow: hidden;">
+                            <button type="button" class="sim-scope-btn" data-scope="All" style="background: #fff; border: none; padding: 6px 16px; font-size: 13px; cursor: pointer; font-weight: 500;">All</button>
+                            <button type="button" class="sim-scope-btn" data-scope="Selected" style="background: #fff; border: none; border-left: 1px solid #8a8886; border-right: 1px solid #8a8886; padding: 6px 16px; font-size: 13px; cursor: pointer; font-weight: 500;">Selected</button>
+                            <button type="button" class="sim-scope-btn" data-scope="None" style="background: #fff; border: none; padding: 6px 16px; font-size: 13px; cursor: pointer; font-weight: 500;">None</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 11px; color: #605e5c; border-top: 1px solid #e2e8f0; pt-2;">
+                    Microsoft Entra ID > Groups > Expiration Settings Portal Simulation
+                </div>
+            </div>
+        `;
+
+        return `
+            <div class="sim-layout-grid" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; align-items: stretch; min-height: 520px; width: 100%;">
+                ${instructionHtml}
+                ${portalHtml}
+            </div>
+        `;
+    }
+
+    function setupLoginListeners(question) {
+        const nextBtn = byId('sim-next-btn');
+        const backBtn = byId('sim-back-link');
+        const signInBtn = byId('sim-signin-btn');
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const emailInput = byId('sim-email-input').value.trim();
+                if (emailInput.toLowerCase() === question.simulation.requiredEmail.toLowerCase()) {
+                    byId('sim-step-user').style.display = 'none';
+                    byId('sim-step-pass').style.display = 'block';
+                } else {
+                    alert("This account doesn't exist. Enter a valid account.");
+                }
+            });
+        }
+
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                byId('sim-step-pass').style.display = 'none';
+                byId('sim-step-user').style.display = 'block';
+            });
+        }
+
+        if (signInBtn) {
+            signInBtn.addEventListener('click', () => {
+                const passInput = byId('sim-pass-input').value;
+                if (passInput === question.simulation.requiredPassword) {
+                    state.simStage = 'config';
+                    renderQuestion();
+                } else {
+                    alert('Your account or password is incorrect. Please try again.');
+                }
+            });
+        }
+    }
+
+    function setupConfigListeners(question) {
+        const scopeButtons = document.querySelectorAll('.sim-scope-btn');
+        let selectedScope = '';
+
+        scopeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                scopeButtons.forEach(b => {
+                    b.style.background = '#fff';
+                    b.style.color = '#323130';
+                    b.style.fontWeight = '500';
+                });
+                btn.style.background = '#0078d4';
+                btn.style.color = '#fff';
+                btn.style.fontWeight = '700';
+                selectedScope = btn.dataset.scope;
+                btn.dataset.selected = 'true';
+            });
+        });
+
+        const saveBtn = byId('sim-save-config-btn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => {
+                const lifetime = byId('sim-lifetime-select').value;
+                const ownerInput = byId('sim-owner-input').value.trim();
+                const activeScopeBtn = document.querySelector('.sim-scope-btn[data-selected="true"]');
+                const scope = activeScopeBtn ? activeScopeBtn.dataset.scope : '';
+
+                // Validate config matches expected answers for this simulation
+                const configValid = 
+                    lifetime === '180' &&
+                    ownerInput.toLowerCase() === 'allan deyoung' &&
+                    scope === 'All';
+
+                if (configValid) {
+                    state.simStage = 'question';
+                    state.answers[question.id] = 0; // auto-select correct option index or record completion
+                    state.submitted.add(question.id);
+                    renderQuestion();
+                } else {
+                    alert('Configuration is incomplete or incorrect. Please review the instructions and check your settings (Lifetime: 180, Owner: Allan Deyoung, Scope: All).');
+                }
+            });
+        }
+    }
+    // ----------------------------------------------
+
     function renderQuestion() {
         const questionBank = getQuestions();
         const layout = byId('portal-layout');
@@ -578,6 +785,27 @@ function cleanExplanationHtml(value) {
             feedback.hidden = true;
             feedback.style.display = 'none';
             feedback.innerHTML = '';
+        }
+
+        // Check if question has a simulation phase
+        if (question.simulation) {
+            if (state.simStage === 'login') {
+                layout.style.display = 'block';
+                layout.style.gridTemplateColumns = 'none';
+                layout.innerHTML = renderLoginSimulation(question.simulation);
+                setupLoginListeners(question);
+                updateNavButtons();
+                updateExamHeader();
+                return;
+            } else if (state.simStage === 'config') {
+                layout.style.display = 'block';
+                layout.style.gridTemplateColumns = 'none';
+                layout.innerHTML = renderExpirationConfigSimulation(question.simulation);
+                setupConfigListeners(question);
+                updateNavButtons();
+                updateExamHeader();
+                return;
+            }
         }
 
         if (question.isCaseStudy) {
@@ -628,6 +856,7 @@ function cleanExplanationHtml(value) {
 
         state.currentIndex = nextIndex;
         state.activeCaseSection = null;
+        state.simStage = 'login'; // Reset login simulation stage for the new question
         const select = byId('jump-select');
         if (select) select.value = String(state.currentIndex);
         renderQuestion();
@@ -677,6 +906,7 @@ function cleanExplanationHtml(value) {
     }
 
     function isAnswerComplete(question, answer) {
+        if (question.simulation && state.simStage === 'question') return true;
         if (question.type === 'radio') return Number.isInteger(answer);
         if (question.type === 'checkbox') return Array.isArray(answer) && answer.length > 0;
         if (question.type === 'matrix') {
@@ -694,6 +924,7 @@ function cleanExplanationHtml(value) {
     }
 
     function evaluateAnswer(question, answer) {
+        if (question.simulation && state.simStage === 'question') return true;
         if (question.type === 'radio') return Number(answer) === Number(question.correctAnswer);
         if (question.type === 'checkbox') {
             const selected = [...answer].sort((a, b) => a - b);
@@ -768,16 +999,14 @@ function cleanExplanationHtml(value) {
             </div>
             <div style="padding:10px;border-radius:6px;background:${isCorrect ? '#f0fdf4' : '#fef2f2'};border:1px solid ${isCorrect ? '#bbf7d0' : '#fecaca'};">
                 <strong style="color:#0f172a;">Explanation / Answer Details:</strong><br>
-                
-
-		<div style="font-size:13px;color:#334155;">
-${sanitizeRichHtml(
-    cleanExplanationHtml(
-        question.correctAnswerText ||
-        'Review the correct answer details.'
-    )
-)}
-</div>
+                <div style="font-size:13px;color:#334155;">
+                    ${sanitizeRichHtml(
+                        cleanExplanationHtml(
+                            question.correctAnswerText ||
+                            'Review the correct answer details.'
+                        )
+                    )}
+                </div>
             </div>
         `;
     }
@@ -809,7 +1038,7 @@ ${sanitizeRichHtml(
 
         state.answers[question.id] = answer;
 
-          saveProgress();
+        saveProgress();
         if (state.mode === 'simulation') {
             state.submitted.add(question.id);
             const feedback = byId('feedback-box');
@@ -868,17 +1097,17 @@ ${sanitizeRichHtml(
             });
         }
         displayFeedback(isCorrect, question);
-        // Show Finish Practice button after the last question is submitted
-          if (
+        
+        if (
              state.mode === 'practice' &&
              state.currentIndex === questionBank.length - 1
-      ) {
-          const submitBtn = byId('submit-btn');
-          const finishBtn = byId('finish-practice-btn');
+        ) {
+            const submitBtn = byId('submit-btn');
+            const finishBtn = byId('finish-practice-btn');
 
-          if (submitBtn) submitBtn.style.display = 'none';
-          if (finishBtn) finishBtn.style.display = 'inline-block';
-                }
+            if (submitBtn) submitBtn.style.display = 'none';
+            if (finishBtn) finishBtn.style.display = 'inline-block';
+        }
     }
     
     function buildReviewItems(bank, trackIncorrectQuestions = false) {
@@ -985,7 +1214,7 @@ ${sanitizeRichHtml(
         if (retakeButton) retakeButton.style.display = 'none';
     }
 
-        function getPracticeSettings(masterLength) {
+    function getPracticeSettings(masterLength) {
         const start = Number(byId('practice-start').value) || 1;
         const end = Number(byId('practice-end').value) || masterLength;
 
@@ -1063,6 +1292,7 @@ ${sanitizeRichHtml(
         state.submitted = new Set();
         state.completed = false;
         state.incorrectQuestionIds = [];
+        state.simStage = 'login';
     }
 
     function resetAssessmentButtons(mode) {
@@ -1121,7 +1351,7 @@ ${sanitizeRichHtml(
         startTimer();
     }
 
-        function handleLayoutClick(event) {
+    function handleLayoutClick(event) {
         const actionElement = event.target.closest('[data-action]');
         if (!actionElement) return;
 
@@ -1263,6 +1493,7 @@ ${sanitizeRichHtml(
         byId('jump-select').addEventListener('change', event => {
             state.currentIndex = Number(event.target.value);
             state.activeCaseSection = null;
+            state.simStage = 'login';
             renderQuestion();
         });
 
@@ -1301,6 +1532,7 @@ ${sanitizeRichHtml(
             state.answers = saved.answers || {};
             state.activeQuestions = saved.activeQuestions || [];
             state.mode = saved.mode;
+            state.simStage = 'login';
 
             byId('setup-screen').hidden = true;
             byId('results-screen').hidden = true;
@@ -1330,7 +1562,7 @@ ${sanitizeRichHtml(
         byId('results-screen').hidden = true;
     }
 
-        if (document.readyState === 'loading') {
+    if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
     } else {
         initializeApp();
